@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "wiki-app",
-      "outDir": "example-dist",
+      "outDir": "wiki-dist",
       "assets": [
         "assets",
         "favicon.ico"

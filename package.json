@@ -12,10 +12,10 @@
     "clean": "git clean -xdf && yarn && yarn run bootstrap",
     "cli": "ng",
     "coverage:html": "nyc report --reporter=html",
-    "example:start": "yarn run build && yarn run cli -- serve",
-    "example:start:aot": "yarn run build && yarn run cli -- serve --aot",
-    "example:test": "yarn run cli -- test --code-coverage",
-    "example:build:prod": "yarn build && yarn cli -- build --aot -prod --base-href \"/platform/wiki-app/\" --output-path \"./example-dist/example-app\"",
+    "wiki:start": "yarn run build && yarn run cli -- serve",
+    "wiki:start:aot": "yarn run build && yarn run cli -- serve --aot",
+    "wiki:test": "yarn run cli -- test --code-coverage",
+    "wiki:build:prod": "yarn build && yarn cli -- build --aot -prod --base-href \"/platform/wiki-app/\" --output-path \"./wiki-dist/wiki-app\"",
     "ci": "yarn run build && yarn run test && nyc report --reporter=text-lcov | coveralls",
     "prettier": "prettier --parser typescript --single-quote --trailing-comma es5 --write \"./**/*.ts\"",
     "watch:tests": "chokidar 'modules/**/*.ts' --initial -c 'nyc --reporter=text --reporter=html yarn run test:unit'",
@@ -24,16 +24,30 @@
     "release": "lerna publish --skip-npm --conventional-commits && npm run build"
   },
   "lint-staged": {
-    "*.ts": ["yarn prettier", "git add"]
+    "*.ts": [
+      "yarn prettier",
+      "git add"
+    ]
   },
-  "keywords": ["ngrx", "angular", "rxjs"],
+  "keywords": [
+    "ngrx",
+    "angular",
+    "rxjs"
+  ],
   "author": "Rob Wormald <robwormald@gmail.com>",
   "license": "MIT",
   "repository": {},
   "nyc": {
-    "extension": [".ts"],
-    "exclude": ["**/*.spec", "**/spec/**/*"],
-    "include": ["**/*.ts"]
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.spec",
+      "**/spec/**/*"
+    ],
+    "include": [
+      "**/*.ts"
+    ]
   },
   "devDependencies": {
     "@angular/animations": "^4.2.0",

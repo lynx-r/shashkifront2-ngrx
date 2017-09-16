@@ -11,7 +11,7 @@ export interface BooksState {
 }
 
 export interface State extends fromRoot.State {
-  'books': BooksState;
+  books: BooksState;
 }
 
 export const reducers = {
