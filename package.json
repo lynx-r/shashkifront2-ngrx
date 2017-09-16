@@ -16,6 +16,7 @@
     "wiki:start:aot": "yarn run build && yarn run cli -- serve --aot",
     "wiki:test": "yarn run cli -- test --code-coverage",
     "wiki:build:prod": "yarn build && yarn cli -- build --aot -prod --base-href \"/com.workingbit.shashkifront-test/\" --output-path \"./wiki-dist/wiki-app\"",
+    "wiki:deply": "cd wiki-dist/wiki-app && aws s3 cp . s3://com.workingbit.shashkifront-test --recursive",
     "ci": "yarn run build && yarn run test && nyc report --reporter=text-lcov | coveralls",
     "prettier": "prettier --parser typescript --single-quote --trailing-comma es5 --write \"./**/*.ts\"",
     "watch:tests": "chokidar 'modules/**/*.ts' --initial -c 'nyc --reporter=text --reporter=html yarn run test:unit'",
