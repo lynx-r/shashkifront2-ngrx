@@ -12,5 +12,6 @@ pipelines:
           - node
         script:
           - npm i
+          - npm i -g yarn
           - npm run wiki:build:prod
           - npm run wiki:deploy
