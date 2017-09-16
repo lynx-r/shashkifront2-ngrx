@@ -11,5 +11,6 @@ pipelines:
         caches:
           - node
         script:
+          - npm i
           - npm run wiki:build:prod
           - npm run wiki:deploy
