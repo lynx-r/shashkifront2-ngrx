@@ -6,6 +6,7 @@ export const SEARCH_COMPLETE = '[Article] Search Complete';
 export const LOAD = '[Article] Load';
 export const EDIT = '[Article] Edit';
 export const CREATE = '[Article] Create';
+export const CREATE_SUCCESS = '[Article] SUCCESS';
 export const SELECT = '[Article] Select';
 
 /**
@@ -33,6 +34,12 @@ export class Create implements Action {
   constructor(public payload: Article) {}
 }
 
+export class CreateSuccess implements Action {
+  readonly type = CREATE_SUCCESS;
+
+  constructor(public payload: Article) {}
+}
+
 export class Edit implements Action {
   readonly type = EDIT;
 
@@ -55,4 +62,11 @@ export class Select implements Action {
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
-export type Actions = Search | SearchComplete | Create | Edit | Load | Select;
+export type Actions =
+  | Search
+  | SearchComplete
+  | Create
+  | CreateSuccess
+  | Edit
+  | Load
+  | Select;

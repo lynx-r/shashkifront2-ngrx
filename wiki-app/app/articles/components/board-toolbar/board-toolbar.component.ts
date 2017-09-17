@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { Article } from '../../models/article';
 
 @Component({
-  selector: 'board-toolbar',
+  selector: 'ac-board-toolbar',
   templateUrl: './board-toolbar.component.html',
   styleUrls: ['./board-toolbar.component.css'],
 })
@@ -57,7 +57,7 @@ export class BoardToolbarComponent implements OnInit {
 
   removeArticle() {}
 
-  createArticleDialog() {
+  handleCreateArticle() {
     // let bsModalRef: BsModalRef = this.modalService.show(
     //   CreateArticleDialogComponent
     // );

@@ -12,6 +12,8 @@ import { Article } from '../models/article';
  */
 export interface State extends EntityState<Article> {
   selectedArticleId: string | null;
+  loading: boolean;
+  loaded: boolean;
 }
 
 /**
@@ -33,11 +35,25 @@ export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
 */
 export const initialState: State = adapter.getInitialState({
   selectedArticleId: null,
+  loading: false,
+  loaded: false,
 });
 
 export function reducer(state = initialState, action: article.Actions): State {
   switch (action.type) {
-    // case article.CREATE:
+    case article.CREATE: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case article.CREATE_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+      };
+    }
     case article.EDIT:
     case article.LOAD: {
       return {

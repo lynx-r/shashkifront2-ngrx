@@ -25,7 +25,7 @@ import { CreateArticlePageComponent } from './containers/create-article-page';
     ComponentsModule,
     RouterModule.forChild([
       // { path: 'find', component: FindArticlePageComponent },
-      { path: '', component: CreateArticlePageComponent },
+      { path: 'create', component: CreateArticlePageComponent },
       // {
       //   path: ':id',
       //   component: EditArticlePageComponent,
