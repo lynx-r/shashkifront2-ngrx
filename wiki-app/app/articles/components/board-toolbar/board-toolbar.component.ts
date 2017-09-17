@@ -56,9 +56,9 @@ export class BoardToolbarComponent implements OnInit {
         boardId: null,
       },
       boardRequest: {
-        black: false,
+        black: true,
         squareSize: 60,
-        rules: Rules.RUSSIAN,
+        rules: Rules.INTERNATIONAL_GIVEAWAY,
         fillBoard: false,
       },
     };
@@ -93,11 +93,10 @@ export class BoardToolbarComponent implements OnInit {
 
   openCreateArticleDialog() {
     let openDialogHref = this.dialog.open(CreateArticleDialogComponent, {
-      data: {
-        article: this.initialArticle,
-      },
+      data: this.initialArticle,
     });
     openDialogHref.afterClosed().subscribe(result => {
+      console.log(result);
       this.article = result;
     });
     // let bsModalRef: BsModalRef = this.modalService.show(

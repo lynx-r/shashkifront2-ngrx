@@ -1,49 +1,36 @@
-<!--<div id="createArticle" class="modal fade">-->
-  <!--<div class="modal-dialog" role="document">-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Создать статью</h5>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-12">
-            <input [(ngModel)]="title" placeholder="Название статьи" class="form-control">
-          </div>
-        </div>
-        <div class="row">
-          <label for="color" class="col-4">Цвет</label>
-          <div class="col-8">
-            <select id="color" [(ngModel)]="black" name="black" title="Цвет" class="form-control">
-              <option [ngValue]="false" [selected]="true">Белые</option>
-              <option [ngValue]="true">Черные</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <label for="rules" class="col-4">Правила</label>
-          <div class="col-8">
-            <select id="rules" [(ngModel)]="rules" name="rules" title="Правила" class="form-control">
-              <option [ngValue]="Rules.RUSSIAN" [selected]="Rules.RUSSIAN">Русские шашки</option>
-              <option [ngValue]="Rules.RUSSIAN_GIVEAWAY">Русские шашки (поддавки)</option>
-              <option [ngValue]="Rules.INTERNATIONAL">Интернациональные шашки</option>
-              <option [ngValue]="Rules.INTERNATIONAL_GIVEAWAY">Интернациональные шашки (поддавки)</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <label for="fillBoard" class="col-4">Расставить с начала</label>
-          <div id="fillBoard" class="col-8">
-            <input type="checkbox" [(ngModel)]="fillBoard" name="fillBoard" class="form-control">
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="bsModalRef.hide()">Отмена</button>
-        <button (click)="onNewArticle()" type="button" class="btn btn-primary" data-dismiss="modal">Создать</button>
-      </div>
-    </div>
-  <!--</div>-->
-<!--</div>-->
+<h1 md-dialog-title>Новая статья</h1>
+<div md-dialog-content>
+  <md-list>
+    <md-list-item>
+      <md-form-field>
+        <input mdInput tabindex="1" [(ngModel)]="data.article.title" placeholder="Название статьи">
+      </md-form-field>
+    </md-list-item>
+    <md-list-item>
+      <md-select class="md-select" [(ngModel)]="data.boardRequest.black" title="Цвет" placeholder="Цвет">
+        <md-option [value]="false">Белые</md-option>
+        <md-option [value]="true">Чёрные</md-option>
+      </md-select>
+    </md-list-item>
+    <md-list-item>
+      <md-select class="md-select" [(ngModel)]="rules" title="Правила" placeholder="Правила">
+        <md-option [value]="Rules.RUSSIAN">Русские шашки</md-option>
+        <md-option [value]="Rules.RUSSIAN_GIVEAWAY">Русские шашки (поддавки)</md-option>
+        <md-option [value]="Rules.INTERNATIONAL">Интернациональные шашки</md-option>
+        <md-option [value]="Rules.INTERNATIONAL_GIVEAWAY">Интернациональные шашки (поддавки)</md-option>
+      </md-select>
+    </md-list-item>
+    <md-list-item>
+      <md-checkbox [(ngModel)]="fillBoard">Расставить шашки</md-checkbox>
+    </md-list-item>
+  </md-list>
+</div>
+<div md-dialog-actions>
+  <span flex></span>
+  <button md-button md-dialog-close type="button" class="btn btn-secondary" data-dismiss="modal"
+          (click)="dialogRef.close()">Отмена
+  </button>
+  <button md-button [md-dialog-close]="data" type="button" class="btn btn-primary"
+          data-dismiss="modal">Создать
+  </button>
+</div>
