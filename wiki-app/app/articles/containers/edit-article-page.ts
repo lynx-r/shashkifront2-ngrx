@@ -10,7 +10,9 @@ import * as article from '../actions/article';
   selector: 'ec-edit-article-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ec-edit-article-page></ec-edit-article-page>
+    <ec-edit-article-page>
+      <ac-create-article-page [edit]="true"></ac-create-article-page>
+    </ec-edit-article-page>
   `,
 })
 export class EditArticlePageComponent implements OnDestroy {

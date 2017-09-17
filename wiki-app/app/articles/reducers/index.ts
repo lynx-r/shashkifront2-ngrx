@@ -150,6 +150,6 @@ export const isSelectedArticleInCollection = createSelector(
   getCollectionArticleIds,
   getSelectedArticleId,
   (ids, selected) => {
-    return ids.indexOf(selected) > -1;
+    return selected == null ? false : ids.indexOf(selected) > -1;
   }
 );

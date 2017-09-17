@@ -9,5 +9,10 @@ export const routes: Routes = [
     loadChildren: './books/books.module#BooksModule',
     canActivate: [AuthGuard],
   },
+  {
+    path: 'articles',
+    loadChildren: './articles/articles.module#ArticlesModule',
+    // canActivate: [AuthGuard],
+  },
   { path: '**', component: NotFoundPageComponent },
 ];

@@ -27,7 +27,7 @@ import { reducers } from './reducers';
       {
         path: ':id',
         component: ViewBookPageComponent,
-        canActivate: [BookExistsGuard],
+        // canActivate: [BookExistsGuard],
       },
       { path: '', component: CollectionPageComponent },
     ]),

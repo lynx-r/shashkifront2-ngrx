@@ -5,6 +5,7 @@ export const SEARCH = '[Article] Search';
 export const SEARCH_COMPLETE = '[Article] Search Complete';
 export const LOAD = '[Article] Load';
 export const EDIT = '[Article] Edit';
+export const CREATE = '[Article] Create';
 export const SELECT = '[Article] Select';
 
 /**
@@ -26,14 +27,20 @@ export class SearchComplete implements Action {
   constructor(public payload: Article[]) {}
 }
 
-export class Load implements Action {
-  readonly type = LOAD;
+export class Create implements Action {
+  readonly type = CREATE;
 
   constructor(public payload: Article) {}
 }
 
 export class Edit implements Action {
   readonly type = EDIT;
+
+  constructor(public payload: Article) {}
+}
+
+export class Load implements Action {
+  readonly type = LOAD;
 
   constructor(public payload: Article) {}
 }
@@ -48,4 +55,4 @@ export class Select implements Action {
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
-export type Actions = Search | SearchComplete | Load | Edit | Select;
+export type Actions = Search | SearchComplete | Create | Edit | Load | Select;

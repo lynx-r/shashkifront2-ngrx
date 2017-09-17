@@ -7,13 +7,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Draught } from '../../../models/draught';
-import { BoardService } from '../../../service/board.service';
 import { Square } from '../../../models/square';
-import { LocalStorage } from 'ngx-webstorage';
-import { AppConstants } from '../../../service/app-constants';
 import { Article } from '../../../models/article';
 import { Move } from '../../../models/move';
-import { Utils } from '../../../service/utils.service';
 import { Subscription } from 'rxjs/Subscription';
 import {
   animate,
@@ -56,11 +52,11 @@ export class DraughtComponent implements OnInit, OnDestroy {
   private allowedSquares: Square[];
   private beatenPos: Square[];
   private size: number;
-  @LocalStorage(AppConstants.EDIT_MODE_STORAGE_KEY) editMode: boolean;
-  @LocalStorage(AppConstants.ARTICLE_STORAGE_KEY) article: Article;
+  editMode: boolean;
+  article: Article;
   private moveToSubscription: Subscription;
 
-  constructor(private boardService: BoardService) {}
+  constructor() {}
 
   ngOnInit() {
     if (this.square) {
@@ -72,17 +68,17 @@ export class DraughtComponent implements OnInit, OnDestroy {
         this.highlightAllowedFor(this.square);
       }
     }
-    this.moveToSubscription = this.boardService.moveToSquareEvent.subscribe(
-      (target: Move) => {
-        this.moveDraughtTo(target);
-      }
-    );
-    this.boardService.observableEditMode().subscribe(mode => {
-      if (mode) {
-        this.highlightAllowedFor(null);
-        this.draught.highlighted = false;
-      }
-    });
+    // this.moveToSubscription = this.boardService.moveToSquareEvent.subscribe(
+    //   (target: Move) => {
+    //     this.moveDraughtTo(target);
+    //   }
+    // );
+    // this.boardService.observableEditMode().subscribe(mode => {
+    //   if (mode) {
+    //     this.highlightAllowedFor(null);
+    //     this.draught.highlighted = false;
+    //   }
+    // });
   }
 
   ngOnDestroy() {
@@ -101,28 +97,28 @@ export class DraughtComponent implements OnInit, OnDestroy {
       boardId: this.article.board.id,
       selectedSquare: square,
     };
-    this.boardService.highlightAllowedFor(config, highlighted => {
-      if (square) {
-        square.draught.highlighted = true;
-      }
-      this.beatenPos = highlighted.beaten;
-      this.allowedSquares = <Square[]>highlighted.allowed;
-    });
+    // this.boardService.highlightAllowedFor(config, highlighted => {
+    //   if (square) {
+    //     square.draught.highlighted = true;
+    //   }
+    //   this.beatenPos = highlighted.beaten;
+    //   this.allowedSquares = <Square[]>highlighted.allowed;
+    // });
   }
 
   private moveDraughtTo(moveTo: Move) {
     let targetSquare = moveTo.targetSquare;
-    if (
-      (targetSquare.occupied && targetSquare.draught.beaten) ||
-      !this.allowedSquares ||
-      (!moveTo.undoMove &&
-        !Utils.containsSquare(this.allowedSquares, targetSquare)) ||
-      !this.draught.highlighted ||
-      !targetSquare.main ||
-      targetSquare == this.square
-    ) {
-      return;
-    }
+    // if (
+    //   (targetSquare.occupied && targetSquare.draught.beaten) ||
+    //   !this.allowedSquares ||
+    //   (!moveTo.undoMove &&
+    //     !Utils.containsSquare(this.allowedSquares, targetSquare)) ||
+    //   !this.draught.highlighted ||
+    //   !targetSquare.main ||
+    //   targetSquare == this.square
+    // ) {
+    //   return;
+    // }
     const config = {
       boardId: this.article.board.id,
       allowed: this.allowedSquares,
@@ -144,7 +140,6 @@ export class DraughtComponent implements OnInit, OnDestroy {
     let animParams = {
       draughtRefElement: this.draughtRef.nativeElement,
     };
-    this.boardService.moveDraughtTo(config, animParams);
   }
 
   // private moveDraughtToTween(move, targetSquare: Square, target?: any) {

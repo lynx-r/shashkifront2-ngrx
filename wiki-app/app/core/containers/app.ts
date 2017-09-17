@@ -14,6 +14,9 @@ import * as Auth from '../../auth/actions/auth';
   template: `
     <bc-layout>
       <bc-sidenav [open]="showSidenav$ | async">
+        <bc-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/articles" icon="article" hint="Написать статью">
+          Новая статья
+        </bc-nav-item>
         <bc-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/" icon="book" hint="View your book collection">
           My Collection
         </bc-nav-item>

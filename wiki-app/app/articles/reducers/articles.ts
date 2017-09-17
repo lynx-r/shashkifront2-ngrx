@@ -24,7 +24,7 @@ export interface State extends EntityState<Article> {
  */
 export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
   selectId: (article: Article) => article.id,
-  // sort: false,
+  sort: false,
 });
 
 /** getInitialState returns the default initial state
@@ -37,6 +37,7 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(state = initialState, action: article.Actions): State {
   switch (action.type) {
+    // case article.CREATE:
     case article.EDIT:
     case article.LOAD: {
       return {

@@ -4,5 +4,5 @@ export interface Article {
   title: string;
   article: string;
   author: string;
-  board: Board;
+  board: Board | null;
 }

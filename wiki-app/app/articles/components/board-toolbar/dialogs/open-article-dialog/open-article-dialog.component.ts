@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ArticleService } from '../../../../service/article.service';
 import { Article } from '../../../../models/article';
 import { Observable } from 'rxjs/Observable';
-import { BlockUIService } from 'ng-block-ui';
 
 @Component({
   selector: 'open-article-dialog',
@@ -13,23 +11,23 @@ export class OpenArticleDialogComponent implements OnInit {
   @Input() observableArticles: Observable<Article[]>;
   selectedArticle: Article;
 
-  constructor(
-    private articleService: ArticleService,
-    private blockUIService: BlockUIService
-  ) {}
-
-  ngOnInit() {
-    this.articleService.articleObservable().subscribe(article => {
-      this.selectedArticle = article;
-    });
-    this.selectedArticle = this.articleService.article;
+  constructor() // private articleService: ArticleService,
+  // private blockUIService: BlockUIService
+  {
   }
 
-  onArticleSelected(article) {
+  ngOnInit() {
+    // this.articleService.articleObservable().subscribe(article => {
+    //   this.selectedArticle = article;
+    // });
+    // this.selectedArticle = this.articleService.article;
+  }
+
+  onArticleSelected(article: Article) {
     this.selectedArticle = article;
   }
 
   onOpenArticle() {
-    this.articleService.openArticle(this.selectedArticle.id);
+    // this.articleService.openArticle(this.selectedArticle.id);
   }
 }
