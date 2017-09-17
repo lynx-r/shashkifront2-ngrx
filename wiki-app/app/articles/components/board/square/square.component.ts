@@ -33,13 +33,13 @@ export class SquareComponent implements OnInit {
     // if (this.editMode) {
     //   if (this.removeDraught) {
     //     this.boardService.removeDraught({
-    //       _articleId: this.article.id,
+    //       _articleId: this.content.id,
     //       x: this.square.h,
     //       y: this.square.v,
     //     });
     //   } else {
     //     this.boardService.addDraught({
-    //       _articleId: this.article.id,
+    //       _articleId: this.content.id,
     //       x: this.square.h,
     //       y: this.square.v,
     //       black: this.boardService.selectedDraughtDescFlag.black,

@@ -38,5 +38,6 @@ export const COMPONENTS = [
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,
+  entryComponents: [CreateArticleDialogComponent],
 })
 export class ComponentsModule {}

@@ -30,8 +30,8 @@ export class CreateArticlePageComponent implements OnDestroy {
         let initArticle: Article = {
           id: '',
           title: 'Новая статья',
-          article: 'Текст статьи',
-          board: null,
+          content: 'Содержание статьи',
+          boardId: null,
           author: '',
         };
         return this.edit

@@ -24,6 +24,7 @@ import { CustomRouterStateSerializer } from './shared/utils';
 
 import { AppComponent } from './core/containers/app';
 import { environment } from '../environments/environment';
+import { MdFormFieldModule } from '@angular/material/typings/form-field';
 
 @NgModule({
   imports: [
@@ -31,6 +32,8 @@ import { environment } from '../environments/environment';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    MdFormFieldModule,
+
     RouterModule.forRoot(routes, { useHash: true }),
 
     /**

@@ -93,7 +93,7 @@ export class BoardService {
   }) {
     // this.socketService.socket.emit(AppConstants.ADD_DRAUGHT, param, (resp) => {
     //   Utils.handleResponse(resp).then((resp) => {
-    //     this.article = resp.data;
+    //     this.content = resp.data;
     //   })
     // })
   }
@@ -101,7 +101,7 @@ export class BoardService {
   removeDraught(param: { _articleId: string; x: number; y: number }) {
     // this.socketService.socket.emit(AppConstants.REMOVE_DRAUGHT, param, (resp) => {
     //   Utils.handleResponse(resp).then((resp) => {
-    //     this.articleService.article = resp.data;
+    //     this.articleService.content = resp.data;
     //   })
     // })
   }
@@ -131,7 +131,7 @@ export class BoardService {
    * @returns {Article}
    */
   // activeArticle(): Article {
-  // return this.articleService.article;
+  // return this.articleService.content;
   // }
 
   moveDraughtTo(

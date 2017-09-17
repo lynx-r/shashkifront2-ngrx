@@ -1,32 +1,22 @@
 import { Injectable } from '@angular/core';
-import { SocketService } from './socket.service';
-import { Utils } from './utils.service';
 import { Observable } from 'rxjs/Observable';
 import { AppConstants } from './app-constants';
-import { Http } from '@angular/http';
-import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
 import { ApiArticleService } from './api-article.service';
-import { BoardService } from './board.service';
 import { Article } from '../../articles/models/article';
 
 @Injectable()
 export class ArticleService {
   constructor(private apiArticleService: ApiArticleService) {}
 
-  createArticle(article: Article) {
-    this.apiArticleService
-      .post(AppConstants.ARTICLE_RESOURCE, article)
-      .subscribe(articleAndBoard => {
-        let article = articleAndBoard.article;
-        article.board = articleAndBoard.board;
-      });
+  createArticle(article: Article): Observable<Article> {
+    return this.apiArticleService.post(AppConstants.ARTICLE_RESOURCE, article);
   }
 
-  // refreshArticle(article, unblock) {
+  // refreshArticle(content, unblock) {
   //   this.localStorage.clear(AppConstants.ARTICLE_STORAGE_KEY);
-  //   if (article) {
+  //   if (content) {
   //       // this.localStorage.store(AppConstants.BOARD_STORAGE_KEY, board);
-  //       this.localStorage.store(AppConstants.ARTICLE_STORAGE_KEY, article);
+  //       this.localStorage.store(AppConstants.ARTICLE_STORAGE_KEY, content);
   //       unblock();
   //   }
   // }
@@ -55,8 +45,8 @@ export class ArticleService {
   //   Utils.blockUI(this.blockUIService, (unblock) => {
   //     this.apiArticleService
   //       .get(AppConstants.ARTICLE_RESOURCE + `/${articleId}`)
-  //       .subscribe((article) => {
-  //         this.refreshArticle(article, unblock);
+  //       .subscribe((content) => {
+  //         this.refreshArticle(content, unblock);
   //       });
   //   })
   // }
@@ -64,16 +54,16 @@ export class ArticleService {
   // updateArticle() {
   //   Utils.blockUI(this.blockUIService,(unblock) => {
   //     this.apiArticleService
-  //       .put(AppConstants.ARTICLE_RESOURCE, {article: this.article})
-  //       .subscribe((article) => {
-  //         this.refreshArticle(article, unblock);
+  //       .put(AppConstants.ARTICLE_RESOURCE, {content: this.content})
+  //       .subscribe((content) => {
+  //         this.refreshArticle(content, unblock);
   //       })
   //   })
   // }
 
   fillInBoard() {
     // this.blockUI((unblock) => {
-    // this.apiArticleService.post(AppConstants.ARTICLE_RESOURCE, {id: this.article.id}, (resp) => {
+    // this.apiArticleService.post(AppConstants.ARTICLE_RESOURCE, {id: this.content.id}, (resp) => {
     //   if (resp.ok) {
     //     this.refreshArticle(resp);
     //   } else {
@@ -86,7 +76,7 @@ export class ArticleService {
 
   eraseBoard() {
     // this.blockUI((unblock) => {
-    // this.socketService.socket.emit(AppConstants.CLEAR_BOARD, {id: this.article.id}, (resp) => {
+    // this.socketService.socket.emit(AppConstants.CLEAR_BOARD, {id: this.content.id}, (resp) => {
     //   if (resp.ok) {
     //     this.refreshArticle(resp);
     //   } else {
@@ -99,7 +89,7 @@ export class ArticleService {
 
   removeArticle() {
     // this.blockUI((unblock) => {
-    // this.socketService.socket.emit(AppConstants.REMOVE_ARTICLE, {id: this.article.id}, (resp) => {
+    // this.socketService.socket.emit(AppConstants.REMOVE_ARTICLE, {id: this.content.id}, (resp) => {
     //   if (resp.ok) {
     //     this.refreshArticle(null);
     //   } else {
@@ -111,6 +101,6 @@ export class ArticleService {
   }
 
   // get board() {
-  //   return this.article.board;
+  //   return this.content.board;
   // }
 }

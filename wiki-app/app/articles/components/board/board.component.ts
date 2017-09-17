@@ -18,14 +18,14 @@ export class BoardComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    // this.articleService.articleObservable().subscribe(article => {
-    //   if (article.board) {
-    //     this.updateBoard(article.board);
+    // this.articleService.articleObservable().subscribe(content => {
+    //   if (content.board) {
+    //     this.updateBoard(content.board);
     //   }
     // });
-    // if (this.articleService.article.board) {
+    // if (this.articleService.content.board) {
     //   this.boardService
-    //     .findById(this.articleService.article.board.id)
+    //     .findById(this.articleService.content.board.id)
     // .then(board => {
     //   this.updateBoard(board);
     // })

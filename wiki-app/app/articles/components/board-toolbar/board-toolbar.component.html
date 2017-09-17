@@ -1,24 +1,17 @@
-<md-toolbar>
-  <button md-raised-button (click)="handleCreateArticle()">
-    Создать
-  </button>
-  <button md-raised-button (click)="findArticles()">
-    Открыть
-  </button>
-</md-toolbar>
+
 
 <!--<div class="board-toolbar">-->
-  <!--<div [hidden]="article">-->
+  <!--<div [hidden]="content">-->
     <!--<button class="btn btn-secondary" (click)="findArticles()" data-toggle="modal" title="Открыть"-->
             <!--data-target="#openArticle">-->
       <!--<i class="fa fa-folder-open"></i>-->
     <!--</button>-->
   <!--</div>-->
-  <!--<div [hidden]="!article" class="btn-group">-->
+  <!--<div [hidden]="!content" class="btn-group">-->
     <!--<button (click)="updateArticle()" id="saveBoard" class="btn btn-secondary" title="Сохранить">-->
       <!--<i class="fa fa-save"></i>-->
     <!--</button>-->
-    <!--<button id="open-article" class="btn btn-secondary" (click)="findArticles()" data-toggle="modal"-->
+    <!--<button id="open-content" class="btn btn-secondary" (click)="findArticles()" data-toggle="modal"-->
             <!--data-target="#openArticle">-->
       <!--<i class="fa fa-folder-open"></i>-->
     <!--</button>-->
@@ -72,7 +65,7 @@
         <!--</span>-->
   <!--</div>-->
   <!--<div class="float-right">-->
-    <!--<button (click)="removeArticle()" [disabled]="!article" id="removeBoard" class="btn btn-danger" data-toggle="modal"-->
+    <!--<button (click)="removeArticle()" [disabled]="!content" id="removeBoard" class="btn btn-danger" data-toggle="modal"-->
             <!--data-target="#initBoardModal">-->
       <!--<i class="fa fa-remove"></i>-->
     <!--</button>-->

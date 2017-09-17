@@ -1,5 +1,5 @@
-import config from '../config/config.json';
-import { profile } from '../config/profile';
+import config from '../../config/config.json';
+import { profile } from '../../config/profile';
 
 export class ApiBase {
   protected apiBoardUrl() {

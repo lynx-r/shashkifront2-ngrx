@@ -6,13 +6,13 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { ComponentsModule } from './components';
-// import { ArticleEffects } from './effects/article';
+// import { ArticleEffects } from './effects/content';
 // import { CollectionEffects } from './effects/collection';
-// import { ArticleExistsGuard } from './guards/article-exists';
+// import { ArticleExistsGuard } from './guards/content-exists';
 
 import { EditArticlePageComponent } from './containers/edit-article-page';
-// import { ViewArticlePageComponent } from './containers/view-article-page';
-// import { SelectedArticlePageComponent } from './containers/selected-article-page';
+// import { ViewArticlePageComponent } from './containers/view-content-page';
+// import { SelectedArticlePageComponent } from './containers/selected-content-page';
 // import { CollectionPageComponent } from './containers/collection-page';
 
 import { reducers } from './reducers';

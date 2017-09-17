@@ -17,10 +17,10 @@ export class OpenArticleDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.articleService.articleObservable().subscribe(article => {
-    //   this.selectedArticle = article;
+    // this.articleService.articleObservable().subscribe(content => {
+    //   this.selectedArticle = content;
     // });
-    // this.selectedArticle = this.articleService.article;
+    // this.selectedArticle = this.articleService.content;
   }
 
   onArticleSelected(article: Article) {

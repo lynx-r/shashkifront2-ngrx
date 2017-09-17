@@ -9,12 +9,11 @@ import { Effect, Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Scheduler } from 'rxjs/Scheduler';
-import { async } from 'rxjs/scheduler/async';
-import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 
 import * as article from '../actions/article';
 import { Article } from '../models/article';
+import { ArticleService } from '../../core/services/article.service';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
 export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
@@ -35,48 +34,29 @@ export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
 @Injectable()
 export class ArticleEffects {
   @Effect()
-  search$: Observable<Action> = this.actions$
-    .ofType<article.Search>(article.SEARCH)
-    .debounceTime(this.debounce, this.scheduler || async)
-    .map(action => action.payload)
-    .switchMap(query => {
-      if (query === '') {
-        return empty();
-      }
-
-      const nextSearch$ = this.actions$.ofType(article.SEARCH).skip(1);
-
-      return this.googleArticles
-        .searchArticles(query)
-        .takeUntil(nextSearch$)
-        .map((articles: Article[]) => new article.SearchComplete(articles))
-        .catch(() => of(new article.SearchComplete([])));
-    });
-
-  @Effect()
   create$: Observable<Action> = this.actions$
-    .ofType<article.Search>(article.CREATE)
-    .debounceTime(this.debounce, this.scheduler || async)
-    .map(action => action.payload)
-    .switchMap(article => {
-      return this.googleArticles
-        .searchArticles(query)
-        .takeUntil(nextSearch$)
-        .map((articles: Article[]) => new article.SearchComplete(articles))
-        .catch(() => of(new article.SearchComplete([])));
-    });
+    .ofType(article.CREATE)
+    .map((action: article.Create) => action.payload)
+    .mergeMap(createArticle =>
+      this.articleService
+        .createArticle(createArticle)
+        .map(
+          (createdArticle: Article) => new article.CreateSuccess(createdArticle)
+        )
+        .catch(() => of(new article.CreateFail(createArticle)))
+    );
 
   constructor(
     private actions$: Actions,
-    private googleArticles: ArticlesService,
+    private articleService: ArticleService,
     @Optional()
     @Inject(SEARCH_DEBOUNCE)
     private debounce: number = 300,
     /**
-       * You inject an optional Scheduler that will be undefined
-       * in normal application usage, but its injected here so that you can mock out
-       * during testing using the RxJS TestScheduler for simulating passages of time.
-       */
+               * You inject an optional Scheduler that will be undefined
+               * in normal application usage, but its injected here so that you can mock out
+               * during testing using the RxJS TestScheduler for simulating passages of time.
+               */
     @Optional()
     @Inject(SEARCH_SCHEDULER)
     private scheduler: Scheduler

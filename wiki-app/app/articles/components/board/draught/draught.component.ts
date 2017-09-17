@@ -94,7 +94,6 @@ export class DraughtComponent implements OnInit, OnDestroy {
 
   private highlightAllowedFor(square: Square) {
     const config = {
-      boardId: this.article.board.id,
       selectedSquare: square,
     };
     // this.boardService.highlightAllowedFor(config, highlighted => {
@@ -120,7 +119,7 @@ export class DraughtComponent implements OnInit, OnDestroy {
     //   return;
     // }
     const config = {
-      boardId: this.article.board.id,
+      // boardId: this.article.board.id,
       allowed: this.allowedSquares,
       beaten: this.beatenPos,
       selectedSquare: this.square,

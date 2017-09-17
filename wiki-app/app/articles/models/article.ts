@@ -1,8 +1,7 @@
-import { Board } from './board';
 export interface Article {
   id: string;
   title: string;
-  article: string;
+  content: string;
   author: string;
-  board: Board | null;
+  boardId: string | null;
 }

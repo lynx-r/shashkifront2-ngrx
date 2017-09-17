@@ -1,11 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BoardComponent } from './board.component';
-import { SocketService } from '../../service/socket.service';
-import { BoardService } from '../../service/board.service';
 import { FormsModule } from '@angular/forms';
-import { Ng2Webstorage } from 'ngx-webstorage';
-import { ArticleService } from '../../service/article.service';
 import { SquareComponent } from './square/square.component';
 import { DraughtComponent } from './draught/draught.component';
 
@@ -17,16 +13,7 @@ describe('BoardComponent', () => {
     async(() => {
       TestBed.configureTestingModule({
         declarations: [BoardComponent, SquareComponent, DraughtComponent],
-        imports: [
-          FormsModule,
-          Ng2Webstorage,
-          Ng2Webstorage.forRoot({
-            prefix: 'shashki',
-            separator: '.',
-            caseSensitive: true,
-          }),
-        ],
-        providers: [ArticleService, BoardService, SocketService],
+        imports: [FormsModule],
       }).compileComponents();
     })
   );
