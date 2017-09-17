@@ -49,7 +49,7 @@ export class BoardToolbarComponent implements OnInit {
   constructor(public dialog: MdDialog) {
     this.initialArticle = {
       article: {
-        id: '',
+        id: 'null',
         title: 'Новая статья',
         content: '',
         author: '',
@@ -94,6 +94,7 @@ export class BoardToolbarComponent implements OnInit {
   openCreateArticleDialog() {
     let openDialogHref = this.dialog.open(CreateArticleDialogComponent, {
       data: this.initialArticle,
+      width: '400px',
     });
     openDialogHref.afterClosed().subscribe(result => {
       console.log(result);

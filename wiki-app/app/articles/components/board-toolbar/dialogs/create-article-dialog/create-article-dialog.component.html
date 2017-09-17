@@ -2,18 +2,18 @@
 <div md-dialog-content>
   <md-list>
     <md-list-item>
-      <md-form-field>
+      <md-form-field class="full-width">
         <input mdInput tabindex="1" [(ngModel)]="data.article.title" placeholder="Название статьи">
       </md-form-field>
     </md-list-item>
     <md-list-item>
-      <md-select class="md-select" [(ngModel)]="data.boardRequest.black" title="Цвет" placeholder="Цвет">
+      <md-select class="full-width" [(ngModel)]="data.boardRequest.black" title="Цвет" placeholder="Цвет">
         <md-option [value]="false">Белые</md-option>
         <md-option [value]="true">Чёрные</md-option>
       </md-select>
     </md-list-item>
     <md-list-item>
-      <md-select class="md-select" [(ngModel)]="rules" title="Правила" placeholder="Правила">
+      <md-select class="full-width" [(ngModel)]="data.boardRequest.rules" title="Правила" placeholder="Правила">
         <md-option [value]="Rules.RUSSIAN">Русские шашки</md-option>
         <md-option [value]="Rules.RUSSIAN_GIVEAWAY">Русские шашки (поддавки)</md-option>
         <md-option [value]="Rules.INTERNATIONAL">Интернациональные шашки</md-option>
@@ -21,12 +21,12 @@
       </md-select>
     </md-list-item>
     <md-list-item>
-      <md-checkbox [(ngModel)]="fillBoard">Расставить шашки</md-checkbox>
+      <md-checkbox [(ngModel)]="data.boardRequest.fillBoard">Расставить шашки</md-checkbox>
     </md-list-item>
   </md-list>
 </div>
 <div md-dialog-actions>
-  <span flex></span>
+  <span class="fill-remaining-space"></span>
   <button md-button md-dialog-close type="button" class="btn btn-secondary" data-dismiss="modal"
           (click)="dialogRef.close()">Отмена
   </button>
