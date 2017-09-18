@@ -4,6 +4,8 @@ import { Article } from '../models/article';
 export const SEARCH = '[Article] Search';
 export const SEARCH_COMPLETE = '[Article] Search Complete';
 export const LOAD = '[Article] Load';
+export const LOAD_SUCCESS = '[Article] Load Success';
+export const LOAD_FAIL = '[Article] Load Fail';
 export const EDIT = '[Article] Edit';
 export const CREATE_SUCCESS = '[Article] Success';
 export const SELECT = '[Article] Select';
@@ -42,7 +44,19 @@ export class Edit implements Action {
 export class Load implements Action {
   readonly type = LOAD;
 
+  constructor(public payload: string) {}
+}
+
+export class LoadSuccess implements Action {
+  readonly type = LOAD_SUCCESS;
+
   constructor(public payload: Article) {}
+}
+
+export class LoadFail implements Action {
+  readonly type = LOAD_FAIL;
+
+  constructor(public payload: any) {}
 }
 
 export class Select implements Action {
@@ -61,4 +75,5 @@ export type Actions =
   | CreateSuccess
   | Edit
   | Load
+  | LoadSuccess
   | Select;

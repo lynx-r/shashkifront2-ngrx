@@ -8,11 +8,11 @@ import { Book } from '../models/book';
       <md-card>
         <md-card-title-group>
           <img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>
-          <md-card-title>{{ title | bcEllipsis:35 }}</md-card-title>
-          <md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>
+          <md-card-title>{{ title | acEllipsis:35 }}</md-card-title>
+          <md-card-subtitle *ngIf="subtitle">{{ subtitle | acEllipsis:40 }}</md-card-subtitle>
         </md-card-title-group>
         <md-card-content>
-          <p *ngIf="description">{{ description | bcEllipsis }}</p>
+          <p *ngIf="description">{{ description | acEllipsis }}</p>
         </md-card-content>
         <md-card-footer>
           <bc-book-authors [book]="book"></bc-book-authors>

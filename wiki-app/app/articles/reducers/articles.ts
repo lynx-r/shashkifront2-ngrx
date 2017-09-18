@@ -57,6 +57,27 @@ export function reducer(
       };
     }
 
+    case article.LOAD: {
+      return {
+        ...state,
+        selectedArticleId: action.payload,
+      };
+    }
+
+    case article.LOAD_SUCCESS: {
+      return {
+        ...adapter.addOne(action.payload, state),
+        selectedArticleId: action.payload.id,
+      };
+    }
+
+    case article.SELECT: {
+      return {
+        ...state,
+        selectedArticleId: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

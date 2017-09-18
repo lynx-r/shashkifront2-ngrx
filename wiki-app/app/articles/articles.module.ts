@@ -5,9 +5,8 @@ import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ComponentsModule } from './components';
-import { EditArticlePageComponent } from './containers/edit-article-page';
 import { reducers } from './reducers';
-import { CreateArticlePageComponent } from './containers/create-article-page';
+import { EditArticlePageComponent } from './containers/edit-article-page';
 import { ArticleEffects } from './effects/article';
 import { ArticleService } from '../core/services/article.service';
 import { ApiArticleService } from '../core/services/api-article.service';
@@ -20,13 +19,14 @@ import { CollectionEffects } from './effects/collection';
     MaterialModule,
     ComponentsModule,
     RouterModule.forChild([
-      // { path: 'find', component: FindArticlePageComponent },
-      { path: 'create', component: CreateArticlePageComponent },
-      // {
-      //   path: ':id',
-      //   component: EditArticlePageComponent,
-      //   canActivate: [ArticleExistsGuard],
-      // },
+      {
+        path: ':id',
+        children: [
+          { path: 'edit', component: EditArticlePageComponent },
+          { path: '', component: EditArticlePageComponent },
+        ],
+      },
+      { path: 'create', component: EditArticlePageComponent },
       { path: '', component: CollectionPageComponent },
     ]),
 
@@ -49,7 +49,7 @@ import { CollectionEffects } from './effects/collection';
     EffectsModule.forFeature([ArticleEffects, CollectionEffects]),
   ],
   declarations: [
-    CreateArticlePageComponent,
+    EditArticlePageComponent,
     EditArticlePageComponent,
     // FindArticlePageComponent,
     // ViewArticlePageComponent,

@@ -2,7 +2,8 @@ export class AppConstants {
   static WIKI_HOST: string = 'http://localhost:8081';
   static BOARD_HOST: string = 'http://localhost:8082';
   static BLOCK_MAIN: string = 'block-main';
-  static ARTICLE_RESOURCE: string = '/articles';
+  static ARTICLES_RESOURCE: string = '/articles';
+  static ARTICLE_RESOURCE: string = '/article';
   static BOARD_RESOURCE: string = '/board';
   static UNDO: string = '/undo';
   static FIND_ARTICLES: string = 'find articles';

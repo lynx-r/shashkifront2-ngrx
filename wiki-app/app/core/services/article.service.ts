@@ -13,7 +13,7 @@ export class ArticleService {
   createArticle(
     article: CreateArticleRequest
   ): Observable<CreateArticleResponse> {
-    return this.apiArticleService.post(AppConstants.ARTICLE_RESOURCE, article);
+    return this.apiArticleService.post(AppConstants.ARTICLES_RESOURCE, article);
   }
 
   // refreshArticle(content, unblock) {
@@ -27,7 +27,7 @@ export class ArticleService {
 
   listArticles(limit: number): Observable<Article[]> {
     return this.apiArticleService.get(
-      AppConstants.ARTICLE_RESOURCE + `?limit=${limit}`
+      AppConstants.ARTICLES_RESOURCE + `?limit=${limit}`
     );
   }
 
@@ -50,7 +50,7 @@ export class ArticleService {
   // openArticle(articleId: string) {
   //   Utils.blockUI(this.blockUIService, (unblock) => {
   //     this.apiArticleService
-  //       .get(AppConstants.ARTICLE_RESOURCE + `/${articleId}`)
+  //       .get(AppConstants.ARTICLES_RESOURCE + `/${articleId}`)
   //       .subscribe((content) => {
   //         this.refreshArticle(content, unblock);
   //       });
@@ -60,7 +60,7 @@ export class ArticleService {
   // updateArticle() {
   //   Utils.blockUI(this.blockUIService,(unblock) => {
   //     this.apiArticleService
-  //       .put(AppConstants.ARTICLE_RESOURCE, {content: this.content})
+  //       .put(AppConstants.ARTICLES_RESOURCE, {content: this.content})
   //       .subscribe((content) => {
   //         this.refreshArticle(content, unblock);
   //       })
@@ -69,7 +69,7 @@ export class ArticleService {
 
   fillInBoard() {
     // this.blockUI((unblock) => {
-    // this.apiArticleService.post(AppConstants.ARTICLE_RESOURCE, {id: this.content.id}, (resp) => {
+    // this.apiArticleService.post(AppConstants.ARTICLES_RESOURCE, {id: this.content.id}, (resp) => {
     //   if (resp.ok) {
     //     this.refreshArticle(resp);
     //   } else {
@@ -109,4 +109,9 @@ export class ArticleService {
   // get board() {
   //   return this.content.board;
   // }
+  findArticleById(articleId: string): Observable<Article> {
+    return this.apiArticleService.get(
+      AppConstants.ARTICLE_RESOURCE + `/${articleId}`
+    );
+  }
 }
