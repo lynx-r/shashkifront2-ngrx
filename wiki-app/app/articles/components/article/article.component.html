@@ -1,13 +1,13 @@
-<md-card class="article-card">
+<md-card class="full-width">
   <md-list>
     <md-list-item>
-      <md-form-field>
-        <input mdInput title="Название статьи" [(ngModel)]="article.title">
+      <md-form-field class="full-width">
+        <input mdInput title="Название статьи" required [(ngModel)]="article.title">
       </md-form-field>
     </md-list-item>
     <md-list-item>
-      <md-form-field>
-        <textarea title="Текст статьи" mdInput mdTextareaAutosize [(ngModel)]="article.content"></textarea>
+      <md-form-field class="full-width">
+        <textarea title="Текст статьи" mdTextareaAutosize placeholder="Текст статьи" required mdInput [(ngModel)]="article.content"></textarea>
       </md-form-field>
     </md-list-item>
   </md-list>

@@ -17,4 +17,14 @@ html {
 
 .full-width {
   width: 100%;
+  /*width: -moz-calc(100% - 64px);*/
+  /*width: -webkit-calc(100% - 64px);*/
+  /*width: calc(100% - 64px);*/
+}
+
+.full-height {
+  height: 100vh;
+  /*height: -moz-calc(100% - 64px);*/
+  /*height: -webkit-calc(100% - 64px);*/
+  /*height: calc(100% - 64px);*/
 }
