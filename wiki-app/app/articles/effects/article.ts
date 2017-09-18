@@ -16,6 +16,7 @@ import * as article from '../actions/article';
 import * as board from '../actions/board';
 import { ArticleService } from '../../core/services/article.service';
 import { CreateArticleResponse } from '../models/create-article-response';
+import { CreateArticleRequest } from '../models/create-article-request';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
 export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
@@ -39,16 +40,15 @@ export class ArticleEffects {
   create$: Observable<Action> = this.actions$
     .ofType(createArticle.CREATE)
     .map((action: createArticle.Create) => action.payload)
-    .mergeMap(createArticleRequest =>
-      this.articleService
-        .createArticle(createArticleRequest)
-        .flatMap((createdArticle: CreateArticleResponse) => [
-          new article.CreateSuccess(createdArticle.article),
-          new board.CreateSuccess(createdArticle.board),
-          new createArticle.CreateSuccess(),
-        ])
-        .catch(err => of(new createArticle.CreateFail(createArticleRequest)))
-    );
+    .switchMap((createArticleRequest: CreateArticleRequest) =>
+      this.articleService.createArticle(createArticleRequest)
+    )
+    .mergeMap((createdArticleResponse: CreateArticleResponse) => [
+      new article.CreateSuccess(createdArticleResponse.article),
+      new board.CreateSuccess(createdArticleResponse.board),
+      new createArticle.CreateSuccess(),
+    ])
+    .catch(err => of(new createArticle.CreateFail()));
 
   constructor(
     private actions$: Actions,

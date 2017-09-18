@@ -28,13 +28,10 @@ export class Utils {
 
   static processRequest(resp: any) {
     console.log(resp.ok);
-    let body = resp.json();
-    console.log(body);
     if (resp.ok) {
-      return body.data;
+      return resp.json();
     }
-    console.log('err');
-    throw { message: body.message };
+    throw { message: resp.message };
   }
 
   static equalsSquares(source: Square, target: Square) {
