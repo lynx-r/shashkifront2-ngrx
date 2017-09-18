@@ -7,10 +7,10 @@ import { Article } from '../models/article';
     <ac-board-toolbar class="col-12"></ac-board-toolbar>
     <md-grid-list *ngIf="article; else createArticle" cols="2">
       <md-grid-tile>
-        <board></board>
+        <ac-board></ac-board>
       </md-grid-tile>
       <md-grid-tile>
-        <board-article></board-article>
+        <ac-board-article [article]="article"></ac-board-article>
       </md-grid-tile>
     </md-grid-list>
     <ng-template #createArticle>

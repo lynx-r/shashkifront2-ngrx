@@ -1,13 +1,15 @@
-<div class="">
-  <div class="title">
-    <!--[(ngModel)]="content.title"-->
-    <input  ngDefaultControl type="text" class="form-control" placeholder="Название">
-  </div>
-  <div class="content">
-    <!--[(ngModel)]="content.content"-->
-    <div  ngDefaultControl placeholder="Содержание статьи" contenteditable="true" class="contenteditable form-control"></div>
-  </div>
-  <div class="author">
-    <input type="text" class="form-control" placeholder="Автор">
-  </div>
-</div>
+<md-card class="article-card">
+  <md-list>
+    <md-list-item>
+      <md-form-field>
+        <input mdInput title="Название статьи" [(ngModel)]="article.title">
+      </md-form-field>
+    </md-list-item>
+    <md-list-item>
+      <md-form-field>
+        <textarea title="Текст статьи" mdInput mdTextareaAutosize [(ngModel)]="article.content"></textarea>
+      </md-form-field>
+    </md-list-item>
+  </md-list>
+</md-card>
+

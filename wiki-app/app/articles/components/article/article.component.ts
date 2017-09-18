@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Article } from '../../models/article';
 
 @Component({
-  selector: 'board-article',
+  selector: 'ac-board-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],
 })
 export class ArticleComponent implements OnInit {
-  article: Article;
+  @Input() article: Article;
 
   constructor() {}
 

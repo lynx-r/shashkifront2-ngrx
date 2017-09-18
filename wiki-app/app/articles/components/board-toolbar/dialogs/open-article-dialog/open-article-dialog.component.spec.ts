@@ -4,7 +4,7 @@ import { OpenArticleDialogComponent } from './open-article-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { ArticleService } from '../../../../service/article.service';
-import { BoardService } from '../../../../service/board.service';
+import { BoardService } from '../../../../service/ac-board.service';
 import { SocketService } from '../../../../service/socket.service';
 
 describe('OpenArticleDialogComponent', () => {

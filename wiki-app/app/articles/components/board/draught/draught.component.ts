@@ -119,7 +119,7 @@ export class DraughtComponent implements OnInit, OnDestroy {
     //   return;
     // }
     const config = {
-      // boardId: this.article.board.id,
+      // boardId: this.article.ac-board.id,
       allowed: this.allowedSquares,
       beaten: this.beatenPos,
       selectedSquare: this.square,

@@ -5,7 +5,7 @@ import { Rules } from '../../models/rules';
 import { Square } from '../../models/square';
 
 @Component({
-  selector: 'board',
+  selector: 'ac-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
@@ -19,15 +19,15 @@ export class BoardComponent implements OnInit {
 
   ngOnInit() {
     // this.articleService.articleObservable().subscribe(content => {
-    //   if (content.board) {
-    //     this.updateBoard(content.board);
+    //   if (content.ac-board) {
+    //     this.updateBoard(content.ac-board);
     //   }
     // });
-    // if (this.articleService.content.board) {
+    // if (this.articleService.content.ac-board) {
     //   this.boardService
-    //     .findById(this.articleService.content.board.id)
-    // .then(board => {
-    //   this.updateBoard(board);
+    //     .findById(this.articleService.content.ac-board.id)
+    // .then(ac-board => {
+    //   this.updateBoard(ac-board);
     // })
     // .catch(() => {});
     // }
@@ -35,14 +35,14 @@ export class BoardComponent implements OnInit {
 
   private updateBoard(board: Board) {
     if (board) {
-      // this.boardDimension = Rules.getBoardLenth(board.rules);
+      // this.boardDimension = Rules.getBoardLenth(ac-board.rules);
       // this.boardChunk = Rules.getChunk(
       //   this.boardDimension,
-      //   Math.abs(Rules.getDimension(board.rules))
+      //   Math.abs(Rules.getDimension(ac-board.rules))
       // );
-      // this.board = board;
-      // if (this.board.currentBoard) {
-      //   this.squares = this.board.currentBoard.squares;
+      // this.ac-board = ac-board;
+      // if (this.ac-board.currentBoard) {
+      //   this.squares = this.ac-board.currentBoard.squares;
       // } else {
       //   this.squares = [];
       // }

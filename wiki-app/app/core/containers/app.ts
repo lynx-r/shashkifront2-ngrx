@@ -9,33 +9,36 @@ import * as layout from '../actions/layout';
 import * as Auth from '../../auth/actions/auth';
 
 @Component({
-  selector: 'bc-app',
+  selector: 'ac-app',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <bc-layout>
-      <bc-sidenav [open]="showSidenav$ | async">
-        <bc-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/articles/edit" icon="article" hint="Написать статью">
+    <ac-layout>
+      <ac-sidenav [open]="showSidenav$ | async">
+        <ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/articles/edit" icon="article"
+                     hint="Написать статью">
           Новая статья
-        </bc-nav-item>
-        <bc-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/" icon="book" hint="View your book collection">
+        </ac-nav-item>
+        <ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/" icon="book"
+                     hint="View your book collection">
           My Collection
-        </bc-nav-item>
-        <bc-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/books/find" icon="search" hint="Find your next book!">
+        </ac-nav-item>
+        <ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/books/find" icon="search"
+                     hint="Find your next book!">
           Browse Books
-        </bc-nav-item>
-        <bc-nav-item (activate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">
+        </ac-nav-item>
+        <ac-nav-item (activate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">
           Sign In
-        </bc-nav-item>
-        <bc-nav-item (activate)="logout()" *ngIf="loggedIn$ | async">
+        </ac-nav-item>
+        <ac-nav-item (activate)="logout()" *ngIf="loggedIn$ | async">
           Sign Out
-        </bc-nav-item>
-      </bc-sidenav>
-      <bc-toolbar (openMenu)="openSidenav()">
-        Book Collection
-      </bc-toolbar>
+        </ac-nav-item>
+      </ac-sidenav>
+      <ac-toolbar (openMenu)="openSidenav()">
+        Меню статьи
+      </ac-toolbar>
 
       <router-outlet></router-outlet>
-    </bc-layout>
+    </ac-layout>
   `,
 })
 export class AppComponent {

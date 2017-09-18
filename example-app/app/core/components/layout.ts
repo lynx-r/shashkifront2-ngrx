@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'bc-layout',
+  selector: 'ac-layout',
   template: `
     <md-sidenav-container fullscreen>
 

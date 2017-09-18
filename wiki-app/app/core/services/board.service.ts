@@ -179,9 +179,9 @@ export class BoardService {
       // Utils.blockUI(this.blockUIService, (unblock) => {
       //   this.apiBoardService
       //     .get(AppConstants.BOARD_RESOURCE + `/${boardId}`)
-      //     .subscribe((board) => {
-      //       this.board = board;
-      //       resolve(board);
+      //     .subscribe((ac-board) => {
+      //       this.ac-board = ac-board;
+      //       resolve(ac-board);
       //       unblock();
       //     }, (err) => {
       //       reject(null);

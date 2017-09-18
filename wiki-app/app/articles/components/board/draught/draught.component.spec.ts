@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DraughtComponent } from './draught.component';
 import { ArticleService } from '../../../service/article.service';
-import { BoardService } from '../../../service/board.service';
+import { BoardService } from '../../../service/ac-board.service';
 import { SocketService } from '../../../service/socket.service';
 import { FormsModule } from '@angular/forms';
 import { Ng2Webstorage } from 'ngx-webstorage';

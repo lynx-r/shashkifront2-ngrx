@@ -4,13 +4,13 @@ export class AppConstants {
   static BLOCK_MAIN: string = 'block-main';
   static ARTICLES_RESOURCE: string = '/articles';
   static ARTICLE_RESOURCE: string = '/article';
-  static BOARD_RESOURCE: string = '/board';
+  static BOARD_RESOURCE: string = '/ac-board';
   static UNDO: string = '/undo';
   static FIND_ARTICLES: string = 'find articles';
   static FIND_ARTICLE: string = 'find article';
   static UPDATE_ARTICLE: string = 'update article';
-  static FILL_IN_BOARD: string = 'fill in board';
-  static CLEAR_BOARD: string = 'clear board';
+  static FILL_IN_BOARD: string = 'fill in ac-board';
+  static CLEAR_BOARD: string = 'clear ac-board';
   static REMOVE_ARTICLE: string = 'remove article';
   static HIGHLIGHT: string = 'highlighted';
   static MOVE_DRAUGHT_TO: string = 'move draught to';
@@ -18,7 +18,7 @@ export class AppConstants {
   static REMOVE_DRAUGHT: string = 'remove draught';
 
   static ARTICLE_STORAGE_KEY: string = 'article-key';
-  static BOARD_STORAGE_KEY: string = 'board-key';
+  static BOARD_STORAGE_KEY: string = 'ac-board-key';
   static REMOVE_DRAUGHT_STORAGE_KEY: string = 'remove-draught-flag-key';
   static SELECTED_DRAUGHT_DESC_STORAGE_KEY: string = 'selected-draught-desc-key';
   static EDIT_MODE_STORAGE_KEY: string = 'edit-mode-key';

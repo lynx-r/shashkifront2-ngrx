@@ -9,30 +9,32 @@ import * as layout from '../actions/layout';
 import * as Auth from '../../auth/actions/auth';
 
 @Component({
-  selector: 'bc-app',
+  selector: 'ac-app',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <bc-layout>
-      <bc-sidenav [open]="showSidenav$ | async">
-        <bc-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/" icon="book" hint="View your book collection">
-          My Collection
-        </bc-nav-item>
-        <bc-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/books/find" icon="search" hint="Find your next book!">
-          Browse Books
-        </bc-nav-item>
-        <bc-nav-item (activate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">
-          Sign In
-        </bc-nav-item>
-        <bc-nav-item (activate)="logout()" *ngIf="loggedIn$ | async">
-          Sign Out
-        </bc-nav-item>
-      </bc-sidenav>
-      <bc-toolbar (openMenu)="openSidenav()">
-        Book Collection
-      </bc-toolbar>
+      <ac-layout>
+          <ac-sidenav [open]="showSidenav$ | async">
+              <ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/" icon="book"
+                           hint="View your book collection">
+                  My Collection
+              </ac-nav-item>
+              <ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/books/find" icon="search"
+                           hint="Find your next book!">
+                  Browse Books
+              </ac-nav-item>
+              <ac-nav-item (activate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">
+                  Sign In
+              </ac-nav-item>
+              <ac-nav-item (activate)="logout()" *ngIf="loggedIn$ | async">
+                  Sign Out
+              </ac-nav-item>
+          </ac-sidenav>
+          <ac-toolbar (openMenu)="openSidenav()">
+              Book Collection
+          </ac-toolbar>
 
-      <router-outlet></router-outlet>
-    </bc-layout>
+          <router-outlet></router-outlet>
+      </ac-layout>
   `,
 })
 export class AppComponent {

@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ArticleComponent } from './article.component';
 import { FormsModule } from '@angular/forms';
 import { ArticleService } from '../../service/article.service';
-import { BoardService } from '../../service/board.service';
+import { BoardService } from '../../service/ac-board.service';
 import { SocketService } from '../../service/socket.service';
 import { Ng2Webstorage } from 'ngx-webstorage/dist/app';
 

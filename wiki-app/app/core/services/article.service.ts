@@ -19,7 +19,7 @@ export class ArticleService {
   // refreshArticle(content, unblock) {
   //   this.localStorage.clear(AppConstants.ARTICLE_STORAGE_KEY);
   //   if (content) {
-  //       // this.localStorage.store(AppConstants.BOARD_STORAGE_KEY, board);
+  //       // this.localStorage.store(AppConstants.BOARD_STORAGE_KEY, ac-board);
   //       this.localStorage.store(AppConstants.ARTICLE_STORAGE_KEY, content);
   //       unblock();
   //   }
@@ -106,8 +106,8 @@ export class ArticleService {
     // })
   }
 
-  // get board() {
-  //   return this.content.board;
+  // get ac-board() {
+  //   return this.content.ac-board;
   // }
   findArticleById(articleId: string): Observable<Article> {
     return this.apiArticleService.get(

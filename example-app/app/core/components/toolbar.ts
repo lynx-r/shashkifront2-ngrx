@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'bc-toolbar',
+  selector: 'ac-toolbar',
   template: `
     <md-toolbar color="primary">
       <button md-icon-button (click)="openMenu.emit()">
