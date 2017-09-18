@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Article } from '../models/article';
+import { Board } from '../models/board';
 
 @Component({
   selector: 'ac-editor',
@@ -7,7 +8,7 @@ import { Article } from '../models/article';
     <ac-board-toolbar class="col-12"></ac-board-toolbar>
     <md-grid-list *ngIf="article; else createArticle" cols="2" class="full-width">
       <md-grid-tile style="background-color: aliceblue">
-        <ac-board></ac-board>
+        <ac-board [board]="board"></ac-board>
       </md-grid-tile>
       <md-grid-tile style="background-color: aquamarine">
         <ac-board-article [article]="article"></ac-board-article>
@@ -24,6 +25,7 @@ import { Article } from '../models/article';
 })
 export class EditorComponent implements OnInit {
   @Input() article: Article;
+  @Input() board: Board;
 
   constructor() {
     console.log(this.article);

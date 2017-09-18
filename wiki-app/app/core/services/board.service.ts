@@ -7,6 +7,7 @@ import { Board } from '../../articles/models/board';
 import { Move } from '../../articles/models/move';
 import { Article } from '../../articles/models/article';
 import { Square } from '../../articles/models/square';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BoardService {
@@ -203,5 +204,11 @@ export class BoardService {
       .subscribe((resp: Move) => {
         this.moveToSquareEvent.emit(resp);
       });
+  }
+
+  findBoardById(boardId: string): Observable<Board> {
+    return this.apiBoardService.get(
+      AppConstants.BOARD_RESOURCE + `/${boardId}`
+    );
   }
 }

@@ -1,12 +1,12 @@
 import { Action } from '@ngrx/store';
 import { Board } from '../models/board';
-import { CreateBoardRequest } from '../models/create-board-request';
-import { CreateArticleRequest } from '../models/create-article-request';
 
 export const LOAD = '[Board] Load';
+export const LOAD_SUCCESS = '[Board] Load Success';
+export const SELECT = '[Board] Load Select';
 export const EDIT = '[Board] Edit';
 export const CREATE_SUCCESS = '[Board] Success';
-export const CREATE_FAIL = '[Board] Fail';
+export const LOAD_FAIL = '[Board] Fail';
 
 /**
  * Every action is comprised of at least a type and an optional
@@ -21,12 +21,6 @@ export class CreateSuccess implements Action {
   constructor(public payload: Board) {}
 }
 
-export class CreateFail implements Action {
-  readonly type = CREATE_FAIL;
-
-  constructor(public payload: Board) {}
-}
-
 export class Edit implements Action {
   readonly type = EDIT;
 
@@ -36,11 +30,35 @@ export class Edit implements Action {
 export class Load implements Action {
   readonly type = LOAD;
 
+  constructor(public payload: string) {}
+}
+
+export class LoadSuccess implements Action {
+  readonly type = LOAD_SUCCESS;
+
   constructor(public payload: Board) {}
+}
+
+export class LoadFail implements Action {
+  readonly type = LOAD_FAIL;
+
+  constructor(public payload: Board) {}
+}
+
+export class Select implements Action {
+  readonly type = SELECT;
+
+  constructor(public payload: string) {}
 }
 
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
-export type Actions = CreateSuccess | Edit | Load;
+export type Actions =
+  | CreateSuccess
+  | Edit
+  | Load
+  | LoadSuccess
+  | LoadFail
+  | Select;

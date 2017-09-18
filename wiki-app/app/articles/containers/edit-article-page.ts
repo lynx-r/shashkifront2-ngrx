@@ -12,18 +12,20 @@ import * as fromArticles from '../reducers';
 import * as article from '../actions/article';
 import { Article } from '../models/article';
 import { Observable } from 'rxjs/Observable';
+import { Board } from '../models/board';
 
 @Component({
   selector: 'ac-create-article-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ac-editor [article]="article$ | async"></ac-editor>
+    <ac-editor [article]="article$ | async" [board]="board$"></ac-editor>
   `,
 })
 export class EditArticlePageComponent implements OnDestroy {
   actionsSubscription: Subscription;
 
   article$: Observable<Article>;
+  board$: Observable<Board>;
 
   constructor(store: Store<fromArticles.State>, route: ActivatedRoute) {
     this.actionsSubscription = route.params
@@ -31,6 +33,7 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe(store);
 
     this.article$ = store.select(fromArticles.getSelectedArticle);
+    this.board$ = store.select(fromArticles.getSelectedBoard);
   }
 
   ngOnDestroy() {

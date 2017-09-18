@@ -1,6 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromSearch from './search';
 import * as fromArticles from './articles';
+import * as fromBoards from './boards';
 import * as fromCreateArticle from './create-article';
 import * as fromCollection from './collection';
 import * as fromRoot from '../../reducers';
@@ -8,6 +9,7 @@ import * as fromRoot from '../../reducers';
 export interface ArticlesState {
   search: fromSearch.State;
   articles: fromArticles.State;
+  boards: fromBoards.State;
   createArticle: fromCreateArticle.State;
   collection: fromCollection.State;
 }
@@ -64,9 +66,19 @@ export const getArticleEntitiesState = createSelector(
   }
 );
 
+export const getBoardEntitiesState = createSelector(getArticlesState, state => {
+  console.log('BOARDS ENTITIES', state);
+  return state.boards;
+});
+
 export const getSelectedArticleId = createSelector(
   getArticleEntitiesState,
   fromArticles.getSelectedId
+);
+
+export const getSelectedBoardId = createSelector(
+  getBoardEntitiesState,
+  fromBoards.getSelectedId
 );
 
 /**
@@ -83,6 +95,13 @@ export const {
   selectAll: getAllArticles,
   selectTotal: getTotalArticles,
 } = fromArticles.adapter.getSelectors(getArticleEntitiesState);
+
+export const {
+  selectIds: getBoardIds,
+  selectEntities: getBoardEntities,
+  selectAll: getAllBoards,
+  selectTotal: getTotalBoards,
+} = fromBoards.adapter.getSelectors(getBoardEntitiesState);
 
 export const getSelectedArticle = createSelector(
   getArticleEntities,
@@ -162,5 +181,14 @@ export const isSelectedArticleInCollection = createSelector(
   getSelectedArticleId,
   (ids, selected) => {
     return selected == null ? false : ids.indexOf(selected) > -1;
+  }
+);
+
+export const getSelectedBoard = createSelector(
+  getBoardEntities,
+  getSelectedBoardId,
+  (entities, selectedId) => {
+    console.log('ENT1 SEL1 ', entities, selectedId);
+    return selectedId && entities[selectedId];
   }
 );

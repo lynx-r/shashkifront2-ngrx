@@ -10,14 +10,16 @@ import { Square } from '../../models/square';
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
+  @Input() board: Board;
+
   boardDimension: Array<number>;
-  boardChunk: Array<number>;
-  board: Board;
+  boardChunk: Array<number>[];
   squares: Square[];
 
   constructor() {}
 
   ngOnInit() {
+    this.updateBoard(this.board);
     // this.articleService.articleObservable().subscribe(content => {
     //   if (content.ac-board) {
     //     this.updateBoard(content.ac-board);
@@ -35,17 +37,17 @@ export class BoardComponent implements OnInit {
 
   private updateBoard(board: Board) {
     if (board) {
-      // this.boardDimension = Rules.getBoardLenth(ac-board.rules);
-      // this.boardChunk = Rules.getChunk(
-      //   this.boardDimension,
-      //   Math.abs(Rules.getDimension(ac-board.rules))
-      // );
-      // this.ac-board = ac-board;
-      // if (this.ac-board.currentBoard) {
-      //   this.squares = this.ac-board.currentBoard.squares;
-      // } else {
-      //   this.squares = [];
-      // }
+      this.boardDimension = Rules.getBoardLength(board.rules);
+      this.boardChunk = Rules.getChunk(
+        this.boardDimension,
+        Rules.getDimension(board.rules)
+      );
+      this.board = board;
+      if (this.board.currentBoard) {
+        this.squares = this.board.currentBoard.squares;
+      } else {
+        this.squares = [];
+      }
     }
   }
 }

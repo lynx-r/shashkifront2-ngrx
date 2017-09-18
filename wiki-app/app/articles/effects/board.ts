@@ -11,13 +11,9 @@ import { Observable } from 'rxjs/Observable';
 import { Scheduler } from 'rxjs/Scheduler';
 import { of } from 'rxjs/observable/of';
 
-import * as createArticle from '../actions/create-article';
-import * as article from '../actions/article';
 import * as board from '../actions/board';
-import { ArticleService } from '../../core/services/article.service';
-import { CreateArticleResponse } from '../models/create-article-response';
-import { CreateArticleRequest } from '../models/create-article-request';
-import { Article } from '../models/article';
+import { BoardService } from '../../core/services/board.service';
+import { Board } from '../models/board';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
 export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
@@ -36,37 +32,18 @@ export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
  */
 
 @Injectable()
-export class ArticleEffects {
-  @Effect()
-  create$: Observable<Action> = this.actions$
-    .ofType(createArticle.CREATE)
-    .map((action: createArticle.Create) => action.payload)
-    .switchMap((createArticleRequest: CreateArticleRequest) =>
-      this.articleService.createArticle(createArticleRequest)
-    )
-    .mergeMap((createdArticleResponse: CreateArticleResponse) => [
-      new article.CreateSuccess(createdArticleResponse.article),
-      new board.CreateSuccess(createdArticleResponse.board),
-      new createArticle.CreateSuccess(),
-    ])
-    .catch(err => of(new createArticle.CreateFail(err)));
-
+export class BoardEffects {
   @Effect()
   load$: Observable<Action> = this.actions$
-    .ofType(article.LOAD)
-    .map((action: article.Load) => action.payload)
-    .switchMap((articleId: string) =>
-      this.articleService.findArticleById(articleId)
-    )
-    .mergeMap((loadedArticle: Article) => [
-      new article.LoadSuccess(loadedArticle),
-      new board.Load(loadedArticle.boardId),
-    ])
-    .catch(err => of(new article.LoadFail(err)));
+    .ofType(board.LOAD)
+    .map((action: board.Load) => action.payload)
+    .switchMap((boardId: string) => this.boardService.findBoardById(boardId))
+    .map((loadedBoard: Board) => new board.LoadSuccess(loadedBoard))
+    .catch(err => of(new board.LoadFail(err)));
 
   constructor(
     private actions$: Actions,
-    private articleService: ArticleService,
+    private boardService: BoardService,
     @Optional()
     @Inject(SEARCH_DEBOUNCE)
     private debounce: number = 300,
