@@ -27,4 +27,5 @@ export class AppConstants {
   static AUTH_ACTIVE_TAB: string = 'auth-active-tab-key';
 
   static HOST: string = 'http://localhost:4200';
+  static PAGE_SIZE: number = 5;
 }

@@ -18,8 +18,4 @@ import { Article } from '../models/article';
 })
 export class ArticlePreviewListComponent {
   @Input() articles: Article[];
-
-  constructor() {
-    console.log('ARTICLES', this.articles);
-  }
 }

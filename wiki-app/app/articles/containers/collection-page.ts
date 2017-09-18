@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import * as fromArticles from '../reducers';
 import * as collection from '../actions/collection';
 import { Article } from '../models/article';
+import { AppConstants } from '../../core/services/app-constants';
 
 @Component({
   selector: 'ac-collection-page',
@@ -40,6 +41,6 @@ export class CollectionPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new collection.Load(3));
+    this.store.dispatch(new collection.Load(AppConstants.PAGE_SIZE));
   }
 }
