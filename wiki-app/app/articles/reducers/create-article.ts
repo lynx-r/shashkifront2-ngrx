@@ -1,7 +1,6 @@
-import { createSelector } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import * as article from '../actions/article';
-import { Article } from '../models/article';
+import * as createArticle from '../actions/create-article';
+import { CreateArticleRequest } from '../models/create-article-request';
 
 /**
  * @ngrx/entity provides a predefined interface for handling
@@ -10,8 +9,10 @@ import { Article } from '../models/article';
  * model type by id. This interface is extended to include
  * any additional interface properties.
  */
-export interface State extends EntityState<Article> {
+export interface State extends EntityState<CreateArticleRequest> {
   selectedArticleId: string | null;
+  loading: boolean;
+  loaded: boolean;
 }
 
 /**
@@ -22,9 +23,10 @@ export interface State extends EntityState<Article> {
  * a sort option whether to sort the records when performing
  * operations
  */
-export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
-  selectId: (article: Article) => article.id,
-  sort: false,
+export const adapter: EntityAdapter<CreateArticleRequest> = createEntityAdapter<
+  CreateArticleRequest
+>({
+  selectId: (article: CreateArticleRequest) => article.article.id,
 });
 
 /** getInitialState returns the default initial state
@@ -33,22 +35,27 @@ export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
 */
 export const initialState: State = adapter.getInitialState({
   selectedArticleId: null,
+  loading: false,
+  loaded: false,
 });
 
-export function reducer(state = initialState, action: article.Actions): State {
+export function reducer(
+  state = initialState,
+  action: createArticle.Actions
+): State {
   switch (action.type) {
-    case article.EDIT:
-    case article.LOAD: {
+    case createArticle.CREATE: {
       return {
-        /**
-         * The addOne function provided by the created adapter
-         * adds one record to the entity dictionary
-         * and returns a new state including that records if it doesn't
-         * exist already. If the collection is to be sorted, the adapter will
-         * insert the new record into the sorted array.
-         */
-        ...adapter.addOne(action.payload, state),
-        selectedArticleId: state.selectedArticleId,
+        ...state,
+        loading: true,
+      };
+    }
+
+    case createArticle.CREATE_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
       };
     }
 

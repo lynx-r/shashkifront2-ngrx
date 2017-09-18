@@ -15,7 +15,7 @@ export class ApiArticleService extends ApiBase {
     });
   }
 
-  post(resource: string, config) {
+  post(resource: string, config: any) {
     return this.http.post(this.apiArticleUrl() + resource, config).map(resp => {
       return Utils.processRequest(resp);
     });

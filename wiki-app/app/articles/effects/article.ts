@@ -11,9 +11,11 @@ import { Observable } from 'rxjs/Observable';
 import { Scheduler } from 'rxjs/Scheduler';
 import { of } from 'rxjs/observable/of';
 
+import * as createArticle from '../actions/create-article';
 import * as article from '../actions/article';
-import { Article } from '../models/article';
+import * as board from '../actions/board';
 import { ArticleService } from '../../core/services/article.service';
+import { CreateArticleResponse } from '../models/create-article-response';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
 export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
@@ -35,15 +37,17 @@ export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
 export class ArticleEffects {
   @Effect()
   create$: Observable<Action> = this.actions$
-    .ofType(article.CREATE)
-    .map((action: article.Create) => action.payload)
-    .mergeMap(createArticle =>
+    .ofType(createArticle.CREATE)
+    .map((action: createArticle.Create) => action.payload)
+    .mergeMap(createArticleRequest =>
       this.articleService
-        .createArticle(createArticle)
-        .map(
-          (createdArticle: Article) => new article.CreateSuccess(createdArticle)
-        )
-        .catch(() => of(new article.CreateFail(createArticle)))
+        .createArticle(createArticleRequest)
+        .flatMap((createdArticle: CreateArticleResponse) => [
+          new article.CreateSuccess(createdArticle.article),
+          new board.CreateSuccess(createdArticle.board),
+          new createArticle.CreateSuccess(),
+        ])
+        .catch(err => of(new createArticle.CreateFail(createArticleRequest)))
     );
 
   constructor(

@@ -5,9 +5,7 @@ export const SEARCH = '[Article] Search';
 export const SEARCH_COMPLETE = '[Article] Search Complete';
 export const LOAD = '[Article] Load';
 export const EDIT = '[Article] Edit';
-export const CREATE = '[Article] Create';
 export const CREATE_SUCCESS = '[Article] Success';
-export const CREATE_FAIL = '[Article] Fail';
 export const SELECT = '[Article] Select';
 
 /**
@@ -29,20 +27,8 @@ export class SearchComplete implements Action {
   constructor(public payload: Article[]) {}
 }
 
-export class Create implements Action {
-  readonly type = CREATE;
-
-  constructor(public payload: Article) {}
-}
-
 export class CreateSuccess implements Action {
   readonly type = CREATE_SUCCESS;
-
-  constructor(public payload: Article) {}
-}
-
-export class CreateFail implements Action {
-  readonly type = CREATE_FAIL;
 
   constructor(public payload: Article) {}
 }
@@ -72,7 +58,6 @@ export class Select implements Action {
 export type Actions =
   | Search
   | SearchComplete
-  | Create
   | CreateSuccess
   | Edit
   | Load

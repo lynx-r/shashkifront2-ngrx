@@ -25,23 +25,23 @@ export class CreateArticlePageComponent implements OnDestroy {
   actionsSubscription: Subscription;
 
   constructor(store: Store<fromArticles.State>, route: ActivatedRoute) {
-    this.actionsSubscription = route.params
-      .map(params => {
-        let initArticle: Article = {
-          id: '',
-          title: 'Новая статья',
-          content: 'Содержание статьи',
-          boardId: null,
-          author: '',
-        };
-        return this.edit
-          ? new article.Edit(params.id)
-          : new article.Create(initArticle);
-      })
-      .subscribe(store);
+    //   this.actionsSubscription = route.params
+    //     .map(params => {
+    //       let initArticle: Article = {
+    //         id: '',
+    //         title: 'Новая статья',
+    //         content: 'Содержание статьи',
+    //         boardId: null,
+    //         author: '',
+    //       };
+    //       return this.edit
+    //         ? new article.Edit(params.id)
+    //         : new article.Create(initArticle);
+    //     })
+    //     .subscribe(store);
   }
 
   ngOnDestroy() {
-    this.actionsSubscription.unsubscribe();
+    // this.actionsSubscription.unsubscribe();
   }
 }

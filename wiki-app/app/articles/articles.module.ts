@@ -4,19 +4,13 @@ import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-
 import { ComponentsModule } from './components';
-// import { ArticleEffects } from './effects/content';
-// import { CollectionEffects } from './effects/collection';
-// import { ArticleExistsGuard } from './guards/content-exists';
-
 import { EditArticlePageComponent } from './containers/edit-article-page';
-// import { ViewArticlePageComponent } from './containers/view-content-page';
-// import { SelectedArticlePageComponent } from './containers/selected-content-page';
-// import { CollectionPageComponent } from './containers/collection-page';
-
 import { reducers } from './reducers';
 import { CreateArticlePageComponent } from './containers/create-article-page';
+import { ArticleEffects } from './effects/article';
+import { ArticleService } from '../core/services/article.service';
+import { ApiArticleService } from '../core/services/api-article.service';
 
 @NgModule({
   imports: [
@@ -50,7 +44,7 @@ import { CreateArticlePageComponent } from './containers/create-article-page';
      * All Effects will only be instantiated once regardless of
      * whether they are registered once or multiple times.
      */
-    // EffectsModule.forFeature([ArticleEffects, CollectionEffects]),
+    EffectsModule.forFeature([ArticleEffects]),
   ],
   declarations: [
     CreateArticlePageComponent,
@@ -60,6 +54,6 @@ import { CreateArticlePageComponent } from './containers/create-article-page';
     // SelectedArticlePageComponent,
     // CollectionPageComponent,
   ],
-  // providers: [ArticleExistsGuard],
+  providers: [ArticleService, ApiArticleService],
 })
 export class ArticlesModule {}

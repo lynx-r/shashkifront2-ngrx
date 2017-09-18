@@ -3,12 +3,16 @@ import { Observable } from 'rxjs/Observable';
 import { AppConstants } from './app-constants';
 import { ApiArticleService } from './api-article.service';
 import { Article } from '../../articles/models/article';
+import { CreateArticleRequest } from '../../articles/models/create-article-request';
+import { CreateArticleResponse } from '../../articles/models/create-article-response';
 
 @Injectable()
 export class ArticleService {
   constructor(private apiArticleService: ApiArticleService) {}
 
-  createArticle(article: Article): Observable<Article> {
+  createArticle(
+    article: CreateArticleRequest
+  ): Observable<CreateArticleResponse> {
     return this.apiArticleService.post(AppConstants.ARTICLE_RESOURCE, article);
   }
 

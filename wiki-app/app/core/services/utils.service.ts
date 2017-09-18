@@ -27,10 +27,13 @@ export class Utils {
   }
 
   static processRequest(resp: any) {
+    console.log(resp.ok);
     let body = resp.json();
-    if (body.ok) {
+    console.log(body);
+    if (resp.ok) {
       return body.data;
     }
+    console.log('err');
     throw { message: body.message };
   }
 

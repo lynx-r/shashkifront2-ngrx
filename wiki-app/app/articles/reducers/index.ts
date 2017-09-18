@@ -1,12 +1,14 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromSearch from './search';
 import * as fromArticles from './articles';
+import * as fromCreateArticle from './create-article';
 import * as fromCollection from './collection';
 import * as fromRoot from '../../reducers';
 
 export interface ArticlesState {
   search: fromSearch.State;
   articles: fromArticles.State;
+  createArticle: fromCreateArticle.State;
   collection: fromCollection.State;
 }
 
@@ -17,6 +19,7 @@ export interface State extends fromRoot.State {
 export const reducers = {
   search: fromSearch.reducer,
   articles: fromArticles.reducer,
+  createArticle: fromCreateArticle.reducer,
   collection: fromCollection.reducer,
 };
 
