@@ -27,7 +27,7 @@ export class Utils {
   }
 
   static processRequest(resp: any) {
-    console.log(resp.ok);
+    console.log('RESPONSE ', resp);
     if (resp.ok) {
       return resp.json();
     }

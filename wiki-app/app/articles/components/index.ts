@@ -14,6 +14,8 @@ import { BoardComponent } from './board/board.component';
 import { SquareComponent } from './board/square/square.component';
 import { DraughtComponent } from './board/draught/draught.component';
 import { ArticleComponent } from './article/article.component';
+import { ArticlePreviewListComponent } from './article-preview-list';
+import { ArticlePreviewComponent } from './article-preview';
 
 export const COMPONENTS = [
   EditorComponent,
@@ -25,6 +27,8 @@ export const COMPONENTS = [
   SquareComponent,
   DraughtComponent,
   ArticleComponent,
+  ArticlePreviewListComponent,
+  ArticlePreviewComponent,
 ];
 
 @NgModule({

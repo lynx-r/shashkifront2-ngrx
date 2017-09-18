@@ -48,7 +48,7 @@ export class ArticleEffects {
       new board.CreateSuccess(createdArticleResponse.board),
       new createArticle.CreateSuccess(),
     ])
-    .catch(err => of(new createArticle.CreateFail()));
+    .catch(err => of(new createArticle.CreateFail(err)));
 
   constructor(
     private actions$: Actions,

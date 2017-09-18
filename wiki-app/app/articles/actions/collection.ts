@@ -58,6 +58,8 @@ export class RemoveArticleFail implements Action {
  */
 export class Load implements Action {
   readonly type = LOAD;
+
+  constructor(public payload: number = 20) {}
 }
 
 export class LoadSuccess implements Action {

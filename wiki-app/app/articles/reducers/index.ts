@@ -42,7 +42,7 @@ export const reducers = {
 /**
  * The createFeatureSelector function selects a piece of state from the root of the state object.
  * This is used for selecting feature states that are loaded eagerly or lazily.
-*/
+ */
 export const getArticlesState = createFeatureSelector<ArticlesState>(
   'articles'
 );
@@ -58,7 +58,10 @@ export const getArticlesState = createFeatureSelector<ArticlesState>(
  */
 export const getArticleEntitiesState = createSelector(
   getArticlesState,
-  state => state.articles
+  state => {
+    console.log('ARTICLE ENTITIES', state);
+    return state.articles;
+  }
 );
 
 export const getSelectedArticleId = createSelector(
@@ -85,6 +88,7 @@ export const getSelectedArticle = createSelector(
   getArticleEntities,
   getSelectedArticleId,
   (entities, selectedId) => {
+    console.log('ENT1 SEL1 ', entities, selectedId);
     return selectedId && entities[selectedId];
   }
 );
@@ -125,7 +129,10 @@ export const getSearchResults = createSelector(
 
 export const getCollectionState = createSelector(
   getArticlesState,
-  (state: ArticlesState) => state.collection
+  (state: ArticlesState) => {
+    console.log('COLSTATE', state);
+    return state.collection;
+  }
 );
 
 export const getCollectionLoaded = createSelector(
@@ -145,6 +152,7 @@ export const getArticleCollection = createSelector(
   getArticleEntities,
   getCollectionArticleIds,
   (entities, ids) => {
+    console.log('ENTITIES IDS ', entities);
     return ids.map(id => entities[id]);
   }
 );

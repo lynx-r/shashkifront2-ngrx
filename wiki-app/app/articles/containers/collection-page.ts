@@ -3,19 +3,19 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import * as fromBooks from '../reducers';
+import * as fromArticles from '../reducers';
 import * as collection from '../actions/collection';
-import { Book } from '../models/book';
+import { Article } from '../models/article';
 
 @Component({
-  selector: 'bc-collection-page',
+  selector: 'ac-collection-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <md-card>
-      <md-card-title>My Collection</md-card-title>
+      <md-card-title>Статьи</md-card-title>
     </md-card>
 
-    <bc-book-preview-list [books]="article$ | async"></bc-book-preview-list>
+    <ac-article-preview-list [articles]="article$ | async"></ac-article-preview-list>
   `,
   /**
    * Container components are permitted to have just enough styles
@@ -33,13 +33,13 @@ import { Book } from '../models/book';
   ],
 })
 export class CollectionPageComponent implements OnInit {
-  books$: Observable<Book[]>;
+  article$: Observable<Article[]>;
 
-  constructor(private store: Store<fromBooks.State>) {
-    this.books$ = store.select(fromBooks.getBookCollection);
+  constructor(private store: Store<fromArticles.State>) {
+    this.article$ = store.select(fromArticles.getArticleCollection);
   }
 
   ngOnInit() {
-    this.store.dispatch(new collection.Load());
+    this.store.dispatch(new collection.Load(3));
   }
 }

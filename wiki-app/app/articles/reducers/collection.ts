@@ -25,6 +25,7 @@ export function reducer(
     }
 
     case collection.LOAD_SUCCESS: {
+      console.log('ACTION ', action);
       return {
         loaded: true,
         loading: false,

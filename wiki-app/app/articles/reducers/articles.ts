@@ -1,6 +1,6 @@
-import { createSelector } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as article from '../actions/article';
+import * as collection from '../actions/collection';
 import { Article } from '../models/article';
 
 /**
@@ -23,7 +23,10 @@ export interface State extends EntityState<Article> {
  * operations
  */
 export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
-  selectId: (article: Article) => article.id,
+  selectId: (article: Article) => {
+    console.log(article);
+    return article.id;
+  },
   sort: false,
 });
 
@@ -35,10 +38,12 @@ export const initialState: State = adapter.getInitialState({
   selectedArticleId: null,
 });
 
-export function reducer(state = initialState, action: article.Actions): State {
+export function reducer(
+  state = initialState,
+  action: article.Actions | collection.Actions
+): State {
   switch (action.type) {
-    case article.EDIT:
-    case article.LOAD: {
+    case collection.LOAD_SUCCESS: {
       return {
         /**
          * The addOne function provided by the created adapter
@@ -47,7 +52,7 @@ export function reducer(state = initialState, action: article.Actions): State {
          * exist already. If the collection is to be sorted, the adapter will
          * insert the new record into the sorted array.
          */
-        ...adapter.addOne(action.payload, state),
+        ...adapter.addMany(action.payload, state),
         selectedArticleId: state.selectedArticleId,
       };
     }

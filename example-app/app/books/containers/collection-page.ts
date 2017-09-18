@@ -11,11 +11,11 @@ import { Book } from '../models/book';
   selector: 'bc-collection-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <md-card>
-      <md-card-title>My Collection</md-card-title>
-    </md-card>
+      <md-card>
+          <md-card-title>My Collection</md-card-title>
+      </md-card>
 
-    <bc-book-preview-list [books]="books$ | async"></bc-book-preview-list>
+      <bc-book-preview-list [books]="article$ | async"></bc-book-preview-list>
   `,
   /**
    * Container components are permitted to have just enough styles

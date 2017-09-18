@@ -25,8 +25,10 @@ export class ArticleService {
   //   }
   // }
 
-  findArticles(): Observable<Article[]> {
-    return this.apiArticleService.get(AppConstants.ARTICLE_RESOURCE);
+  listArticles(limit: number): Observable<Article[]> {
+    return this.apiArticleService.get(
+      AppConstants.ARTICLE_RESOURCE + `?limit=${limit}`
+    );
   }
 
   // findArticlesIO(): Observable<Article[]> {

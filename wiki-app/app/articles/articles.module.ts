@@ -11,6 +11,8 @@ import { CreateArticlePageComponent } from './containers/create-article-page';
 import { ArticleEffects } from './effects/article';
 import { ArticleService } from '../core/services/article.service';
 import { ApiArticleService } from '../core/services/api-article.service';
+import { CollectionPageComponent } from './containers/collection-page';
+import { CollectionEffects } from './effects/collection';
 
 @NgModule({
   imports: [
@@ -25,7 +27,7 @@ import { ApiArticleService } from '../core/services/api-article.service';
       //   component: EditArticlePageComponent,
       //   canActivate: [ArticleExistsGuard],
       // },
-      // { path: '', component: CollectionPageComponent },
+      { path: '', component: CollectionPageComponent },
     ]),
 
     /**
@@ -44,7 +46,7 @@ import { ApiArticleService } from '../core/services/api-article.service';
      * All Effects will only be instantiated once regardless of
      * whether they are registered once or multiple times.
      */
-    EffectsModule.forFeature([ArticleEffects]),
+    EffectsModule.forFeature([ArticleEffects, CollectionEffects]),
   ],
   declarations: [
     CreateArticlePageComponent,
@@ -52,7 +54,7 @@ import { ApiArticleService } from '../core/services/api-article.service';
     // FindArticlePageComponent,
     // ViewArticlePageComponent,
     // SelectedArticlePageComponent,
-    // CollectionPageComponent,
+    CollectionPageComponent,
   ],
   providers: [ArticleService, ApiArticleService],
 })
