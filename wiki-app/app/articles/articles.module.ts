@@ -23,6 +23,7 @@ import { ArticleExistsGuard } from './guards/article-exists';
     MaterialModule,
     ComponentsModule,
     RouterModule.forChild([
+      { path: 'create', component: EditArticlePageComponent },
       {
         path: ':id',
         children: [
@@ -31,7 +32,6 @@ import { ArticleExistsGuard } from './guards/article-exists';
         ],
         canActivate: [ArticleExistsGuard],
       },
-      { path: 'create', component: EditArticlePageComponent },
       { path: '', component: CollectionPageComponent },
     ]),
 
