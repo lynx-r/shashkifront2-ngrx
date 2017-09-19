@@ -25,23 +25,24 @@ import { Board } from '../models/board';
   `,
 })
 export class EditArticlePageComponent implements OnDestroy {
-  // actionsSubscription: Subscription;
+  actionsSubscription: Subscription;
 
   article$: Observable<Article>;
   board$: Observable<Board>;
 
   constructor(
-    private store: Store<fromArticles.State> // private route: ActivatedRoute
+    private store: Store<fromArticles.State>,
+    private route: ActivatedRoute
   ) {
-    // this.actionsSubscription = route.params
-    //   .map(params => new article.Select(params.id))
-    //   .subscribe(store);
+    this.actionsSubscription = route.params
+      .map(params => new article.Select(params.id))
+      .subscribe(store);
 
     this.article$ = this.store.select(fromArticles.getSelectedArticle);
     this.board$ = this.store.select(fromArticles.getSelectedBoard);
   }
 
   ngOnDestroy() {
-    // this.actionsSubscription.unsubscribe();
+    this.actionsSubscription.unsubscribe();
   }
 }
