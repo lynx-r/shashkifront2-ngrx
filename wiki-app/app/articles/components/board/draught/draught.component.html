@@ -2,7 +2,6 @@
 <div #draughtRef
      *ngIf="!draught?.beaten"
      [ngStyle]="{'width': size + 'px', 'height': size + 'px', 'color': draught?.black ? 'black' : 'white'}"
-     [@heroState]="draught.state"
      [ngClass]="{
      'highlight': draught?.highlighted,
      'draught': !draught?.queen,

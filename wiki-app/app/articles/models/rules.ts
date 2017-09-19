@@ -10,17 +10,17 @@ export class Rules {
     return _.chunk(boardDimension, length);
   }
 
-  static getBoardLength(rules: Rules) {
+  static getBoardLength(rules: string) {
     return _.range(Rules.getDimension(rules) * Rules.getDimension(rules));
   }
 
-  static getDimension(rules: Rules): number {
+  static getDimension(rules: string): number {
     switch (rules) {
-      case Rules.RUSSIAN:
-      case Rules.RUSSIAN_GIVEAWAY:
+      case 'RUSSIAN':
+      case 'RUSSIAN_GIVEAWAY':
         return 8;
-      case Rules.INTERNATIONAL:
-      case Rules.INTERNATIONAL_GIVEAWAY:
+      case 'INTERNATIONAL':
+      case 'INTERNATIONAL_GIVEAWAY':
         return 10;
       default:
         return 8;

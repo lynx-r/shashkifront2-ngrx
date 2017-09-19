@@ -24,7 +24,7 @@ export interface State extends EntityState<Board> {
  */
 export const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
   selectId: (board: Board) => {
-    console.log(board);
+    console.log('Board ADAPTER', board);
     return board.id;
   },
   sort: false,
@@ -48,7 +48,7 @@ export function reducer(state = initialState, action: board.Actions): State {
     }
 
     case board.LOAD_SUCCESS: {
-      console.log('LOAD_SUCCESS', action);
+      console.log('BOARD LOADED', action.payload);
       return {
         ...adapter.addOne(action.payload, state),
         selectedBoardId: action.payload.id,

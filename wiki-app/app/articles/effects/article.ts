@@ -58,10 +58,7 @@ export class ArticleEffects {
     .switchMap((articleId: string) =>
       this.articleService.findArticleById(articleId)
     )
-    .mergeMap((loadedArticle: Article) => [
-      new article.LoadSuccess(loadedArticle),
-      new board.Load(loadedArticle.boardId),
-    ])
+    .map((loadedArticle: Article) => new article.LoadSuccess(loadedArticle))
     .catch(err => of(new article.LoadFail(err)));
 
   constructor(

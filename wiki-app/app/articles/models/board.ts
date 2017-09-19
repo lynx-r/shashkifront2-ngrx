@@ -7,6 +7,6 @@ export interface Board {
   squares: Square[];
   boardHistoryId: BoardChanger;
   squareSize: number;
-  rules: Rules;
+  rules: string;
   black: boolean;
 }

@@ -11,10 +11,17 @@ import { Article } from '../models/article';
         </md-card-title-group>
         <md-card-content>
           <p *ngIf="description">{{ article.content | acEllipsis }}</p>
-          <a md-button [routerLink]="[article.id, 'edit']">Редактировать</a>
+          <a md-button [routerLink]="[article.id, 'edit']">
+            <md-icon>edit</md-icon>
+          </a>
         </md-card-content>
         <md-card-footer>
-          Автор: {{ article.author }}
+          <p>
+            Автор: {{ article.author ? article.author : 'Новый автор' }}
+          </p>
+          <p>
+            Опубликовано: {{ article.createdAt | date:'medium' }}
+          </p>
         </md-card-footer>
       </md-card>
     </a>
