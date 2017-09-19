@@ -24,7 +24,7 @@ import { Board } from '../models/board';
     <ac-editor [article]="article$ | async" [board]="board$ | async"></ac-editor>
   `,
 })
-export class EditArticlePageComponent implements OnInit, OnDestroy {
+export class EditArticlePageComponent implements OnDestroy {
   actionsSubscription: Subscription;
 
   article$: Observable<Article>;
@@ -37,9 +37,7 @@ export class EditArticlePageComponent implements OnInit, OnDestroy {
     this.actionsSubscription = route.params
       .map(params => new article.Load(params.id))
       .subscribe(store);
-  }
 
-  ngOnInit() {
     this.article$ = this.store.select(fromArticles.getSelectedArticle);
     this.board$ = this.store.select(fromArticles.getSelectedBoard);
   }

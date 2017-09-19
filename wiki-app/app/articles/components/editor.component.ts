@@ -5,7 +5,7 @@ import { Board } from '../models/board';
 @Component({
   selector: 'ac-editor',
   template: `
-    <ac-board-toolbar class="col-12"></ac-board-toolbar>
+    <ac-board-toolbar></ac-board-toolbar>
     <md-grid-list *ngIf="article; else createArticle" cols="2" class="full-width">
       <md-grid-tile style="background-color: aliceblue">
         <ac-board [board]="board"></ac-board>
@@ -23,12 +23,7 @@ import { Board } from '../models/board';
   `,
   styles: [],
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent {
   @Input() article: Article;
   @Input() board: Board;
-
-  ngOnInit() {
-    console.log('AAA', this.article);
-    console.log('BBB', this.board);
-  }
 }
