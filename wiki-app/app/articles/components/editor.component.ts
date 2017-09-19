@@ -26,4 +26,8 @@ import { Board } from '../models/board';
 export class EditorComponent {
   @Input() article: Article;
   @Input() board: Board;
+
+  constructor() {
+    console.log('**BOARD**', this.board);
+  }
 }

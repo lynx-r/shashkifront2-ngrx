@@ -38,7 +38,7 @@ export class BoardComponent implements OnInit {
 
   private updateBoard(board: Board) {
     if (board) {
-      console.log('BOARD', board.rules);
+      console.log('**BOARD**', board.rules);
       this.boardDim = Rules.getDimension(board.rules);
       console.log(this.boardDim);
       this.boardLength = Rules.getBoardLength(board.rules);

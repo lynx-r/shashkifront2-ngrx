@@ -51,15 +51,15 @@ export class ArticleEffects {
     ])
     .catch(err => of(new createArticle.CreateFail(err)));
 
-  @Effect()
-  load$: Observable<Action> = this.actions$
-    .ofType(article.LOAD)
-    .map((action: article.Load) => action.payload)
-    .switchMap((articleId: string) =>
-      this.articleService.findArticleById(articleId)
-    )
-    .map((loadedArticle: Article) => new article.LoadSuccess(loadedArticle))
-    .catch(err => of(new article.LoadFail(err)));
+  // @Effect()
+  // load$: Observable<Action> = this.actions$
+  //   .ofType(article.LOAD)
+  //   .map((action: article.Load) => action.payload)
+  //   .switchMap((articleId: string) =>
+  //     this.articleService.findArticleById(articleId)
+  //   )
+  //   .map((loadedArticle: Article) => new article.LoadSuccess(loadedArticle))
+  //   .catch(err => of(new article.LoadFail(err)));
 
   constructor(
     private actions$: Actions,

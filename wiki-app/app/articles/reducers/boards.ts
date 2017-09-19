@@ -42,14 +42,6 @@ export function reducer(state = initialState, action: board.Actions): State {
   switch (action.type) {
     case board.LOAD: {
       return {
-        ...state,
-        selectedBoardId: action.payload,
-      };
-    }
-
-    case board.LOAD_SUCCESS: {
-      console.log('BOARD LOADED', action.payload);
-      return {
         ...adapter.addOne(action.payload, state),
         selectedBoardId: action.payload.id,
       };

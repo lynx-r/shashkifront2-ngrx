@@ -33,13 +33,13 @@ export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
 
 @Injectable()
 export class BoardEffects {
-  @Effect()
-  load$: Observable<Action> = this.actions$
-    .ofType(board.LOAD)
-    .map((action: board.Load) => action.payload)
-    .switchMap((boardId: string) => this.boardService.findBoardById(boardId))
-    .map((loadedBoard: Board) => new board.LoadSuccess(loadedBoard))
-    .catch(err => of(new board.LoadFail(err)));
+  // @Effect()
+  // load$: Observable<Action> = this.actions$
+  //   .ofType(board.LOAD)
+  //   .map((action: board.Load) => action.payload)
+  //   .switchMap((boardId: string) => this.boardService.findBoardById(boardId))
+  //   .map((loadedBoard: Board) => new board.LoadSuccess(loadedBoard))
+  //   .catch(err => of(new board.LoadFail(err)));
 
   constructor(
     private actions$: Actions,

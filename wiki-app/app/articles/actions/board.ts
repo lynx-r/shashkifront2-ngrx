@@ -30,7 +30,7 @@ export class Edit implements Action {
 export class Load implements Action {
   readonly type = LOAD;
 
-  constructor(public payload: string) {}
+  constructor(public payload: Board) {}
 }
 
 export class LoadSuccess implements Action {

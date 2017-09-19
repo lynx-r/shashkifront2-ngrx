@@ -15,6 +15,7 @@ import { CollectionEffects } from './effects/collection';
 import { BoardEffects } from './effects/board';
 import { BoardService } from '../core/services/board.service';
 import { ApiBoardService } from '../core/services/api-board.service';
+import { ArticleExistsGuard } from './guards/article-exists';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { ApiBoardService } from '../core/services/api-board.service';
           { path: 'edit', component: EditArticlePageComponent },
           { path: '', component: EditArticlePageComponent },
         ],
+        canActivate: [ArticleExistsGuard],
       },
       { path: 'create', component: EditArticlePageComponent },
       { path: '', component: CollectionPageComponent },
@@ -59,6 +61,12 @@ import { ApiBoardService } from '../core/services/api-board.service';
     // SelectedArticlePageComponent,
     CollectionPageComponent,
   ],
-  providers: [ArticleService, ApiArticleService, BoardService, ApiBoardService],
+  providers: [
+    ArticleExistsGuard,
+    ArticleService,
+    ApiArticleService,
+    BoardService,
+    ApiBoardService,
+  ],
 })
 export class ArticlesModule {}
