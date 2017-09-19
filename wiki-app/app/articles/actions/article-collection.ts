@@ -1,15 +1,16 @@
 import { Action } from '@ngrx/store';
 import { Article } from '../models/article';
 
-export const ADD_ARTICLE = '[Collection] Add Article';
-export const ADD_ARTICLE_SUCCESS = '[Collection] Add Article Success';
-export const ADD_ARTICLE_FAIL = '[Collection] Add Article Fail';
-export const REMOVE_ARTICLE = '[Collection] Remove Article';
-export const REMOVE_ARTICLE_SUCCESS = '[Collection] Remove Article Success';
-export const REMOVE_ARTICLE_FAIL = '[Collection] Remove Article Fail';
-export const LOAD = '[Collection] Load';
-export const LOAD_SUCCESS = '[Collection] Load Success';
-export const LOAD_FAIL = '[Collection] Load Fail';
+export const ADD_ARTICLE = '[Article Collection] Add Article';
+export const ADD_ARTICLE_SUCCESS = '[Article Collection] Add Article Success';
+export const ADD_ARTICLE_FAIL = '[Article Collection] Add Article Fail';
+export const REMOVE_ARTICLE = '[Article Collection] Remove Article';
+export const REMOVE_ARTICLE_SUCCESS =
+  '[Article Collection] Remove Article Success';
+export const REMOVE_ARTICLE_FAIL = '[Article Collection] Remove Article Fail';
+export const LOAD = '[Article Collection] Load';
+export const LOAD_SUCCESS = '[Article Collection] Load Success';
+export const LOAD_FAIL = '[Article Collection] Load Fail';
 
 /**
  * Add Article to Collection Actions

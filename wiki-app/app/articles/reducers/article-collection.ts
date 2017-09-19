@@ -1,4 +1,4 @@
-import * as collection from '../actions/collection';
+import * as articleCollection from '../actions/article-collection';
 
 export interface State {
   loaded: boolean;
@@ -14,27 +14,28 @@ const initialState: State = {
 
 export function reducer(
   state = initialState,
-  action: collection.Actions
+  action: articleCollection.Actions
 ): State {
   switch (action.type) {
-    case collection.LOAD: {
+    case articleCollection.LOAD: {
       return {
         ...state,
         loading: true,
       };
     }
 
-    case collection.LOAD_SUCCESS: {
-      console.log('ACTION ', action);
+    case articleCollection.LOAD_SUCCESS: {
+      console.log('****', action);
       return {
+        ...state,
         loaded: true,
         loading: false,
-        ids: action.payload.map(article => article.id),
+        ids: (<any>action.payload).map((article: any) => article.id),
       };
     }
 
-    case collection.ADD_ARTICLE_SUCCESS:
-    case collection.REMOVE_ARTICLE_FAIL: {
+    case articleCollection.ADD_ARTICLE_SUCCESS:
+    case articleCollection.REMOVE_ARTICLE_FAIL: {
       if (state.ids.indexOf(action.payload.id) > -1) {
         return state;
       }
@@ -45,8 +46,8 @@ export function reducer(
       };
     }
 
-    case collection.REMOVE_ARTICLE_SUCCESS:
-    case collection.ADD_ARTICLE_FAIL: {
+    case articleCollection.REMOVE_ARTICLE_SUCCESS:
+    case articleCollection.ADD_ARTICLE_FAIL: {
       return {
         ...state,
         ids: state.ids.filter(id => id !== action.payload.id),

@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as article from '../actions/article';
-import * as collection from '../actions/collection';
+import * as collection from '../actions/article-collection';
 import { Article } from '../models/article';
 
 /**

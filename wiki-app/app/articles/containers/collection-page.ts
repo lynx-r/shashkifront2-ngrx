@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromArticles from '../reducers';
-import * as collection from '../actions/collection';
+import * as collection from '../actions/article-collection';
 import { Article } from '../models/article';
 import { AppConstants } from '../../core/services/app-constants';
 

@@ -42,6 +42,7 @@ import * as Auth from '../../auth/actions/auth';
 
       <router-outlet></router-outlet>
     </ac-layout>
+    <!--<ngrx-store-log-monitor toggleCommand="ctrl-h" positionCommand="ctrl-m"></ngrx-store-log-monitor>-->
   `,
 })
 export class AppComponent {

@@ -13,6 +13,7 @@ import {
   RouterStateSerializer,
 } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
@@ -24,6 +25,12 @@ import { CustomRouterStateSerializer } from './shared/utils';
 
 import { AppComponent } from './core/containers/app';
 import { environment } from '../environments/environment';
+
+// export function instrumentOptions() {
+//   return {
+//     monitor: useLogMonitor({ visible: true, position: 'right' })
+//   };
+// }
 
 @NgModule({
   imports: [
@@ -58,6 +65,7 @@ import { environment } from '../environments/environment';
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    // !environment.production ? StoreLogMonitorModule : [],
 
     /**
      * EffectsModule.forRoot() is imported once in the root module and

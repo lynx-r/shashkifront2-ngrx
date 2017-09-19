@@ -8,6 +8,7 @@ import { Move } from '../../articles/models/move';
 import { Article } from '../../articles/models/article';
 import { Square } from '../../articles/models/square';
 import { Observable } from 'rxjs/Observable';
+import { ArticleCompositeKey } from '../../articles/models/article-composite-key';
 
 @Injectable()
 export class BoardService {
@@ -210,5 +211,9 @@ export class BoardService {
     return this.apiBoardService.get(
       AppConstants.BOARD_RESOURCE + `/${boardId}`
     );
+  }
+
+  listBoards(boardIds: string[]): Observable<Board[]> {
+    return this.apiBoardService.post(AppConstants.BOARDS_RESOURCE, boardIds);
   }
 }

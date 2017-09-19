@@ -4,6 +4,7 @@ export class AppConstants {
   static BLOCK_MAIN: string = 'block-main';
   static ARTICLES_RESOURCE: string = '/articles';
   static ARTICLE_RESOURCE: string = '/article';
+  static BOARDS_RESOURCE: string = '/boards';
   static BOARD_RESOURCE: string = '/board';
   static UNDO: string = '/undo';
   static FIND_ARTICLES: string = 'find articles';

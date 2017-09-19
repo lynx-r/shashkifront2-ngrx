@@ -9,9 +9,13 @@ import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import * as collection from '../actions/collection';
+import * as collection from '../actions/article-collection';
+import * as boardCollection from '../actions/board-collection';
 import { ArticleService } from '../../core/services/article.service';
 import { Article } from '../models/article';
+import { BoardService } from '../../core/services/board.service';
+import { Board } from '../models/board';
+import { ArticleCompositeKey } from '../models/article-composite-key';
 
 @Injectable()
 export class CollectionEffects {
@@ -32,8 +36,22 @@ export class CollectionEffects {
     .mergeMap(limit =>
       this.articleService
         .listArticles(limit)
-        .map((articles: Article[]) => new collection.LoadSuccess(articles))
+        .mergeMap((articles: Article[]) => [
+          new collection.LoadSuccess(articles),
+          new boardCollection.Load(articles.map(a => a.boardId)),
+        ])
         .catch(error => of(new collection.LoadFail(error)))
+    );
+
+  @Effect()
+  loadBoardCollection$: Observable<Action> = this.actions$
+    .ofType(boardCollection.LOAD)
+    .map((action: boardCollection.Load) => action.payload)
+    .switchMap((boardIds: string[]) =>
+      this.boardService
+        .listBoards(boardIds)
+        .map((boards: Board[]) => new boardCollection.LoadSuccess(boards))
+        .catch(error => of(new boardCollection.LoadFail(error)))
     );
 
   // @Effect()
@@ -60,6 +78,7 @@ export class CollectionEffects {
 
   constructor(
     private actions$: Actions,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private boardService: BoardService
   ) {}
 }

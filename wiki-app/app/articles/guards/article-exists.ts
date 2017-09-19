@@ -40,6 +40,14 @@ export class ArticleExistsGuard implements CanActivate {
   waitForCollectionToLoad(): Observable<boolean> {
     return this.store
       .select(fromArticles.getSelectedArticle)
+      .map(
+        (articleSelected: Article) =>
+          !!articleSelected && new board.Select(articleSelected.boardId)
+      )
+      .do(
+        (boardAction: board.Select) =>
+          !!boardAction && this.store.dispatch(boardAction)
+      )
       .map(selected => !!selected);
   }
 
@@ -61,17 +69,15 @@ export class ArticleExistsGuard implements CanActivate {
   hasArticleInApi(id: string): Observable<boolean> {
     return this.articleService
       .findArticleById(id)
-      .do(
-        articleEntity =>
-          !!articleEntity &&
-          this.boardService
-            .findBoardById(articleEntity.boardId)
-            .map(boardEntity => new board.Load(boardEntity))
-            .do((action: board.Load) => this.store.dispatch(action))
-      )
       .map(articleEntity => new article.Load(articleEntity))
       .do((action: article.Load) => this.store.dispatch(action))
-      .map(article => !!article)
+      .switchMap((articleLoad: article.Load) =>
+        this.boardService
+          .findBoardById(articleLoad.payload.boardId)
+          .map(boardEntity => new board.Load(boardEntity))
+          .do((action: board.Load) => this.store.dispatch(action))
+          .map(boardLoad => !!boardLoad)
+      )
       .catch(() => {
         this.router.navigate(['/404']);
         return of(false);

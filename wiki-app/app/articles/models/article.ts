@@ -2,7 +2,7 @@ export interface Article {
   id: string;
   title: string;
   content: string;
-  createdAt?: Date;
+  createdAt: Date;
   author: string;
   boardId: string;
 }

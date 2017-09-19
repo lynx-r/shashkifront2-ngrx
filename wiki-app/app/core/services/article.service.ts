@@ -25,7 +25,7 @@ export class ArticleService {
   //   }
   // }
 
-  listArticles(limit: number): Observable<Article[]> {
+  listArticles(limit: number = 20): Observable<Article[]> {
     return this.apiArticleService.get(
       AppConstants.ARTICLES_RESOURCE + `?limit=${limit}`
     );

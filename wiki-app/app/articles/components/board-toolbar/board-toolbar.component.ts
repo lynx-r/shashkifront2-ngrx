@@ -33,6 +33,7 @@ export class BoardToolbarComponent {
     this.initialArticle = {
       article: {
         id: '',
+        createdAt: new Date(),
         title: 'Новая статья',
         content: '',
         author: '',

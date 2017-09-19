@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as board from '../actions/board';
-import * as collection from '../actions/collection';
+import * as collection from '../actions/article-collection';
 import { Board } from '../models/board';
 
 /**
