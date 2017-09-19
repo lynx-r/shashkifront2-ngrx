@@ -32,16 +32,16 @@ export class BoardToolbarComponent {
   ) {
     this.initialArticle = {
       article: {
-        id: 'null',
+        id: '',
         title: 'Новая статья',
         content: '',
         author: '',
-        boardId: null,
+        boardId: '',
       },
       boardRequest: {
-        black: true,
+        black: false,
         squareSize: 60,
-        rules: Rules.INTERNATIONAL_GIVEAWAY,
+        rules: Rules.RUSSIAN,
         fillBoard: false,
       },
     };

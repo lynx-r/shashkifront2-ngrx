@@ -48,6 +48,7 @@ export function reducer(state = initialState, action: board.Actions): State {
     }
 
     case board.LOAD_SUCCESS: {
+      console.log('LOAD_SUCCESS', action);
       return {
         ...adapter.addOne(action.payload, state),
         selectedBoardId: action.payload.id,

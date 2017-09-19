@@ -59,7 +59,7 @@ export class BoardService {
   // }
 
   private goThroughBoard(func: Function) {
-    for (let square of this.board.currentBoard.squares) {
+    for (let square of this.board.boardHistoryId.squares) {
       func(square);
     }
   }

@@ -28,7 +28,8 @@ export class EditorComponent implements OnInit {
   @Input() board: Board;
 
   constructor() {
-    console.log(this.article);
+    console.log('AAA', this.article);
+    console.log('BBB', this.board);
   }
 
   ngOnInit() {}

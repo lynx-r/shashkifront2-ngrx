@@ -14,24 +14,27 @@ import * as Auth from '../../auth/actions/auth';
   template: `
     <ac-layout>
       <ac-sidenav [open]="showSidenav$ | async">
-        <ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/articles/edit" icon="article"
+        <ac-nav-item (activate)="closeSidenav()" routerLink="/articles/create" icon="article"
                      hint="Написать статью">
           Новая статья
         </ac-nav-item>
-        <ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/" icon="book"
-                     hint="View your book collection">
-          My Collection
+        <ac-nav-item (activate)="closeSidenav()" routerLink="/articles" hint="Все статьи">
+          Статьи
         </ac-nav-item>
-        <ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/books/find" icon="search"
-                     hint="Find your next book!">
-          Browse Books
-        </ac-nav-item>
-        <ac-nav-item (activate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">
-          Sign In
-        </ac-nav-item>
-        <ac-nav-item (activate)="logout()" *ngIf="loggedIn$ | async">
-          Sign Out
-        </ac-nav-item>
+        <!--<ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/" icon="book"-->
+                     <!--hint="View your book collection">-->
+          <!--My Collection-->
+        <!--</ac-nav-item>-->
+        <!--<ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/books/find" icon="search"-->
+                     <!--hint="Find your next book!">-->
+          <!--Browse Books-->
+        <!--</ac-nav-item>-->
+        <!--<ac-nav-item (activate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">-->
+          <!--Sign In-->
+        <!--</ac-nav-item>-->
+        <!--<ac-nav-item (activate)="logout()" *ngIf="loggedIn$ | async">-->
+          <!--Sign Out-->
+        <!--</ac-nav-item>-->
       </ac-sidenav>
       <ac-toolbar (openMenu)="openSidenav()">
         Меню статьи

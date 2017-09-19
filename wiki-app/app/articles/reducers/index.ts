@@ -21,6 +21,7 @@ export interface State extends fromRoot.State {
 export const reducers = {
   search: fromSearch.reducer,
   articles: fromArticles.reducer,
+  boards: fromBoards.reducer,
   createArticle: fromCreateArticle.reducer,
   collection: fromCollection.reducer,
 };
@@ -106,10 +107,7 @@ export const {
 export const getSelectedArticle = createSelector(
   getArticleEntities,
   getSelectedArticleId,
-  (entities, selectedId) => {
-    console.log('ENT1 SEL1 ', entities, selectedId);
-    return selectedId && entities[selectedId];
-  }
+  (entities, selectedId) => selectedId && entities[selectedId]
 );
 
 /**
@@ -148,10 +146,7 @@ export const getSearchResults = createSelector(
 
 export const getCollectionState = createSelector(
   getArticlesState,
-  (state: ArticlesState) => {
-    console.log('COLSTATE', state);
-    return state.collection;
-  }
+  (state: ArticlesState) => state.collection
 );
 
 export const getCollectionLoaded = createSelector(
@@ -170,10 +165,7 @@ export const getCollectionArticleIds = createSelector(
 export const getArticleCollection = createSelector(
   getArticleEntities,
   getCollectionArticleIds,
-  (entities, ids) => {
-    console.log('ENTITIES IDS ', entities);
-    return ids.map(id => entities[id]);
-  }
+  (entities, ids) => ids.map(id => entities[id])
 );
 
 export const isSelectedArticleInCollection = createSelector(
@@ -188,7 +180,7 @@ export const getSelectedBoard = createSelector(
   getBoardEntities,
   getSelectedBoardId,
   (entities, selectedId) => {
-    console.log('ENT1 SEL1 ', entities, selectedId);
+    console.log('BOARD ENT1 SEL1 ', entities, selectedId);
     return selectedId && entities[selectedId];
   }
 );

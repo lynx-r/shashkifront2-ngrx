@@ -18,7 +18,7 @@ import { Board } from '../models/board';
   selector: 'ac-create-article-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ac-editor [article]="article$ | async" [board]="board$"></ac-editor>
+    <ac-editor [article]="article$ | async" [board]="board$ | async"></ac-editor>
   `,
 })
 export class EditArticlePageComponent implements OnDestroy {

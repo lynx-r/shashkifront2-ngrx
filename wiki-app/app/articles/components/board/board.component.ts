@@ -12,9 +12,10 @@ import { Square } from '../../models/square';
 export class BoardComponent implements OnInit {
   @Input() board: Board;
 
-  boardDimension: Array<number>;
+  boardLength: Array<number>;
   boardChunk: Array<number>[];
   squares: Square[];
+  boardDim: number;
 
   constructor() {}
 
@@ -37,14 +38,16 @@ export class BoardComponent implements OnInit {
 
   private updateBoard(board: Board) {
     if (board) {
-      this.boardDimension = Rules.getBoardLength(board.rules);
+      console.log('BOARD', board);
+      this.boardDim = Rules.getDimension(board.rules);
+      this.boardLength = Rules.getBoardLength(board.rules);
       this.boardChunk = Rules.getChunk(
-        this.boardDimension,
+        this.boardLength,
         Rules.getDimension(board.rules)
       );
       this.board = board;
-      if (this.board.currentBoard) {
-        this.squares = this.board.currentBoard.squares;
+      if (this.board.boardHistoryId) {
+        this.squares = this.board.boardHistoryId.squares;
       } else {
         this.squares = [];
       }

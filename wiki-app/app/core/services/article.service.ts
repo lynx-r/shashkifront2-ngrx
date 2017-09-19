@@ -13,7 +13,7 @@ export class ArticleService {
   createArticle(
     article: CreateArticleRequest
   ): Observable<CreateArticleResponse> {
-    return this.apiArticleService.post(AppConstants.ARTICLES_RESOURCE, article);
+    return this.apiArticleService.post(AppConstants.ARTICLE_RESOURCE, article);
   }
 
   // refreshArticle(content, unblock) {
