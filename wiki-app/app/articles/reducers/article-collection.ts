@@ -25,12 +25,11 @@ export function reducer(
     }
 
     case articleCollection.LOAD_SUCCESS: {
-      console.log('****', action);
       return {
         ...state,
         loaded: true,
         loading: false,
-        ids: (<any>action.payload).map((article: any) => article.id),
+        ids: action.payload.map(article => article.id),
       };
     }
 

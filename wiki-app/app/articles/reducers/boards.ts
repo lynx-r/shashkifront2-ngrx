@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as board from '../actions/board';
-import * as collection from '../actions/article-collection';
+import * as boardCollection from '../actions/board-collection';
 import { Board } from '../models/board';
 
 /**
@@ -33,13 +33,23 @@ export const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
 /** getInitialState returns the default initial state
  * for the generated entity state. Initial state
  * additional properties can also be defined.
-*/
+ */
 export const initialState: State = adapter.getInitialState({
   selectedBoardId: null,
 });
 
-export function reducer(state = initialState, action: board.Actions): State {
+export function reducer(
+  state = initialState,
+  action: board.Actions | boardCollection.Actions
+): State {
   switch (action.type) {
+    case boardCollection.LOAD_SUCCESS: {
+      return {
+        ...adapter.addMany(action.payload, state),
+        selectedBoardId: state.selectedBoardId,
+      };
+    }
+
     case board.LOAD: {
       return {
         ...adapter.addOne(action.payload, state),

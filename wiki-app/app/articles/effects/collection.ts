@@ -9,7 +9,7 @@ import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import * as collection from '../actions/article-collection';
+import * as articleCollection from '../actions/article-collection';
 import * as boardCollection from '../actions/board-collection';
 import { ArticleService } from '../../core/services/article.service';
 import { Article } from '../models/article';
@@ -31,16 +31,16 @@ export class CollectionEffects {
    */
   @Effect()
   loadCollection$: Observable<Action> = this.actions$
-    .ofType(collection.LOAD)
-    .map((action: collection.Load) => action.payload)
+    .ofType(articleCollection.LOAD)
+    .map((action: articleCollection.Load) => action.payload)
     .mergeMap(limit =>
       this.articleService
         .listArticles(limit)
         .mergeMap((articles: Article[]) => [
-          new collection.LoadSuccess(articles),
+          new articleCollection.LoadSuccess(articles),
           new boardCollection.Load(articles.map(a => a.boardId)),
         ])
-        .catch(error => of(new collection.LoadFail(error)))
+        .catch(error => of(new articleCollection.LoadFail(error)))
     );
 
   @Effect()

@@ -30,7 +30,7 @@ export function reducer(
         ...state,
         loaded: true,
         loading: false,
-        ids: (<any>action.payload).map((board: any) => board.id),
+        ids: action.payload.map(board => board.id),
       };
     }
 

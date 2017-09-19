@@ -90,13 +90,14 @@ export class ArticleExistsGuard implements CanActivate {
    * API.
    */
   hasArticle(id: string): Observable<boolean> {
-    return this.hasArticleInStore(id).switchMap(inStore => {
-      if (inStore) {
-        return of(inStore);
-      }
-
-      return this.hasArticleInApi(id);
-    });
+    return this.hasArticleInApi(id);
+    // return this.hasArticleInStore(id).switchMap(inStore => {
+    //   if (inStore) {
+    //     return of(inStore);
+    //   }
+    //
+    //   return this.hasArticleInApi(id);
+    // });
   }
 
   /**
