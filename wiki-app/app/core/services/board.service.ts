@@ -216,4 +216,10 @@ export class BoardService {
   listBoards(boardIds: string[]): Observable<Board[]> {
     return this.apiBoardService.post(AppConstants.BOARDS_RESOURCE, boardIds);
   }
+
+  findByArticleId(articleId: string) {
+    return this.apiBoardService.get(
+      AppConstants.BOARD_RESOURCE + `/article/${articleId}`
+    );
+  }
 }

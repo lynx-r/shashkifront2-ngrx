@@ -38,17 +38,19 @@ export class ArticleExistsGuard implements CanActivate {
    * has finished.
    */
   waitForCollectionToLoad(): Observable<boolean> {
-    return this.store
-      .select(fromArticles.getSelectedArticle)
-      .map(
-        (articleSelected: Article) =>
-          !!articleSelected && new board.Select(articleSelected.boardId)
-      )
-      .do(
-        (boardAction: board.Select) =>
-          !!boardAction && this.store.dispatch(boardAction)
-      )
-      .map(selected => !!selected);
+    return (
+      this.store
+        .select(fromArticles.getSelectedArticle)
+        // .map(
+        //   (articleSelected: Article) =>
+        //     !!articleSelected && new board.Select(articleSelected.boardId)
+        // )
+        // .do(
+        //   (boardAction: board.Select) =>
+        //     !!boardAction && this.store.dispatch(boardAction)
+        // )
+        .map(selected => !!selected)
+    );
   }
 
   /**
@@ -58,8 +60,13 @@ export class ArticleExistsGuard implements CanActivate {
   hasArticleInStore(id: string): Observable<boolean> {
     return this.store
       .select(fromArticles.getArticleEntities)
-      .map(entities => !!entities[id])
-      .take(1);
+      .map(entities => entities[id].boardId)
+      .switchMap(boardId =>
+        this.store
+          .select(fromArticles.getBoardEntities)
+          .map(entities => !!boardId && !!entities[boardId])
+          .take(1)
+      );
   }
 
   /**
@@ -90,14 +97,15 @@ export class ArticleExistsGuard implements CanActivate {
    * API.
    */
   hasArticle(id: string): Observable<boolean> {
-    return this.hasArticleInApi(id);
-    // return this.hasArticleInStore(id).switchMap(inStore => {
-    //   if (inStore) {
-    //     return of(inStore);
-    //   }
-    //
-    //   return this.hasArticleInApi(id);
-    // });
+    // return this.hasArticleInApi(id);
+    return this.hasArticleInStore(id).switchMap(inStore => {
+      if (inStore) {
+        console.log('in store', inStore);
+        return of(inStore);
+      }
+
+      return this.hasArticleInApi(id);
+    });
   }
 
   /**

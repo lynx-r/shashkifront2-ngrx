@@ -8,10 +8,10 @@ import * as fromBoardCollection from './board-collection';
 import * as fromRoot from '../../reducers';
 
 export interface ArticlesState {
+  createArticle: fromCreateArticle.State;
   search: fromSearch.State;
   articles: fromArticles.State;
   boards: fromBoards.State;
-  createArticle: fromCreateArticle.State;
   articleCollection: fromArticleCollection.State;
   boardCollection: fromBoardCollection.State;
 }
@@ -21,10 +21,10 @@ export interface State extends fromRoot.State {
 }
 
 export const reducers = {
+  createArticle: fromCreateArticle.reducer,
   search: fromSearch.reducer,
   articles: fromArticles.reducer,
   boards: fromBoards.reducer,
-  createArticle: fromCreateArticle.reducer,
   articleCollection: fromArticleCollection.reducer,
   boardCollection: fromBoardCollection.reducer,
 };

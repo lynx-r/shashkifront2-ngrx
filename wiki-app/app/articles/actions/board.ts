@@ -3,7 +3,7 @@ import { Board } from '../models/board';
 
 export const LOAD = '[Board] Load';
 export const LOAD_SUCCESS = '[Board] Load Success';
-export const SELECT = '[Board] Board Select';
+export const SELECT = '[Board] Select';
 export const EDIT = '[Board] Edit';
 export const CREATE_SUCCESS = '[Board] Success';
 export const LOAD_FAIL = '[Board] Fail';

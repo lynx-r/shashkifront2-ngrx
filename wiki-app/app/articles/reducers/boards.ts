@@ -23,10 +23,7 @@ export interface State extends EntityState<Board> {
  * operations
  */
 export const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
-  selectId: (board: Board) => {
-    console.log('Board ADAPTER', board);
-    return board.id;
-  },
+  selectId: (board: Board) => board.id,
   sort: false,
 });
 

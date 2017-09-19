@@ -51,7 +51,7 @@ import { ArticleExistsGuard } from './guards/article-exists';
      * All Effects will only be instantiated once regardless of
      * whether they are registered once or multiple times.
      */
-    EffectsModule.forFeature([ArticleEffects, CollectionEffects, BoardEffects]),
+    EffectsModule.forFeature([ArticleEffects, BoardEffects, CollectionEffects]),
   ],
   declarations: [
     EditArticlePageComponent,
