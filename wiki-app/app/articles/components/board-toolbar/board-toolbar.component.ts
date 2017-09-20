@@ -41,7 +41,7 @@ export class BoardToolbarComponent {
       },
       boardRequest: {
         black: false,
-        squareSize: 60,
+        squareSize: 40,
         rules: Rules.RUSSIAN,
         fillBoard: false,
       },

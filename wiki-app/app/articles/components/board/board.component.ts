@@ -47,11 +47,7 @@ export class BoardComponent implements OnInit {
         Rules.getDimension(board.rules)
       );
       this.board = board;
-      if (this.board.boardHistoryId) {
-        this.squares = this.board.boardHistoryId.squares;
-      } else {
-        this.squares = [];
-      }
+      this.squares = this.board.squares;
     }
   }
 }
