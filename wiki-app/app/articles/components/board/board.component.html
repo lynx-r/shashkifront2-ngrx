@@ -1,9 +1,7 @@
-<table class="board">
-  <tr *ngFor="let chunk of boardChunk" class="board-row">
-    <td *ngFor="let i of chunk" class="board-coll">
-      <square [square]="squares[i]" class="float-left">
-        <draught *ngIf="squares[i]?.draught != null" [playsBlack]="board.black" [square]="squares[i]"></draught>
-      </square>
-    </td>
-  </tr>
-</table>
+<md-grid-list [cols]="boardDim">
+  <md-grid-tile *ngFor="let square of squares">
+    <square [square]="square" class="full-width full-height">
+      <draught *ngIf="square?.draught != null" [playsBlack]="board.black" [square]="square"></draught>
+    </square>
+  </md-grid-tile>
+</md-grid-list>

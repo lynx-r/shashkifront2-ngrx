@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { Board } from '../../models/board';
 import 'rxjs/add/observable/of';
 import { Rules } from '../../models/rules';
 import { Square } from '../../models/square';
+import { MdGridList, MdGridTile } from '@angular/material';
 
 @Component({
   selector: 'ac-board',
@@ -38,7 +39,7 @@ export class BoardComponent implements OnInit {
 
   private updateBoard(board: Board) {
     if (board) {
-      console.log('**BOARD**', board.rules);
+      // alert(this.rowHeight);
       this.boardDim = Rules.getDimension(board.rules);
       console.log(this.boardDim);
       this.boardLength = Rules.getBoardLength(board.rules);
@@ -47,7 +48,13 @@ export class BoardComponent implements OnInit {
         Rules.getDimension(board.rules)
       );
       this.board = board;
-      this.squares = this.board.squares;
+      this.squares = board.squares;
+      // .map(square => {
+      // if (!!square) {
+      //   return {...square, size: squareSize};
+      // }
+      // return null;
+      // });
     }
   }
 }

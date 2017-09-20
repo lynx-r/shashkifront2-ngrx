@@ -1,14 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Article } from '../models/article';
 import { Board } from '../models/board';
+import { MdGridTile } from '@angular/material';
 
 @Component({
   selector: 'ac-editor',
   template: `
     <ac-board-toolbar></ac-board-toolbar>
-    <md-grid-list *ngIf="article; else createArticle" cols="2" class="full-width">
+    <md-grid-list #editorGrid *ngIf="article; else createArticle" cols="2" class="full-width">
       <md-grid-tile style="background-color: aliceblue">
-        <ac-board [board]="board"></ac-board>
+        <ac-board class="full-width" [board]="board"></ac-board>
       </md-grid-tile>
       <md-grid-tile style="background-color: aquamarine">
         <ac-board-article [article]="article"></ac-board-article>
@@ -23,11 +24,16 @@ import { Board } from '../models/board';
   `,
   styles: [],
 })
-export class EditorComponent {
+export class EditorComponent implements OnInit {
   @Input() article: Article;
   @Input() board: Board;
+  rowHeight: number;
+
+  @ViewChild('boardTile') boardTileRef: MdGridTile;
 
   constructor() {
     console.log('**BOARD**', this.board);
   }
+
+  ngOnInit() {}
 }

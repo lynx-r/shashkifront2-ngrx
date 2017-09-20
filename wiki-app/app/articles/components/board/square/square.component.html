@@ -1,6 +1,5 @@
-<div (click)="onSquareClicked()" class="square" [style.height]="square?.size + 'px'">
-  <div [style.width]="square?.size + 'px'" [style.height]="square?.size + 'px'"
-       [ngClass]="{'square-black': square != null, 'square-white': square == null, 'highlight': square?.highlighted}">{{square?.v}} {{square?.h}}</div>
+<div (click)="onSquareClicked()" class="full-width full-height">
+  <div class="full-width full-height" [ngClass]="{'square-black': square != null, 'square-white': square == null, 'highlight': square?.highlighted}">{{square?.v}} {{square?.h}}</div>
   <div class="draught-in-square" [style.bottom]="draughtTop" [style.left]="draughtLeft">
     <ng-content></ng-content>
   </div>
