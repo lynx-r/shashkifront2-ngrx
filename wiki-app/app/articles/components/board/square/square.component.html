@@ -1,5 +1,5 @@
-<div (click)="onSquareClicked()" class="full-width full-height">
-  <div class="full-width full-height" [ngClass]="{'square-black': square != null, 'square-white': square == null, 'highlight': square?.highlighted}">
+<div (click)="onSquareClicked()" class="fit">
+  <div class="fit" [ngClass]="{'square-black': square != null, 'square-white': square == null, 'highlight': square?.highlighted}">
     <ng-content></ng-content>
   </div>
 </div>

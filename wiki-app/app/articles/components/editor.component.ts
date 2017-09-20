@@ -9,7 +9,7 @@ import { MdGridTile } from '@angular/material';
     <ac-board-toolbar></ac-board-toolbar>
     <md-grid-list #editorGrid *ngIf="article; else createArticle" cols="2" class="full-width">
       <md-grid-tile style="background-color: aliceblue">
-        <ac-board class="full-width" [board]="board"></ac-board>
+        <ac-board class="fit" [board]="board"></ac-board>
       </md-grid-tile>
       <md-grid-tile style="background-color: aquamarine">
         <ac-board-article [article]="article"></ac-board-article>

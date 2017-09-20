@@ -15,46 +15,33 @@ export class BoardComponent implements OnInit {
 
   boardLength: Array<number>;
   boardChunk: Array<number>[];
-  squares: Square[];
+  squares: Square[] = [];
   boardDim: number;
+  private boardSize: number[];
 
   constructor() {}
 
   ngOnInit() {
     this.updateBoard(this.board);
-    // this.articleService.articleObservable().subscribe(content => {
-    //   if (content.ac-board) {
-    //     this.updateBoard(content.ac-board);
-    //   }
-    // });
-    // if (this.articleService.content.ac-board) {
-    //   this.boardService
-    //     .findById(this.articleService.content.ac-board.id)
-    // .then(ac-board => {
-    //   this.updateBoard(ac-board);
-    // })
-    // .catch(() => {});
-    // }
   }
 
   private updateBoard(board: Board) {
     if (board) {
-      // alert(this.rowHeight);
-      this.boardDim = Rules.getDimension(board.rules);
-      console.log(this.boardDim);
-      this.boardLength = Rules.getBoardLength(board.rules);
-      this.boardChunk = Rules.getChunk(
-        this.boardLength,
-        Rules.getDimension(board.rules)
-      );
+      this.boardDim = Rules.getDimension(board.rules) + 1;
+      this.boardLength = Rules.getAllBoardLength(this.boardDim);
       this.board = board;
-      this.squares = board.squares;
-      // .map(square => {
-      // if (!!square) {
-      //   return {...square, size: squareSize};
-      // }
-      // return null;
-      // });
+      let index = 0;
+      for (let v = 0; v < this.boardDim; v++) {
+        for (let h = 0; h < this.boardDim; h++) {
+          if (h == 0) {
+            this.squares.push(null);
+          } else {
+            console.log(h, board.squares[index]);
+            this.squares.push(board.squares[index]);
+            index += 1;
+          }
+        }
+      }
     }
   }
 }

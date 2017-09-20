@@ -28,3 +28,14 @@ html {
   /*height: -webkit-calc(100% - 64px);*/
   /*height: calc(100% - 64px);*/
 }
+
+.fit {
+  width: 100%;
+  height: 100%;
+}
+
+.justify-text {
+  text-align: center;
+  vertical-align: middle;
+  display: block;
+}

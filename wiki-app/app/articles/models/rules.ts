@@ -14,6 +14,14 @@ export class Rules {
     return _.range(Rules.getDimension(rules) * Rules.getDimension(rules));
   }
 
+  static getAllBoardLength(dimesnion: number) {
+    return _.range(dimesnion * dimesnion);
+  }
+
+  static getBoardSize(rules: string) {
+    return _.range(Rules.getDimension(rules));
+  }
+
   static getDimension(rules: string): number {
     switch (rules) {
       case 'RUSSIAN':
