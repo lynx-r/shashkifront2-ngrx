@@ -25,7 +25,8 @@ import { Board } from '../models/board';
   `,
 })
 export class EditArticlePageComponent implements OnDestroy {
-  actionsSubscription: Subscription;
+  articleSubscription: Subscription;
+  boardSubscription: Subscription;
 
   article$: Observable<Article>;
   board$: Observable<Board>;
@@ -34,15 +35,24 @@ export class EditArticlePageComponent implements OnDestroy {
     private store: Store<fromArticles.State>,
     private route: ActivatedRoute
   ) {
-    this.actionsSubscription = route.params
+    this.articleSubscription = route.params
       .map(params => new article.Select(params.id))
       .subscribe(store);
+    this.boardSubscription = this.store
+      .select(fromArticles.getSelectedArticle)
+      .map(
+        articleEntity =>
+          !!articleEntity && new board.Select(articleEntity.boardId)
+      )
+      .map(select => !!select && this.store.dispatch(select))
+      .subscribe();
 
     this.article$ = this.store.select(fromArticles.getSelectedArticle);
     this.board$ = this.store.select(fromArticles.getSelectedBoard);
   }
 
   ngOnDestroy() {
-    this.actionsSubscription.unsubscribe();
+    this.articleSubscription.unsubscribe();
+    this.boardSubscription.unsubscribe();
   }
 }
