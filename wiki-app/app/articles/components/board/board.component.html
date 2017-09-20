@@ -1,7 +1,7 @@
 <md-grid-list [cols]="boardDim">
   <md-grid-tile *ngFor="let square of squares">
-    <square [square]="square" class="full-width full-height">
-      <draught *ngIf="square?.draught != null" [playsBlack]="board.black" [square]="square"></draught>
+    <square [square]="square" class="square">
+      <draught class="draught" *ngIf="square?.draught != null" [playsBlack]="board.black" [square]="square"></draught>
     </square>
   </md-grid-tile>
 </md-grid-list>
