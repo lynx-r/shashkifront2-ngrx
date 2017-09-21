@@ -19,9 +19,9 @@ export class Utils {
   static getModeColor(mode: string) {
     switch (mode) {
       case AppConstants.PLACE_MODE:
-        return 'yellow';
-      case AppConstants.EDIT_MODE:
-        return 'red';
+        return '#ffb3a4';
+      case AppConstants.WRITE_MODE:
+        return '#add8ff';
       default:
         return 'white';
     }

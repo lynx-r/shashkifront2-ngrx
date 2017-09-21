@@ -229,4 +229,11 @@ export class BoardService {
       board
     );
   }
+
+  move(board: Board) {
+    return this.apiBoardService.post(
+      AppConstants.BOARD_RESOURCE + '/move',
+      board
+    );
+  }
 }

@@ -36,7 +36,6 @@ export class BoardToolbarComponent implements OnInit {
       },
       boardRequest: {
         black: false,
-        squareSize: 40,
         rules: Rules.RUSSIAN,
         fillBoard: false,
       },

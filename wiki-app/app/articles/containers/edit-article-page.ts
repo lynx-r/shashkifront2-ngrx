@@ -18,6 +18,7 @@ import { Article } from '../models/article';
 import { Observable } from 'rxjs/Observable';
 import { Board } from '../models/board';
 import { Square } from '../models/square';
+import { AppConstants } from '../../core/services/app-constants';
 
 @Component({
   selector: 'ac-create-article-page',
@@ -68,16 +69,41 @@ export class EditArticlePageComponent implements OnDestroy {
 
   onSquareClicked(clicked: Square) {
     this.store
-      .select(fromArticles.getSelectedBoard)
-      .do(selectedBoard => {
-        if (selectedBoard) {
-          selectedBoard = { ...selectedBoard, selectedSquare: clicked };
-          this.store.dispatch(new board.Click(selectedBoard));
+      .select(fromArticles.getBoardMode)
+      .do(mode => {
+        if (mode == AppConstants.WRITE_MODE) {
+          if (clicked.draught != null) {
+            this.store
+              .select(fromArticles.getSelectedBoard)
+              .do(selectedBoard => {
+                if (
+                  selectedBoard &&
+                  clicked.draught.black == selectedBoard.black
+                ) {
+                  selectedBoard = { ...selectedBoard, selectedSquare: clicked };
+                  this.store.dispatch(new board.Click(selectedBoard));
+                }
+              })
+              .take(1)
+              .subscribe();
+          } else {
+            this.store
+              .select(fromArticles.getSelectedBoard)
+              .do(selectedBoard => {
+                if (selectedBoard) {
+                  selectedBoard = {
+                    ...selectedBoard,
+                    nextSquare: clicked,
+                  };
+                  this.store.dispatch(new board.Move(selectedBoard));
+                }
+              })
+              .take(1)
+              .subscribe();
+          }
+        } else if (mode == AppConstants.PLACE_MODE) {
         }
       })
-      .subscribe(() => {
-        console.log('Clicked square', clicked);
-      })
-      .unsubscribe();
+      .subscribe();
   }
 }

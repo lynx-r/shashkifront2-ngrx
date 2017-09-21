@@ -39,7 +39,7 @@ export const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
 export const initialState: State = adapter.getInitialState({
   selectedBoardId: null,
   selectedSquare: null,
-  mode: AppConstants.PLACE_MODE,
+  mode: AppConstants.WRITE_MODE,
 });
 
 export function reducer(

@@ -5,6 +5,7 @@ export const LOAD = '[Board] Load';
 export const LOAD_SUCCESS = '[Board] Load Success';
 export const SELECT = '[Board] Select';
 export const CLICK = '[Board] Click';
+export const MOVE = '[Board] Move';
 export const EDIT = '[Board] Edit';
 export const CREATE_SUCCESS = '[Board] Success';
 export const LOAD_FAIL = '[Board] Fail';
@@ -59,6 +60,12 @@ export class Click implements Action {
   constructor(public payload: Board) {}
 }
 
+export class Move implements Action {
+  readonly type = MOVE;
+
+  constructor(public payload: Board) {}
+}
+
 export class Mode implements Action {
   readonly type = MODE;
 
@@ -76,4 +83,5 @@ export type Actions =
   | LoadFail
   | Select
   | Click
+  | Move
   | Mode;

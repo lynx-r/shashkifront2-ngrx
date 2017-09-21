@@ -6,11 +6,11 @@
     Открыть
   </button>
   <md-button-toggle-group #boardModes="mdButtonToggleGroup" (change)="toggleEdit(boardModes.value)">
-    <md-button-toggle value="place" [checked]="true">
-      Расставлять
-    </md-button-toggle>
-    <md-button-toggle value="edit">
+    <md-button-toggle value="write" [checked]="true">
       Писать
+    </md-button-toggle>
+    <md-button-toggle value="place">
+      Расставлять
     </md-button-toggle>
   </md-button-toggle-group>
 </md-toolbar>
