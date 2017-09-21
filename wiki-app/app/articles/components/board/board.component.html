@@ -1,14 +1,16 @@
-<md-grid-list [cols]="boardDim">
-  <md-grid-tile *ngFor="let i of boardLength">
-    <div class="board-numbers-vertical" *ngIf="i % boardDim == 0 && (boardLength.length - i) != boardDim">
-      {{ boardDim - i / boardDim - 1 }}
-    </div>
-    <div class="board-numbers-horizontal" *ngIf="i % boardDim != 0 && boardLength.length - i <= boardDim">
-      {{ (boardLength.length - i - boardDim) * -1}}
-    </div>
-    <square *ngIf="squares[i]" [square]="squares[i]" class="square">
-      <draught class="draught" *ngIf="squares[i]?.draught != null" [playsBlack]="board.black"
-               [square]="squares[i]"></draught>
-    </square>
-  </md-grid-tile>
-</md-grid-list>
+<div *ngIf="board">
+  <md-grid-list [cols]="boardDim">
+    <md-grid-tile *ngFor="let i of boardLength">
+      <div class="board-numbers-vertical" *ngIf="i % boardDim == 0 && (boardLength.length - i) != boardDim">
+        {{ boardDim - i / boardDim - 1 }}
+      </div>
+      <div class="board-numbers-horizontal" *ngIf="i % boardDim != 0 && boardLength.length - i <= boardDim">
+        {{ (boardLength.length - i - boardDim) * -1}}
+      </div>
+      <square (click)="squareClicked.emit(squares[i])" *ngIf="squares[i]" [square]="squares[i]" class="square">
+        <draught class="draught" *ngIf="squares[i]?.draught != null" [playsBlack]="board?.black"
+                 [draught]="squares[i]?.draught"></draught>
+      </square>
+    </md-grid-tile>
+  </md-grid-list>
+</div>

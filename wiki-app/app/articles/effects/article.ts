@@ -55,7 +55,7 @@ export class ArticleEffects {
 
   // @Effect()
   // load$: Observable<Action> = this.actions$
-  //   .ofType(article.LOAD)
+  //   .ofType(article.CLICK)
   //   .map((action: article.Load) => action.payload)
   //   .switchMap((article: Article) =>
   //     this.boardService.findById(article.boardId)

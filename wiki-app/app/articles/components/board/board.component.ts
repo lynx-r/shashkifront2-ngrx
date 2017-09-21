@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Board } from '../../models/board';
 import 'rxjs/add/observable/of';
 import { Rules } from '../../models/rules';
@@ -10,18 +18,18 @@ import { MdGridList, MdGridTile } from '@angular/material';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnChanges {
   @Input() board: Board;
+  @Output() squareClicked = new EventEmitter<Square>();
 
   boardLength: Array<number>;
-  boardChunk: Array<number>[];
   squares: Square[] = [];
   boardDim: number;
-  private boardSize: number[];
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnChanges() {
+    console.log('CHANGE', this.board);
     this.updateBoard(this.board);
   }
 
@@ -29,14 +37,12 @@ export class BoardComponent implements OnInit {
     if (board) {
       this.boardDim = Rules.getDimension(board.rules) + 1;
       this.boardLength = Rules.getAllBoardLength(this.boardDim);
-      this.board = board;
       let index = 0;
       for (let v = 0; v < this.boardDim; v++) {
         for (let h = 0; h < this.boardDim; h++) {
           if (h == 0) {
             this.squares.push(null);
           } else {
-            console.log(h, board.squares[index]);
             this.squares.push(board.squares[index]);
             index += 1;
           }

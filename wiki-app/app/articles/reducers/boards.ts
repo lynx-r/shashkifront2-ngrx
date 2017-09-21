@@ -1,7 +1,9 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as board from '../actions/board';
+import * as square from '../actions/square';
 import * as boardCollection from '../actions/board-collection';
 import { Board } from '../models/board';
+import { Square } from '../models/square';
 
 /**
  * @ngrx/entity provides a predefined interface for handling
@@ -11,7 +13,8 @@ import { Board } from '../models/board';
  * any additional interface properties.
  */
 export interface State extends EntityState<Board> {
-  selectedBoardId: string | null;
+  selectedBoard: Board | null;
+  updated: boolean;
 }
 
 /**
@@ -32,32 +35,41 @@ export const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
  * additional properties can also be defined.
  */
 export const initialState: State = adapter.getInitialState({
-  selectedBoardId: null,
+  selectedBoard: null,
+  updated: false,
 });
 
 export function reducer(
   state = initialState,
-  action: board.Actions | boardCollection.Actions
+  action: board.Actions | boardCollection.Actions | square.Actions
 ): State {
   switch (action.type) {
     case boardCollection.LOAD_SUCCESS: {
       return {
         ...adapter.addMany(action.payload, state),
-        selectedBoardId: state.selectedBoardId,
       };
     }
 
     case board.LOAD: {
       return {
         ...adapter.addOne(action.payload, state),
-        selectedBoardId: action.payload.id,
+        selectedBoard: action.payload,
+        updated: true,
+      };
+    }
+
+    case board.CLICK: {
+      return {
+        ...adapter.addOne(action.payload, state),
+        selectedBoard: action.payload,
+        updated: true,
       };
     }
 
     case board.SELECT: {
       return {
         ...state,
-        selectedBoardId: action.payload,
+        updated: false,
       };
     }
 
@@ -76,4 +88,5 @@ export function reducer(
  * use-case.
  */
 
-export const getSelectedId = (state: State) => state.selectedBoardId;
+export const getSelectedId = (state: State) =>
+  !!state.selectedBoard && state.selectedBoard.id;

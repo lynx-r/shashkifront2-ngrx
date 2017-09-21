@@ -67,19 +67,14 @@ export const getArticleEntitiesState = createSelector(
   state => state.articles
 );
 
-export const getBoardEntitiesState = createSelector(
+export const getSelectedBoard = createSelector(
   getArticlesState,
-  state => state.boards
+  state => state.boards.selectedBoard
 );
 
 export const getSelectedArticleId = createSelector(
   getArticleEntitiesState,
   fromArticles.getSelectedId
-);
-
-export const getSelectedBoardId = createSelector(
-  getBoardEntitiesState,
-  fromBoards.getSelectedId
 );
 
 /**
@@ -96,13 +91,6 @@ export const {
   selectAll: getAllArticles,
   selectTotal: getTotalArticles,
 } = fromArticles.adapter.getSelectors(getArticleEntitiesState);
-
-export const {
-  selectIds: getBoardIds,
-  selectEntities: getBoardEntities,
-  selectAll: getAllBoards,
-  selectTotal: getTotalBoards,
-} = fromBoards.adapter.getSelectors(getBoardEntitiesState);
 
 export const getSelectedArticle = createSelector(
   getArticleEntities,
@@ -182,12 +170,6 @@ export const isSelectedArticleInCollection = createSelector(
   }
 );
 
-export const getSelectedBoard = createSelector(
-  getBoardEntities,
-  getSelectedBoardId,
-  (entities, selectedId) => selectedId && entities[selectedId]
-);
-
 /**
  * Board Collection
  */
@@ -200,10 +182,4 @@ export const getBoardCollectionState = createSelector(
 export const getCollectionBoardIds = createSelector(
   getBoardCollectionState,
   fromBoardCollection.getIds
-);
-
-export const getBoardCollection = createSelector(
-  getBoardEntities,
-  getCollectionBoardIds,
-  (entities, ids) => ids.map(id => entities[id])
 );

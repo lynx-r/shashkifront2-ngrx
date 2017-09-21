@@ -12,8 +12,10 @@ import { Scheduler } from 'rxjs/Scheduler';
 import { of } from 'rxjs/observable/of';
 
 import * as board from '../actions/board';
+import * as square from '../actions/square';
 import { BoardService } from '../../core/services/board.service';
 import { Board } from '../models/board';
+import { Square } from '../models/square';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
 export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
@@ -33,17 +35,28 @@ export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
 
 @Injectable()
 export class BoardEffects {
-  @Effect()
-  load$: Observable<Action> = this.actions$
-    .ofType(board.SELECT)
-    .map((action: board.Select) => action.payload)
-    .switchMap((boardId: string) => this.boardService.findById(boardId))
-    .map((loadedBoard: Board) => new board.LoadSuccess(loadedBoard))
-    .catch(err => of(new board.LoadFail(err)));
+  // @Effect()
+  // retrieve$: Observable<Action> = this.actions$
+  //   .ofType(board.RETRIEVE)
+  //   .map((action: board.Retrieve) => action.payload)
+  //   .switchMap((boardId: string) => this.boardService.findById(boardId))
+  //   .mergeMap((loadedBoard: Board) => [new board.Load(loadedBoard), new board.Select(loadedBoard.id)])
+  //   .catch(err => of(new board.LoadFail(err)));
 
+  @Effect()
+  squareClick$: Observable<Action> = this.actions$
+    .ofType(board.CLICK)
+    .mergeMap((action: board.Click) =>
+      this.boardService.highlightBoard(action.payload)
+    )
+    .mergeMap(highlighted => [
+      new board.Load(highlighted),
+      new board.Select(highlighted.id),
+    ])
+    .catch(err => of(new board.LoadFail(err)));
   // @Effect()
   // load$: Observable<Action> = this.actions$
-  //   .ofType(board.LOAD)
+  //   .ofType(board.CLICK)
   //   .map((action: board.Load) => action.payload)
   //   .switchMap((boardId: string) => this.boardService.findBoardById(boardId))
   //   .map((loadedBoard: Board) => new board.LoadSuccess(loadedBoard))

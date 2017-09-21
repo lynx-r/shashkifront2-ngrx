@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Square } from '../../../models/square';
 import { Article } from '../../../models/article';
 import { Move } from '../../../models/move';
+import { Store } from '@ngrx/store';
+import * as fromArticles from '../../../reducers';
 
 @Component({
   selector: 'square',
@@ -21,15 +23,9 @@ export class SquareComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    if (this.square) {
-      this.black = this.square.main;
-      // берем 10% от размера клетки
-      this.draughtTop = this.draughtLeft = `${this.square.size / 10}px`;
-    }
-  }
+  ngOnInit() {}
 
-  onSquareClicked() {
+  onSquareClicked(square: Square) {
     // if (this.editMode) {
     //   if (this.removeDraught) {
     //     this.boardService.removeDraught({

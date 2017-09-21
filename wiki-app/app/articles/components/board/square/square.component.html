@@ -1,4 +1,4 @@
-<div (click)="onSquareClicked()" class="fit">
+<div class="fit">
   <div class="fit" [ngClass]="{'square-black': square != null, 'square-white': square == null, 'highlight': square?.highlighted}">
     <ng-content></ng-content>
   </div>

@@ -4,6 +4,7 @@ import { Board } from '../models/board';
 export const LOAD = '[Board] Load';
 export const LOAD_SUCCESS = '[Board] Load Success';
 export const SELECT = '[Board] Select';
+export const CLICK = '[Board] Click';
 export const EDIT = '[Board] Edit';
 export const CREATE_SUCCESS = '[Board] Success';
 export const LOAD_FAIL = '[Board] Fail';
@@ -51,6 +52,12 @@ export class Select implements Action {
   constructor(public payload: string) {}
 }
 
+export class Click implements Action {
+  readonly type = CLICK;
+
+  constructor(public payload: Board) {}
+}
+
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -61,4 +68,5 @@ export type Actions =
   | Load
   | LoadSuccess
   | LoadFail
-  | Select;
+  | Select
+  | Click;

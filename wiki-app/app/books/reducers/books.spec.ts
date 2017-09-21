@@ -76,7 +76,7 @@ describe('BooksReducer', () => {
     });
   });
 
-  describe('LOAD', () => {
+  describe('CLICK', () => {
     const expectedResult = {
       ids: [book1.id],
       entities: {

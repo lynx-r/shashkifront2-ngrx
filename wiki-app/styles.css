@@ -32,6 +32,13 @@ html {
 .fit {
   width: 100%;
   height: 100%;
+  box-sizing: border-box;         /* For IE and modern versions of Chrome */
+  -moz-box-sizing: border-box;    /* For Firefox                          */
+  -webkit-box-sizing: border-box; /* For Safari                           */
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 
 .justify-text {

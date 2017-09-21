@@ -222,4 +222,11 @@ export class BoardService {
       AppConstants.BOARD_RESOURCE + `/article/${articleId}`
     );
   }
+
+  highlightBoard(board: Board): Observable<Board> {
+    return this.apiBoardService.post(
+      AppConstants.BOARD_RESOURCE + '/highlight',
+      board
+    );
+  }
 }

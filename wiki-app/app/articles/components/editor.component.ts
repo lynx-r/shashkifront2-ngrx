@@ -1,18 +1,30 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Article } from '../models/article';
 import { Board } from '../models/board';
 import { MdGridTile } from '@angular/material';
+import { Square } from '../models/square';
 
 @Component({
   selector: 'ac-editor',
   template: `
     <ac-board-toolbar></ac-board-toolbar>
-    <md-grid-list #editorGrid *ngIf="article; else createArticle" cols="2" class="full-width">
-      <md-grid-tile style="background-color: aliceblue">
-        <ac-board class="fit" [board]="board"></ac-board>
+    <md-grid-list [rowHeight]="rowHeight" #editorGrid *ngIf="article; else createArticle" cols="12">
+      <md-grid-tile colspan="5">
+        <ac-board #boardRef (squareClicked)="squareClicked.emit($event)" class="fit" [board]="board"></ac-board>
       </md-grid-tile>
-      <md-grid-tile style="background-color: aquamarine">
-        <ac-board-article [article]="article"></ac-board-article>
+      <md-grid-tile colspan="1">
+        Нотация
+      </md-grid-tile>
+      <md-grid-tile colspan="6">
+        <ac-board-article class="fit" [article]="article"></ac-board-article>
       </md-grid-tile>
     </md-grid-list>
     <ng-template #createArticle>
@@ -27,6 +39,7 @@ import { MdGridTile } from '@angular/material';
 export class EditorComponent implements OnInit {
   @Input() article: Article;
   @Input() board: Board;
+  @Output() squareClicked = new EventEmitter<Square>();
   rowHeight: number;
 
   @ViewChild('boardTile') boardTileRef: MdGridTile;
@@ -35,5 +48,7 @@ export class EditorComponent implements OnInit {
     console.log('**BOARD**', this.board);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.rowHeight = window.innerHeight;
+  }
 }

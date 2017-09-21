@@ -26,9 +26,8 @@ import {
 })
 export class DraughtComponent implements OnInit, OnDestroy {
   @ViewChild('draughtRef') draughtRef: ElementRef;
-  @Input() square: Square;
+  @Input() draught: Draught;
   @Input() playsBlack: boolean;
-  draught: Draught;
   private allowedSquares: Square[];
   private beatenPos: Square[];
   private size: number;
@@ -39,15 +38,14 @@ export class DraughtComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit() {
-    if (this.square) {
-      this.draught = this.square.draught;
-      // берем 80% от размера клетки
-      this.size = this.square.size - this.square.size / 10 * 2;
-
-      if (this.draught.highlighted) {
-        this.highlightAllowedFor(this.square);
-      }
-    }
+    // if (this.square) {
+    // this.draught = this.square.draught;
+    // берем 80% от размера клетки
+    // this.size = this.square.size - this.square.size / 10 * 2;
+    // if (this.draught.highlighted) {
+    //   this.highlightAllowedFor(this.square);
+    // }
+    // }
     // this.moveToSubscription = this.boardService.moveToSquareEvent.subscribe(
     //   (target: Move) => {
     //     this.moveDraughtTo(target);
@@ -62,13 +60,13 @@ export class DraughtComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.moveToSubscription.unsubscribe();
+    // this.moveToSubscription.unsubscribe();
   }
 
   onDraughtClick() {
     // this.draught.toggleState();
     if (!this.editMode && this.playsBlack == this.draught.black) {
-      this.highlightAllowedFor(this.square);
+      // this.highlightAllowedFor(this.square);
     }
   }
 
@@ -102,7 +100,7 @@ export class DraughtComponent implements OnInit, OnDestroy {
       // boardId: this.article.ac-board.id,
       allowed: this.allowedSquares,
       beaten: this.beatenPos,
-      selectedSquare: this.square,
+      // selectedSquare: this.square,
       draughtRefElement: this.draughtRef.nativeElement,
       targetSquare: targetSquare,
     };

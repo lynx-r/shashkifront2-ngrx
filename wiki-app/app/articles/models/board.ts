@@ -5,8 +5,8 @@ import { BoardChanger } from './board-changer';
 export interface Board {
   id: string;
   squares: Square[];
+  selectedSquare: Square | null;
   boardHistoryId: BoardChanger;
-  squareSize: number;
   rules: string;
   black: boolean;
 }
