@@ -49,11 +49,9 @@ export class BoardEffects {
     .mergeMap((action: board.Click) =>
       this.boardService.highlightBoard(action.payload)
     )
-    .mergeMap(highlighted => [
-      new board.Load(highlighted),
-      new board.Select(highlighted.id),
-    ])
+    .mergeMap(highlighted => [new board.Load(highlighted)])
     .catch(err => of(new board.LoadFail(err)));
+
   // @Effect()
   // load$: Observable<Action> = this.actions$
   //   .ofType(board.CLICK)

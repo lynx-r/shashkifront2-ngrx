@@ -74,6 +74,7 @@ export class EditArticlePageComponent implements OnDestroy {
       })
       .subscribe(() => {
         console.log('Clicked square', clicked);
-      });
+      })
+      .unsubscribe();
   }
 }

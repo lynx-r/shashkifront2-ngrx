@@ -23,7 +23,7 @@ export class BoardComponent implements OnChanges {
   @Output() squareClicked = new EventEmitter<Square>();
 
   boardLength: Array<number>;
-  squares: Square[] = [];
+  squares: Square[];
   boardDim: number;
 
   constructor() {}
@@ -37,6 +37,7 @@ export class BoardComponent implements OnChanges {
     if (board) {
       this.boardDim = Rules.getDimension(board.rules) + 1;
       this.boardLength = Rules.getAllBoardLength(this.boardDim);
+      this.squares = [];
       let index = 0;
       for (let v = 0; v < this.boardDim; v++) {
         for (let h = 0; h < this.boardDim; h++) {
