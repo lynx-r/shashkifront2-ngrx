@@ -1,5 +1,19 @@
-
-
+<md-toolbar>
+  <button md-raised-button (click)="openCreateArticleDialog()">
+    Создать
+  </button>
+  <button md-raised-button (click)="findArticles()">
+    Открыть
+  </button>
+  <md-button-toggle-group #boardModes="mdButtonToggleGroup" (change)="toggleEdit(boardModes.value)">
+    <md-button-toggle value="place" [checked]="true">
+      Расставлять
+    </md-button-toggle>
+    <md-button-toggle value="edit">
+      Писать
+    </md-button-toggle>
+  </md-button-toggle-group>
+</md-toolbar>
 <!--<div class="ac-board-toolbar">-->
   <!--<div [hidden]="content">-->
     <!--<button class="btn btn-secondary" (click)="findArticles()" data-toggle="modal" title="Открыть"-->

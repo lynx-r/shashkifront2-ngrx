@@ -4,6 +4,7 @@ import * as square from '../actions/square';
 import * as boardCollection from '../actions/board-collection';
 import { Board } from '../models/board';
 import { Square } from '../models/square';
+import { AppConstants } from '../../core/services/app-constants';
 
 /**
  * @ngrx/entity provides a predefined interface for handling
@@ -15,6 +16,7 @@ import { Square } from '../models/square';
 export interface State extends EntityState<Board> {
   selectedBoardId: string | null;
   selectedSquare: Square | null;
+  mode: string;
 }
 
 /**
@@ -37,6 +39,7 @@ export const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
 export const initialState: State = adapter.getInitialState({
   selectedBoardId: null,
   selectedSquare: null,
+  mode: AppConstants.PLACE_MODE,
 });
 
 export function reducer(
@@ -82,6 +85,13 @@ export function reducer(
       return {
         ...state,
         selectedBoardId: action.payload,
+      };
+    }
+
+    case board.MODE: {
+      return {
+        ...state,
+        mode: action.payload,
       };
     }
 

@@ -8,6 +8,7 @@ export const CLICK = '[Board] Click';
 export const EDIT = '[Board] Edit';
 export const CREATE_SUCCESS = '[Board] Success';
 export const LOAD_FAIL = '[Board] Fail';
+export const MODE = '[Board] Mode';
 
 /**
  * Every action is comprised of at least a type and an optional
@@ -58,6 +59,11 @@ export class Click implements Action {
   constructor(public payload: Board) {}
 }
 
+export class Mode implements Action {
+  readonly type = MODE;
+
+  constructor(public payload: string) {}
+}
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -69,4 +75,5 @@ export type Actions =
   | LoadSuccess
   | LoadFail
   | Select
-  | Click;
+  | Click
+  | Mode;

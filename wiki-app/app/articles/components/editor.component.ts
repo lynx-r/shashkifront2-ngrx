@@ -3,6 +3,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   ViewChild,
@@ -11,6 +12,7 @@ import { Article } from '../models/article';
 import { Board } from '../models/board';
 import { MdGridTile } from '@angular/material';
 import { Square } from '../models/square';
+import { Utils } from '../../core/services/utils.service';
 
 @Component({
   selector: 'ac-editor',
@@ -18,7 +20,12 @@ import { Square } from '../models/square';
     <ac-board-toolbar></ac-board-toolbar>
     <md-grid-list [rowHeight]="rowHeight" #editorGrid *ngIf="article; else createArticle" cols="12">
       <md-grid-tile colspan="5">
-        <ac-board #boardRef (squareClicked)="squareClicked.emit($event)" class="fit" [board]="board"></ac-board>
+        <ac-board #boardRef 
+                  (squareClicked)="squareClicked.emit($event)" 
+                  class="fit" 
+                  [board]="board" 
+                  [style.backgroundColor]="backgroundColor"
+        ></ac-board>
       </md-grid-tile>
       <md-grid-tile colspan="1">
         Нотация
@@ -36,11 +43,13 @@ import { Square } from '../models/square';
   `,
   styles: [],
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, OnChanges {
   @Input() article: Article;
   @Input() board: Board;
+  @Input() mode: string;
   @Output() squareClicked = new EventEmitter<Square>();
   rowHeight: number;
+  backgroundColor: string;
 
   @ViewChild('boardTile') boardTileRef: MdGridTile;
 
@@ -50,5 +59,10 @@ export class EditorComponent implements OnInit {
 
   ngOnInit() {
     this.rowHeight = window.innerHeight;
+  }
+
+  ngOnChanges() {
+    this.backgroundColor = Utils.getModeColor(this.mode);
+    console.log('mode', this.backgroundColor);
   }
 }

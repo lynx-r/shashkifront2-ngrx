@@ -188,6 +188,11 @@ export const getSelectedBoard = createSelector(
   (entities, selectedId) => selectedId && entities[selectedId]
 );
 
+export const getBoardMode = createSelector(
+  getBoardEntitiesState,
+  state => state.mode
+);
+
 /**
  * Board Collection
  */

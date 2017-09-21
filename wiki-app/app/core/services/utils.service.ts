@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Square } from '../../articles/models/square';
+import { AppConstants } from './app-constants';
 
 @Injectable()
 export class Utils {
@@ -13,6 +14,17 @@ export class Utils {
   static handleError(error: any) {
     console.log(error);
     Observable.throw(error.message);
+  }
+
+  static getModeColor(mode: string) {
+    switch (mode) {
+      case AppConstants.PLACE_MODE:
+        return 'yellow';
+      case AppConstants.EDIT_MODE:
+        return 'red';
+      default:
+        return 'white';
+    }
   }
 
   static handleResponse(resp: any): Promise<any> {

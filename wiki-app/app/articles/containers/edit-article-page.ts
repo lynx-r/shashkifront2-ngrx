@@ -25,6 +25,7 @@ import { Square } from '../models/square';
   template: `
     <ac-editor [article]="article$ | async"
                [board]="board$ | async"
+               [mode]="boardMode$ | async"
                (squareClicked)="onSquareClicked($event)"
     ></ac-editor>
   `,
@@ -35,6 +36,7 @@ export class EditArticlePageComponent implements OnDestroy {
 
   article$: Observable<Article>;
   board$: Observable<Board>;
+  boardMode$: Observable<string>;
 
   constructor(
     private store: Store<fromArticles.State>,
@@ -56,6 +58,7 @@ export class EditArticlePageComponent implements OnDestroy {
     this.board$ = this.store.select(fromArticles.getSelectedBoard).do(board => {
       console.log('SELECTED BOARD ', board);
     });
+    this.boardMode$ = this.store.select(fromArticles.getBoardMode);
   }
 
   ngOnDestroy() {

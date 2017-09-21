@@ -30,4 +30,6 @@ export class AppConstants {
 
   static HOST: string = 'http://localhost:4200';
   static PAGE_SIZE: number = 5;
+  static PLACE_MODE: string = 'place';
+  static EDIT_MODE: string = 'edit';
 }
