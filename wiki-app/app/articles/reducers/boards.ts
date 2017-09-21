@@ -13,8 +13,8 @@ import { Square } from '../models/square';
  * any additional interface properties.
  */
 export interface State extends EntityState<Board> {
-  selectedBoard: Board | null;
-  updated: boolean;
+  selectedBoardId: string | null;
+  selectedSquare: Square | null;
 }
 
 /**
@@ -35,8 +35,8 @@ export const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
  * additional properties can also be defined.
  */
 export const initialState: State = adapter.getInitialState({
-  selectedBoard: null,
-  updated: false,
+  selectedBoardId: null,
+  selectedSquare: null,
 });
 
 export function reducer(
@@ -51,25 +51,37 @@ export function reducer(
     }
 
     case board.LOAD: {
-      return {
+      let s = {
         ...adapter.addOne(action.payload, state),
-        selectedBoard: action.payload,
-        updated: true,
+        selectedBoardId: action.payload.id,
+      };
+      console.log('RELOAD', s);
+      // return {
+      //   ...adapter.addOne(action.payload,state),
+      //   selectedBoardId: action.payload.id
+      // }
+      let entities = {};
+      entities[action.payload.id] = { ...action.payload };
+      return {
+        ...state,
+        ids: [action.payload.id],
+        entities: entities,
+        selectedBoardId: action.payload.id,
       };
     }
 
     case board.CLICK: {
       return {
         ...adapter.addOne(action.payload, state),
-        selectedBoard: action.payload,
-        updated: true,
+        selectedBoardId: action.payload.id,
+        selectedSquare: action.payload.selectedSquare,
       };
     }
 
     case board.SELECT: {
       return {
         ...state,
-        updated: false,
+        selectedBoardId: action.payload,
       };
     }
 
@@ -88,5 +100,4 @@ export function reducer(
  * use-case.
  */
 
-export const getSelectedId = (state: State) =>
-  !!state.selectedBoard && state.selectedBoard.id;
+export const getSelectedId = (state: State) => state.selectedBoardId;

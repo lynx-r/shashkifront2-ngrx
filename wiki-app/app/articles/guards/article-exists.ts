@@ -60,12 +60,12 @@ export class ArticleExistsGuard implements CanActivate {
   hasArticleInStore(id: string): Observable<boolean> {
     return this.store
       .select(fromArticles.getArticleEntities)
-      .map(entities => !!entities[id])
-      .switchMap(() =>
+      .map(entities => !!entities[id] && entities[id].boardId)
+      .switchMap(boardId =>
         this.store
-          .select(fromArticles.getSelectedBoard)
-          .do(sel => console.log('CHECK', sel))
-          .map(selected => !!selected)
+          .select(fromArticles.getBoardEntities)
+          .map(entities => !!boardId && !!entities[boardId])
+          .take(1)
       );
   }
 
@@ -101,11 +101,9 @@ export class ArticleExistsGuard implements CanActivate {
     // return this.hasArticleInApi(id);
     return this.hasArticleInStore(id).switchMap(inStore => {
       if (inStore) {
-        console.log('IN STORE');
         return of(inStore);
       }
 
-      console.log('IN API');
       return this.hasArticleInApi(id);
     });
   }
