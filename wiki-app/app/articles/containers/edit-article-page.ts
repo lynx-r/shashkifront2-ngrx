@@ -17,7 +17,7 @@ import { CreateArticleRequest } from '../models/create-article-request';
 import { Rules } from '../models/rules';
 import * as fromArticles from '../reducers';
 import * as createArticle from '../actions/create-article';
-import { Draught } from '../models/draught';
+import { getSelectedBoard } from '../reducers/index';
 
 @Component({
   selector: 'ac-create-article-page',
@@ -28,6 +28,8 @@ import { Draught } from '../models/draught';
                (editToggled)="toggleEdit($event)"
                (squareClicked)="onSquareClicked($event)"
                (openCreateArticleDialog)="openCreateArticleDialog()"
+               (undo)="onUndoClicked()"
+               (redo)="onRedoClicked()"
     ></ac-editor>
   `,
 })
@@ -170,4 +172,14 @@ export class EditArticlePageComponent implements OnDestroy {
   toggleEdit(mode: string) {
     this.store.dispatch(new board.Mode(mode));
   }
+
+  onUndoClicked() {
+    this.store
+      .select(getSelectedBoard)
+      .do((selected: BoardBox) => this.store.dispatch(new board.Undo(selected)))
+      .take(1)
+      .subscribe();
+  }
+
+  onRedoClicked() {}
 }

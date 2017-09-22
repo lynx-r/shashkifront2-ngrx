@@ -16,6 +16,7 @@ import * as square from '../actions/square';
 import { BoardService } from '../../core/services/board.service';
 import { BoardBox } from '../models/board-box';
 import { Square } from '../models/square';
+import { getSelectedBoard } from '../reducers/index';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
 export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
@@ -66,6 +67,14 @@ export class BoardEffects {
       this.boardService.addDraught(action.payload)
     )
     .mergeMap(updated => [new board.Load(updated)])
+    .catch(err => of(new board.LoadFail(err)));
+
+  @Effect()
+  undo: Observable<Action> = this.actions$
+    .ofType(board.UNDO)
+    .map((action: board.Undo) => action.payload)
+    .switchMap((selected: BoardBox) => this.boardService.undo(selected))
+    .map((updated: BoardBox) => new board.Load(updated))
     .catch(err => of(new board.LoadFail(err)));
 
   // @Effect()

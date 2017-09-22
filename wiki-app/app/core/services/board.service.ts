@@ -9,6 +9,7 @@ import { Article } from '../../articles/models/article';
 import { Square } from '../../articles/models/square';
 import { Observable } from 'rxjs/Observable';
 import { ArticleCompositeKey } from '../../articles/models/article-composite-key';
+import { Board } from '../../articles/models/board';
 
 @Injectable()
 export class BoardService {
@@ -194,15 +195,11 @@ export class BoardService {
   // boardObservable() {
   //   return this.localStorage.observe(AppConstants.BOARD_STORAGE_KEY);
   // }
-  undo() {
-    let params = {
-      boardId: this.board.id,
-    };
-    this.apiBoardService
-      .post(AppConstants.BOARD_RESOURCE + AppConstants.UNDO, params)
-      .subscribe((resp: Move) => {
-        this.moveToSquareEvent.emit(resp);
-      });
+  undo(boardBox: BoardBox) {
+    return this.apiBoardService.post(
+      AppConstants.BOARD_RESOURCE + AppConstants.UNDO,
+      boardBox
+    );
   }
 
   findBoardById(boardId: string): Observable<BoardBox> {

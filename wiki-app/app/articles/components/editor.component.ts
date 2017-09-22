@@ -26,6 +26,8 @@ export class EditorComponent implements OnInit, OnChanges {
   @Output() squareClicked = new EventEmitter<Square>();
   @Output() openCreateArticleDialog = new EventEmitter();
   @Output() editToggled = new EventEmitter();
+  @Output() undo = new EventEmitter();
+  @Output() redo = new EventEmitter();
 
   rowHeight: number;
   backgroundColor: string;

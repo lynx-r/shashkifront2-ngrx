@@ -88,10 +88,9 @@ export function reducer(
       };
     }
 
-    case board.MODE: {
+    case board.UNDO: {
       return {
-        ...state,
-        mode: action.payload,
+        ...adapter.addOne(action.payload, state),
       };
     }
 

@@ -10,6 +10,12 @@
       Расставлять
     </md-button-toggle>
   </md-button-toggle-group>
+  <button md-raised-button value="write" (click)="undo.emit()">
+    <md-icon>undo</md-icon>
+  </button>
+  <button md-raised-button value="place" (click)="redo.emit()">
+    <md-icon>redo</md-icon>
+  </button>
   <md-toolbar-row *ngIf="boardModes.value == 'place'">
     <md-button-toggle-group #draughtColor="mdButtonToggleGroup" (change)="toggleColor(draughtColor.value)">
       <md-button-toggle value="white" [checked]="true">

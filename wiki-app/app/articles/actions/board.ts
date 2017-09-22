@@ -10,7 +10,11 @@ export const MOVE = '[BoardBox] Move';
 export const EDIT = '[BoardBox] Edit';
 export const CREATE_SUCCESS = '[BoardBox] Success';
 export const LOAD_FAIL = '[BoardBox] Fail';
+
 export const MODE = '[BoardBox] Mode';
+
+export const UNDO = '[BoardBox] Undo';
+export const REDO = '[BoardBox] Redo';
 
 /**
  * Every action is comprised of at least a type and an optional
@@ -78,6 +82,19 @@ export class Mode implements Action {
 
   constructor(public payload: string) {}
 }
+
+export class Undo implements Action {
+  readonly type = UNDO;
+
+  constructor(public payload: BoardBox) {}
+}
+
+export class Redo implements Action {
+  readonly type = REDO;
+
+  constructor(public payload: BoardBox) {}
+}
+
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -91,4 +108,6 @@ export type Actions =
   | Select
   | Click
   | Move
-  | Mode;
+  | Mode
+  | Undo
+  | Redo;
