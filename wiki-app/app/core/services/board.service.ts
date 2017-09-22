@@ -86,13 +86,11 @@ export class BoardService {
     // })
   }
 
-  addDraught(param: {
-    _articleId: string;
-    x: number;
-    y: number;
-    black: boolean;
-    queen: boolean;
-  }) {
+  addDraught(boardBox: BoardBox): Observable<BoardBox> {
+    return this.apiBoardService.post(
+      AppConstants.BOARD_RESOURCE + '/add-draught',
+      boardBox
+    );
     // this.socketService.socket.emit(AppConstants.ADD_DRAUGHT, param, (resp) => {
     //   Utils.handleResponse(resp).then((resp) => {
     //     this.content = resp.data;

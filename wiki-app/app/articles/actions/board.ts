@@ -5,6 +5,7 @@ export const LOAD = '[BoardBox] Load';
 export const LOAD_SUCCESS = '[BoardBox] Load Success';
 export const SELECT = '[BoardBox] Select';
 export const CLICK = '[BoardBox] Click';
+export const ADD_DRAUGHT = '[BoardBox] Add draught';
 export const MOVE = '[BoardBox] Move';
 export const EDIT = '[BoardBox] Edit';
 export const CREATE_SUCCESS = '[BoardBox] Success';
@@ -56,6 +57,12 @@ export class Select implements Action {
 
 export class Click implements Action {
   readonly type = CLICK;
+
+  constructor(public payload: BoardBox) {}
+}
+
+export class AddDraught implements Action {
+  readonly type = ADD_DRAUGHT;
 
   constructor(public payload: BoardBox) {}
 }

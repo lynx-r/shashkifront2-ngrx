@@ -55,7 +55,16 @@ export class BoardEffects {
   @Effect()
   squareMove$: Observable<Action> = this.actions$
     .ofType(board.MOVE)
-    .mergeMap((action: board.Click) => this.boardService.move(action.payload))
+    .mergeMap((action: board.Move) => this.boardService.move(action.payload))
+    .mergeMap(updated => [new board.Load(updated)])
+    .catch(err => of(new board.LoadFail(err)));
+
+  @Effect()
+  addDraught: Observable<Action> = this.actions$
+    .ofType(board.ADD_DRAUGHT)
+    .mergeMap((action: board.AddDraught) =>
+      this.boardService.addDraught(action.payload)
+    )
     .mergeMap(updated => [new board.Load(updated)])
     .catch(err => of(new board.LoadFail(err)));
 

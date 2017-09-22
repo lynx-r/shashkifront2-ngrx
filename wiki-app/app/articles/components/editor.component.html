@@ -1,0 +1,62 @@
+<md-toolbar>
+  <button md-raised-button (click)="openCreateArticleDialog.emit()">
+    Создать
+  </button>
+  <md-button-toggle-group #boardModes="mdButtonToggleGroup" (change)="toggleMode(boardModes.value)">
+    <md-button-toggle value="write" [checked]="true">
+      Писать
+    </md-button-toggle>
+    <md-button-toggle value="place">
+      Расставлять
+    </md-button-toggle>
+  </md-button-toggle-group>
+  <md-toolbar-row *ngIf="boardModes.value == 'place'">
+    <md-button-toggle-group #draughtColor="mdButtonToggleGroup" (change)="toggleColor(draughtColor.value)">
+      <md-button-toggle value="white" [checked]="true">
+        Белая
+      </md-button-toggle>
+      <md-button-toggle value="black">
+        Черная
+      </md-button-toggle>
+    </md-button-toggle-group>
+
+    <md-button-toggle-group #draughtType="mdButtonToggleGroup" (change)="toggleType(draughtType.value)">
+      <md-button-toggle value="draught" [checked]="true">
+        Простая
+      </md-button-toggle>
+      <md-button-toggle value="queen">
+        Дамка
+      </md-button-toggle>
+    </md-button-toggle-group>
+    <md-button-toggle-group #draughtDelete="mdButtonToggleGroup" (change)="toggleDelete(draughtDelete.value)">
+      <md-button-toggle value="add" [checked]="true">
+        Добавить шашку
+      </md-button-toggle>
+      <md-button-toggle value="delete">
+        Удалить шашку
+      </md-button-toggle>
+    </md-button-toggle-group>
+  </md-toolbar-row>
+</md-toolbar>
+<md-grid-list [rowHeight]="rowHeight" #editorGrid *ngIf="article; else createArticle" cols="12">
+  <md-grid-tile colspan="5">
+    <ac-board #boardRef
+              (squareClicked)="onSquareClicked($event)"
+              class="fit"
+              [board]="board"
+              [style.backgroundColor]="backgroundColor"
+    ></ac-board>
+  </md-grid-tile>
+  <md-grid-tile colspan="1">
+    Нотация
+  </md-grid-tile>
+  <md-grid-tile colspan="6">
+    <ac-board-article class="fit" [article]="article"></ac-board-article>
+  </md-grid-tile>
+</md-grid-list>
+<ng-template #createArticle>
+  <div>
+    Нажмите Создать, чтобы создать новую статью или
+    Открыть, чтобы открыть существующую.
+  </div>
+</ng-template>

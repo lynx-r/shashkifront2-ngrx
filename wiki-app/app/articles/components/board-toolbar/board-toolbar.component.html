@@ -1,9 +1,6 @@
 <md-toolbar>
-  <button md-raised-button (click)="openCreateArticleDialog()">
+  <button md-raised-button (click)="createArticle.emit()">
     Создать
-  </button>
-  <button md-raised-button (click)="findArticles()">
-    Открыть
   </button>
   <md-button-toggle-group #boardModes="mdButtonToggleGroup" (change)="toggleEdit(boardModes.value)">
     <md-button-toggle value="write" [checked]="true">
