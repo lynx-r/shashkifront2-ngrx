@@ -1,13 +1,12 @@
-import { Square } from './square';
 import { Draught } from './draught';
-import { Rules } from './rules';
-import { BoardChanger } from './board-changer';
-export interface Board {
+import { Square } from './square';
+import { BoardBox } from './board-box';
+
+export class Board {
   id: string;
   squares: Square[];
   selectedSquare: Square | null;
   nextSquare: Square | null;
-  boardHistoryId: BoardChanger;
   rules: string;
   black: boolean;
 }

@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Board } from '../../models/board';
+import { BoardBox } from '../../models/board-box';
 import 'rxjs/add/observable/of';
 import { Rules } from '../../models/rules';
 import { Square } from '../../models/square';
@@ -19,7 +19,7 @@ import { MdGridList, MdGridTile } from '@angular/material';
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnChanges {
-  @Input() board: Board;
+  @Input() board: BoardBox;
   @Output() squareClicked = new EventEmitter<Square>();
 
   boardLength: Array<number>;
@@ -33,8 +33,9 @@ export class BoardComponent implements OnChanges {
     this.updateBoard(this.board);
   }
 
-  private updateBoard(board: Board) {
-    if (board) {
+  private updateBoard(boardBox: BoardBox) {
+    if (boardBox) {
+      let board = boardBox.board;
       this.boardDim = Rules.getDimension(board.rules) + 1;
       this.boardLength = Rules.getAllBoardLength(this.boardDim);
       this.squares = [];

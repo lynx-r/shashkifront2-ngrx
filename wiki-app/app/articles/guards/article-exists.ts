@@ -60,7 +60,7 @@ export class ArticleExistsGuard implements CanActivate {
   hasArticleInStore(id: string): Observable<boolean> {
     return this.store
       .select(fromArticles.getArticleEntities)
-      .map(entities => !!entities[id] && entities[id].boardId)
+      .map(entities => !!entities[id] && entities[id].boardBoxId)
       .switchMap(boardId =>
         this.store
           .select(fromArticles.getBoardEntities)
@@ -79,7 +79,7 @@ export class ArticleExistsGuard implements CanActivate {
       .map(articleEntity => new article.Load(articleEntity))
       .switchMap((articleLoad: article.Load) =>
         this.boardService
-          .findBoardById(articleLoad.payload.boardId)
+          .findBoardById(articleLoad.payload.boardBoxId)
           .map(boardEntity => new board.Load(boardEntity))
           .do((action: board.Load) => this.store.dispatch(action))
           .map(() => articleLoad)

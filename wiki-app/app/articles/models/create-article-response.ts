@@ -1,8 +1,8 @@
 import { Article } from './article';
 import { CreateBoardRequest } from './create-board-request';
-import { Board } from './board';
+import { BoardBox } from './board-box';
 
 export class CreateArticleResponse {
   article: Article;
-  board: Board;
+  board: BoardBox;
 }

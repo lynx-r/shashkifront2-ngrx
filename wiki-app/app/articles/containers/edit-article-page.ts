@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
@@ -13,10 +7,9 @@ import 'rxjs/Rx';
 import * as fromArticles from '../reducers';
 import * as article from '../actions/article';
 import * as board from '../actions/board';
-import * as squareAction from '../actions/square';
 import { Article } from '../models/article';
 import { Observable } from 'rxjs/Observable';
-import { Board } from '../models/board';
+import { BoardBox } from '../models/board-box';
 import { Square } from '../models/square';
 import { AppConstants } from '../../core/services/app-constants';
 
@@ -36,7 +29,7 @@ export class EditArticlePageComponent implements OnDestroy {
   boardSubscription: Subscription;
 
   article$: Observable<Article>;
-  board$: Observable<Board>;
+  board$: Observable<BoardBox>;
   boardMode$: Observable<string>;
 
   constructor(
@@ -50,7 +43,7 @@ export class EditArticlePageComponent implements OnDestroy {
       .select(fromArticles.getSelectedArticle)
       .map(
         articleEntity =>
-          !!articleEntity && new board.Select(articleEntity.boardId)
+          !!articleEntity && new board.Select(articleEntity.boardBoxId)
       )
       .map(select => !!select && this.store.dispatch(select))
       .subscribe();
@@ -78,9 +71,12 @@ export class EditArticlePageComponent implements OnDestroy {
               .do(selectedBoard => {
                 if (
                   selectedBoard &&
-                  clicked.draught.black == selectedBoard.black
+                  clicked.draught.black == selectedBoard.board.black
                 ) {
-                  selectedBoard = { ...selectedBoard, selectedSquare: clicked };
+                  selectedBoard.board = {
+                    ...selectedBoard.board,
+                    selectedSquare: clicked,
+                  };
                   this.store.dispatch(new board.Click(selectedBoard));
                 }
               })
@@ -91,8 +87,8 @@ export class EditArticlePageComponent implements OnDestroy {
               .select(fromArticles.getSelectedBoard)
               .do(selectedBoard => {
                 if (selectedBoard) {
-                  selectedBoard = {
-                    ...selectedBoard,
+                  selectedBoard.board = {
+                    ...selectedBoard.board,
                     nextSquare: clicked,
                   };
                   this.store.dispatch(new board.Move(selectedBoard));

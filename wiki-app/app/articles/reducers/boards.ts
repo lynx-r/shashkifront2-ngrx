@@ -2,7 +2,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as board from '../actions/board';
 import * as square from '../actions/square';
 import * as boardCollection from '../actions/board-collection';
-import { Board } from '../models/board';
+import { BoardBox } from '../models/board-box';
 import { Square } from '../models/square';
 import { AppConstants } from '../../core/services/app-constants';
 
@@ -13,7 +13,7 @@ import { AppConstants } from '../../core/services/app-constants';
  * model type by id. This interface is extended to include
  * any additional interface properties.
  */
-export interface State extends EntityState<Board> {
+export interface State extends EntityState<BoardBox> {
   selectedBoardId: string | null;
   selectedSquare: Square | null;
   mode: string;
@@ -27,8 +27,8 @@ export interface State extends EntityState<Board> {
  * a sort option whether to sort the records when performing
  * operations
  */
-export const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
-  selectId: (board: Board) => board.id,
+export const adapter: EntityAdapter<BoardBox> = createEntityAdapter<BoardBox>({
+  selectId: (board: BoardBox) => board.id,
   sort: false,
 });
 
@@ -77,7 +77,7 @@ export function reducer(
       return {
         ...adapter.addOne(action.payload, state),
         selectedBoardId: action.payload.id,
-        selectedSquare: action.payload.selectedSquare,
+        selectedSquare: action.payload.board.selectedSquare,
       };
     }
 

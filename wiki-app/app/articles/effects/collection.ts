@@ -14,7 +14,7 @@ import * as boardCollection from '../actions/board-collection';
 import { ArticleService } from '../../core/services/article.service';
 import { Article } from '../models/article';
 import { BoardService } from '../../core/services/board.service';
-import { Board } from '../models/board';
+import { BoardBox } from '../models/board-box';
 import { ArticleCompositeKey } from '../models/article-composite-key';
 
 @Injectable()
@@ -38,7 +38,7 @@ export class CollectionEffects {
         .listArticles(limit)
         .mergeMap((articles: Article[]) => [
           new articleCollection.LoadSuccess(articles),
-          new boardCollection.Load(articles.map(a => a.boardId)),
+          new boardCollection.Load(articles.map(a => a.boardBoxId)),
         ])
         .catch(error => of(new articleCollection.LoadFail(error)))
     );
@@ -50,7 +50,7 @@ export class CollectionEffects {
     .switchMap((boardIds: string[]) =>
       this.boardService
         .listBoards(boardIds)
-        .map((boards: Board[]) => new boardCollection.LoadSuccess(boards))
+        .map((boards: BoardBox[]) => new boardCollection.LoadSuccess(boards))
         .catch(error => of(new boardCollection.LoadFail(error)))
     );
 

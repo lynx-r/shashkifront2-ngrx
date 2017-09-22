@@ -1,15 +1,15 @@
 import { Action } from '@ngrx/store';
-import { Board } from '../models/board';
+import { BoardBox } from '../models/board-box';
 
-export const LOAD = '[Board] Load';
-export const LOAD_SUCCESS = '[Board] Load Success';
-export const SELECT = '[Board] Select';
-export const CLICK = '[Board] Click';
-export const MOVE = '[Board] Move';
-export const EDIT = '[Board] Edit';
-export const CREATE_SUCCESS = '[Board] Success';
-export const LOAD_FAIL = '[Board] Fail';
-export const MODE = '[Board] Mode';
+export const LOAD = '[BoardBox] Load';
+export const LOAD_SUCCESS = '[BoardBox] Load Success';
+export const SELECT = '[BoardBox] Select';
+export const CLICK = '[BoardBox] Click';
+export const MOVE = '[BoardBox] Move';
+export const EDIT = '[BoardBox] Edit';
+export const CREATE_SUCCESS = '[BoardBox] Success';
+export const LOAD_FAIL = '[BoardBox] Fail';
+export const MODE = '[BoardBox] Mode';
 
 /**
  * Every action is comprised of at least a type and an optional
@@ -21,31 +21,31 @@ export const MODE = '[Board] Mode';
 export class CreateSuccess implements Action {
   readonly type = CREATE_SUCCESS;
 
-  constructor(public payload: Board) {}
+  constructor(public payload: BoardBox) {}
 }
 
 export class Edit implements Action {
   readonly type = EDIT;
 
-  constructor(public payload: Board) {}
+  constructor(public payload: BoardBox) {}
 }
 
 export class Load implements Action {
   readonly type = LOAD;
 
-  constructor(public payload: Board) {}
+  constructor(public payload: BoardBox) {}
 }
 
 export class LoadSuccess implements Action {
   readonly type = LOAD_SUCCESS;
 
-  constructor(public payload: Board) {}
+  constructor(public payload: BoardBox) {}
 }
 
 export class LoadFail implements Action {
   readonly type = LOAD_FAIL;
 
-  constructor(public payload: Board) {}
+  constructor(public payload: BoardBox) {}
 }
 
 export class Select implements Action {
@@ -57,13 +57,13 @@ export class Select implements Action {
 export class Click implements Action {
   readonly type = CLICK;
 
-  constructor(public payload: Board) {}
+  constructor(public payload: BoardBox) {}
 }
 
 export class Move implements Action {
   readonly type = MOVE;
 
-  constructor(public payload: Board) {}
+  constructor(public payload: BoardBox) {}
 }
 
 export class Mode implements Action {

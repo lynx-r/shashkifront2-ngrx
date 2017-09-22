@@ -21,6 +21,8 @@ export class Create implements Action {
 
 export class CreateSuccess implements Action {
   readonly type = CREATE_SUCCESS;
+
+  constructor(public payload: string) {}
 }
 
 export class CreateFail implements Action {

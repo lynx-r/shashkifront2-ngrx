@@ -4,5 +4,5 @@ export interface Article {
   content: string;
   createdAt: Date;
   author: string;
-  boardId: string;
+  boardBoxId: string;
 }

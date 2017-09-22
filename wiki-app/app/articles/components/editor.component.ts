@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Article } from '../models/article';
-import { Board } from '../models/board';
+import { BoardBox } from '../models/board-box';
 import { MdGridTile } from '@angular/material';
 import { Square } from '../models/square';
 import { Utils } from '../../core/services/utils.service';
@@ -45,7 +45,7 @@ import { Utils } from '../../core/services/utils.service';
 })
 export class EditorComponent implements OnInit, OnChanges {
   @Input() article: Article;
-  @Input() board: Board;
+  @Input() board: BoardBox;
   @Input() mode: string;
   @Output() squareClicked = new EventEmitter<Square>();
   rowHeight: number;

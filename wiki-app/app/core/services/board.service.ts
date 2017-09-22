@@ -3,7 +3,7 @@ import { Utils } from './utils.service';
 import { AppConstants } from './app-constants';
 import { ApiBoardService } from './api-board.service';
 import 'rxjs/Rx';
-import { Board } from '../../articles/models/board';
+import { BoardBox } from '../../articles/models/board-box';
 import { Move } from '../../articles/models/move';
 import { Article } from '../../articles/models/article';
 import { Square } from '../../articles/models/square';
@@ -12,7 +12,7 @@ import { ArticleCompositeKey } from '../../articles/models/article-composite-key
 
 @Injectable()
 export class BoardService {
-  board: Board;
+  board: BoardBox;
   editModeFlag: boolean;
   selectedDraughtDescFlag: { black: boolean; queen: boolean };
   removeDraughtFlag: boolean;
@@ -59,11 +59,11 @@ export class BoardService {
   //   })
   // }
 
-  private goThroughBoard(func: Function) {
-    for (let square of this.board.boardHistoryId.squares) {
-      func(square);
-    }
-  }
+  // private goThroughBoard(func: Function) {
+  //   for (let square of this.board.boardHistoryId.squares) {
+  //     func(square);
+  //   }
+  // }
 
   // moveDraught(sourceSquare: Square, draught: Draught, targetSquare: Square, queen: boolean) {
   //   sourceSquare.draught = null;
@@ -207,13 +207,13 @@ export class BoardService {
       });
   }
 
-  findBoardById(boardId: string): Observable<Board> {
+  findBoardById(boardId: string): Observable<BoardBox> {
     return this.apiBoardService.get(
       AppConstants.BOARD_RESOURCE + `/${boardId}`
     );
   }
 
-  listBoards(boardIds: string[]): Observable<Board[]> {
+  listBoards(boardIds: string[]): Observable<BoardBox[]> {
     return this.apiBoardService.post(AppConstants.BOARDS_RESOURCE, boardIds);
   }
 
@@ -223,14 +223,14 @@ export class BoardService {
     );
   }
 
-  highlightBoard(board: Board): Observable<Board> {
+  highlightBoard(board: BoardBox): Observable<BoardBox> {
     return this.apiBoardService.post(
       AppConstants.BOARD_RESOURCE + '/highlight',
       board
     );
   }
 
-  move(board: Board) {
+  move(board: BoardBox) {
     return this.apiBoardService.post(
       AppConstants.BOARD_RESOURCE + '/move',
       board

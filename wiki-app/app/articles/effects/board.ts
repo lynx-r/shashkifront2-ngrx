@@ -14,7 +14,7 @@ import { of } from 'rxjs/observable/of';
 import * as board from '../actions/board';
 import * as square from '../actions/square';
 import { BoardService } from '../../core/services/board.service';
-import { Board } from '../models/board';
+import { BoardBox } from '../models/board-box';
 import { Square } from '../models/square';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
@@ -40,7 +40,7 @@ export class BoardEffects {
   //   .ofType(board.RETRIEVE)
   //   .map((action: board.Retrieve) => action.payload)
   //   .switchMap((boardId: string) => this.boardService.findById(boardId))
-  //   .mergeMap((loadedBoard: Board) => [new board.Load(loadedBoard), new board.Select(loadedBoard.id)])
+  //   .mergeMap((loadedBoard: BoardBox) => [new board.Load(loadedBoard), new board.Select(loadedBoard.id)])
   //   .catch(err => of(new board.LoadFail(err)));
 
   @Effect()
@@ -64,7 +64,7 @@ export class BoardEffects {
   //   .ofType(board.CLICK)
   //   .map((action: board.Load) => action.payload)
   //   .switchMap((boardId: string) => this.boardService.findBoardById(boardId))
-  //   .map((loadedBoard: Board) => new board.LoadSuccess(loadedBoard))
+  //   .map((loadedBoard: BoardBox) => new board.LoadSuccess(loadedBoard))
   //   .catch(err => of(new board.LoadFail(err)));
 
   constructor(

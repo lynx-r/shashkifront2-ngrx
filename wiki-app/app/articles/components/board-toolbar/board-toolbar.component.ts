@@ -32,7 +32,7 @@ export class BoardToolbarComponent implements OnInit {
         title: 'Новая статья',
         content: '',
         author: '',
-        boardId: '',
+        boardBoxId: '',
       },
       boardRequest: {
         black: false,

@@ -17,9 +17,7 @@ import * as board from '../actions/board';
 import { ArticleService } from '../../core/services/article.service';
 import { CreateArticleResponse } from '../models/create-article-response';
 import { CreateArticleRequest } from '../models/create-article-request';
-import { Article } from '../models/article';
-import { BoardService } from '../../core/services/board.service';
-import { Board } from '../models/board';
+import { Router } from '@angular/router';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
 export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
@@ -49,10 +47,15 @@ export class ArticleEffects {
     .mergeMap((createdArticleResponse: CreateArticleResponse) => [
       new article.CreateSuccess(createdArticleResponse.article),
       new board.CreateSuccess(createdArticleResponse.board),
-      new createArticle.CreateSuccess(),
+      new createArticle.CreateSuccess(createdArticleResponse.article.id),
     ])
     .catch(err => of(new createArticle.CreateFail(err)));
 
+  @Effect({ dispatch: false })
+  createArticleSuccess$ = this.actions$
+    .ofType(createArticle.CREATE_SUCCESS)
+    .map((action: createArticle.CreateSuccess) => action.payload)
+    .do(articleId => this.router.navigate([`/articles/${articleId}`]));
   // @Effect()
   // load$: Observable<Action> = this.actions$
   //   .ofType(article.CLICK)
@@ -60,7 +63,7 @@ export class ArticleEffects {
   //   .switchMap((article: Article) =>
   //     this.boardService.findById(article.boardId)
   //   )
-  //   .map((loadedBoard: Board) => new board.Load(loadedBoard))
+  //   .map((loadedBoard: BoardBox) => new board.Load(loadedBoard))
   //   .catch(err => of(new board.LoadFail(err)));
 
   // @Effect()
@@ -70,13 +73,13 @@ export class ArticleEffects {
   //   .switchMap((articleId: string) =>
   //     this.boardService.findByArticleId(articleId)
   //   )
-  //   .map((loadedBoard: Board) => new board.LoadSuccess(loadedBoard))
+  //   .map((loadedBoard: BoardBox) => new board.LoadSuccess(loadedBoard))
   //   .catch(err => of(new board.LoadFail(err)));
 
   constructor(
     private actions$: Actions,
     private articleService: ArticleService,
-    private boardService: BoardService,
+    private router: Router,
     @Optional()
     @Inject(SEARCH_DEBOUNCE)
     private debounce: number = 300,

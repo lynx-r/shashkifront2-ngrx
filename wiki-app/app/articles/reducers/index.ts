@@ -194,7 +194,7 @@ export const getBoardMode = createSelector(
 );
 
 /**
- * Board Collection
+ * BoardBox Collection
  */
 
 export const getBoardCollectionState = createSelector(
