@@ -7,6 +7,7 @@ export class AppConstants {
   static BOARDS_RESOURCE: string = '/boards';
   static BOARD_RESOURCE: string = '/board';
   static UNDO: string = '/undo';
+  static REDO: string = '/redo';
   static FIND_ARTICLES: string = 'find articles';
   static FIND_ARTICLE: string = 'find article';
   static UPDATE_ARTICLE: string = 'update article';

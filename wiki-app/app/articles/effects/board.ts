@@ -61,7 +61,7 @@ export class BoardEffects {
     .catch(err => of(new board.LoadFail(err)));
 
   @Effect()
-  addDraught: Observable<Action> = this.actions$
+  addDraught$: Observable<Action> = this.actions$
     .ofType(board.ADD_DRAUGHT)
     .mergeMap((action: board.AddDraught) =>
       this.boardService.addDraught(action.payload)
@@ -70,10 +70,18 @@ export class BoardEffects {
     .catch(err => of(new board.LoadFail(err)));
 
   @Effect()
-  undo: Observable<Action> = this.actions$
+  undo$: Observable<Action> = this.actions$
     .ofType(board.UNDO)
     .map((action: board.Undo) => action.payload)
     .switchMap((selected: BoardBox) => this.boardService.undo(selected))
+    .map((updated: BoardBox) => new board.Load(updated))
+    .catch(err => of(new board.LoadFail(err)));
+
+  @Effect()
+  redo$: Observable<Action> = this.actions$
+    .ofType(board.REDO)
+    .map((action: board.Redo) => action.payload)
+    .switchMap((selected: BoardBox) => this.boardService.redo(selected))
     .map((updated: BoardBox) => new board.Load(updated))
     .catch(err => of(new board.LoadFail(err)));
 

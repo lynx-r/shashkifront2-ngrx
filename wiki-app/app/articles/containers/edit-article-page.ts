@@ -118,10 +118,6 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe();
   }
 
-  private copyBoard(selectedBoard: BoardBox, clicked: Square) {
-    return;
-  }
-
   private moveSquare(selectedBoard: BoardBox, clicked: Square) {
     let updated = {
       ...selectedBoard,
@@ -181,5 +177,11 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe();
   }
 
-  onRedoClicked() {}
+  onRedoClicked() {
+    this.store
+      .select(getSelectedBoard)
+      .do((selected: BoardBox) => this.store.dispatch(new board.Redo(selected)))
+      .take(1)
+      .subscribe();
+  }
 }

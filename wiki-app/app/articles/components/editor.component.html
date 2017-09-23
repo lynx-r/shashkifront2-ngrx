@@ -1,13 +1,17 @@
 <md-toolbar>
   <button md-raised-button (click)="openCreateArticleDialog.emit()">
-    Создать
+    <md-icon>add</md-icon>
   </button>
   <md-button-toggle-group #boardModes="mdButtonToggleGroup" (change)="toggleMode(boardModes.value)">
     <md-button-toggle value="write" [checked]="true">
-      Писать
+      <md-icon>
+        text_format
+      </md-icon>
     </md-button-toggle>
     <md-button-toggle value="place">
-      Расставлять
+      <md-icon>
+        create
+      </md-icon>
     </md-button-toggle>
   </md-button-toggle-group>
   <button md-raised-button value="write" (click)="undo.emit()">
