@@ -14,6 +14,7 @@ import { Square } from '../models/square';
 import { Utils } from '../../core/services/utils.service';
 import { AppConstants } from '../../core/services/app-constants';
 import { Draught } from '../models/draught';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'ac-editor',
@@ -22,12 +23,17 @@ import { Draught } from '../models/draught';
 })
 export class EditorComponent implements OnInit, OnChanges {
   @Input() article: Article;
-  @Input() board: BoardBox;
+  @Input() boardBox: BoardBox;
   @Output() squareClicked = new EventEmitter<Square>();
   @Output() openCreateArticleDialog = new EventEmitter();
   @Output() editToggled = new EventEmitter();
   @Output() undo = new EventEmitter();
   @Output() redo = new EventEmitter();
+
+  notationPrevious$ = new BehaviorSubject<string[]>([]);
+  notationNext$ = new BehaviorSubject<string[]>([]);
+  notationNext: string[];
+  currentStroke: string;
 
   rowHeight: number;
   backgroundColor: string;
@@ -38,7 +44,6 @@ export class EditorComponent implements OnInit, OnChanges {
   private deleteMode: boolean;
 
   constructor() {
-    console.log('**BOARD**', this.board);
     this.draught = {
       v: 0,
       h: 1,
@@ -56,7 +61,26 @@ export class EditorComponent implements OnInit, OnChanges {
     this.deleteMode = false;
   }
 
-  ngOnChanges() {}
+  ngOnChanges() {
+    let board = this.boardBox.board;
+    this.notationPrevious$.next(
+      Utils.getNotation(this.boardBox.board.previousBoards)
+    );
+    this.notationNext$.next(Utils.getNotation(this.boardBox.board.nextBoards));
+    if (board.selectedSquare) {
+      this.currentStroke = board.selectedSquare.notation;
+    } else {
+      this.currentStroke = '';
+    }
+  }
+
+  // private fillNotation(notations: string[], board: Board) {
+  //   if (!notations)
+  //     return;
+  //   notations.splice(0, notations.length);
+  //   console.log('splice',notations);
+  //   notations.concat(Utils.getNotation(board.previousBoards));
+  // }
 
   toggleMode(mode: string) {
     this.editToggled.emit(mode);

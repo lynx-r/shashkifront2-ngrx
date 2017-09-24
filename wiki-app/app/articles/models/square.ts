@@ -8,4 +8,5 @@ export interface Square {
   occupied?: boolean;
   draught?: Draught;
   size?: number;
+  notation?: string;
 }

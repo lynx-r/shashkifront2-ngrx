@@ -16,6 +16,7 @@ import { DraughtComponent } from './board/draught/draught.component';
 import { ArticleComponent } from './article/article.component';
 import { ArticlePreviewListComponent } from './article-preview-list';
 import { ArticlePreviewComponent } from './article-preview';
+import { NotationComponent } from './notation/notation.component';
 
 export const COMPONENTS = [
   EditorComponent,
@@ -24,6 +25,7 @@ export const COMPONENTS = [
   OpenArticleDialogComponent,
   CreateArticleDialogComponent,
   BoardComponent,
+  NotationComponent,
   SquareComponent,
   DraughtComponent,
   ArticleComponent,

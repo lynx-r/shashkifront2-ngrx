@@ -24,7 +24,7 @@ import { getSelectedBoard } from '../reducers/index';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ac-editor [article]="article$ | async"
-               [board]="board$ | async"
+               [boardBox]="boardBox$ | async"
                (editToggled)="toggleEdit($event)"
                (squareClicked)="onSquareClicked($event)"
                (openCreateArticleDialog)="openCreateArticleDialog()"
@@ -38,7 +38,7 @@ export class EditArticlePageComponent implements OnDestroy {
   boardSubscription: Subscription;
 
   article$: Observable<Article>;
-  board$: Observable<BoardBox>;
+  boardBox$: Observable<BoardBox>;
   boardMode$: Observable<string>;
   checkedMode$: Observable<string>;
 
@@ -62,9 +62,11 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe();
 
     this.article$ = this.store.select(fromArticles.getSelectedArticle);
-    this.board$ = this.store.select(fromArticles.getSelectedBoard).do(board => {
-      console.log('SELECTED BOARD ', board);
-    });
+    this.boardBox$ = this.store
+      .select(fromArticles.getSelectedBoard)
+      .do(board => {
+        console.log('SELECTED BOARD ', board);
+      });
     this.boardMode$ = this.store.select(fromArticles.getBoardMode);
 
     this.checkedMode$ = this.store.select(fromArticles.getBoardMode);
@@ -81,7 +83,7 @@ export class EditArticlePageComponent implements OnDestroy {
       boardRequest: {
         black: false,
         rules: Rules.RUSSIAN,
-        fillBoard: false,
+        fillBoard: true,
       },
     };
   }

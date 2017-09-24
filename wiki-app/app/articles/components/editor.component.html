@@ -53,12 +53,16 @@
     <ac-board #boardRef
               (squareClicked)="onSquareClicked($event)"
               class="fit"
-              [board]="board"
+              [board]="boardBox.board"
               [style.backgroundColor]="backgroundColor"
     ></ac-board>
   </md-grid-tile>
   <md-grid-tile colspan="1">
-    Нотация
+    <ac-notation
+      [currentStroke]="currentStroke"
+      [notationPrevious]="notationPrevious$ | async"
+      [notationNext]="notationNext$ | async"
+    ></ac-notation>
   </md-grid-tile>
   <md-grid-tile colspan="6">
     <ac-board-article class="fit" [article]="article"></ac-board-article>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Square } from '../../articles/models/square';
 import { AppConstants } from './app-constants';
+import { BoardIdNotation } from '../../articles/models/boardid-notation';
 
 @Injectable()
 export class Utils {
@@ -56,5 +57,12 @@ export class Utils {
       console.log('found', target);
     }
     return find != null;
+  }
+
+  static getNotation(boards: BoardIdNotation[]): string[] {
+    if (!boards) return [];
+    let strings = boards.map(boardIdNotation => boardIdNotation.notation);
+    console.log('BOARDS NOTATION', strings);
+    return strings;
   }
 }
