@@ -21,29 +21,23 @@
     <md-icon>redo</md-icon>
   </button>
   <md-toolbar-row *ngIf="boardModes.value == 'place'">
-    <md-button-toggle-group #draughtColor="mdButtonToggleGroup" (change)="toggleColor(draughtColor.value)">
-      <md-button-toggle value="white" [checked]="!draught.black">
-        Белая
+    <md-button-toggle-group #draughtSelected="mdButtonToggleGroup" (change)="selectDraught(draughtSelected.value)">
+      <md-button-toggle value="," [checked]="!draught.queen && !draught.black && !deleteMode">
+        <draught-edit [queen]="false" [black]="false" [selected]="!draught.queen && !draught.black && !deleteMode"></draught-edit>
       </md-button-toggle>
-      <md-button-toggle value="black" [checked]="draught.black">
-        Черная
+      <md-button-toggle value="queen," [checked]="draught.queen && !draught.black && !deleteMode">
+        <draught-edit [queen]="true" [black]="false" [selected]="draught.queen && !draught.black && !deleteMode"></draught-edit>
       </md-button-toggle>
-    </md-button-toggle-group>
-
-    <md-button-toggle-group #draughtType="mdButtonToggleGroup" (change)="toggleType(draughtType.value)">
-      <md-button-toggle value="draught" [checked]="!draught.queen">
-        Простая
+      <md-button-toggle value=",black" [checked]="!draught.queen && draught.black && !deleteMode">
+        <draught-edit [queen]="false" [black]="true" [selected]="!draught.queen && draught.black && !deleteMode"></draught-edit>
       </md-button-toggle>
-      <md-button-toggle value="queen" [checked]="draught.queen">
-        Дамка
+      <md-button-toggle value="queen,black" [checked]="draught.queen && draught.black && !deleteMode">
+        <draught-edit [queen]="true" [black]="true" [selected]="draught.queen && draught.black && !deleteMode"></draught-edit>
       </md-button-toggle>
-    </md-button-toggle-group>
-    <md-button-toggle-group #draughtDelete="mdButtonToggleGroup" (change)="toggleDelete(draughtDelete.value)">
-      <md-button-toggle value="add" [checked]="!deleteMode">
-        Добавить шашку
-      </md-button-toggle>
-      <md-button-toggle value="delete" [checked]="deleteMode">
-        Удалить шашку
+      <md-button-toggle value="remove" [checked]="deleteMode">
+        <div class="remove-draught-container">
+          <div class="remove-draught" [ngClass]="{'selected-remove': deleteMode}"></div>
+        </div>
       </md-button-toggle>
     </md-button-toggle-group>
   </md-toolbar-row>

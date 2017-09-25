@@ -7,20 +7,20 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { Article } from '../models/article';
-import { BoardBox } from '../models/board-box';
+import { Article } from '../../models/article';
+import { BoardBox } from '../../models/board-box';
 import { MdGridTile } from '@angular/material';
-import { Square } from '../models/square';
-import { Utils } from '../../core/services/utils.service';
-import { AppConstants } from '../../core/services/app-constants';
-import { Draught } from '../models/draught';
+import { Square } from '../../models/square';
+import { Utils } from '../../../core/services/utils.service';
+import { AppConstants } from '../../../core/services/app-constants';
+import { Draught } from '../../models/draught';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'ac-editor',
   templateUrl: './editor.component.html',
-  styles: [],
+  styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit, OnChanges {
   @Input() article: Article;
@@ -143,6 +143,35 @@ export class EditorComponent implements OnInit, OnChanges {
     );
   }
 
+  selectDraught(mode: string) {
+    if (mode == 'remove') {
+      this.deleteMode = true;
+      this.cookieService.put(
+        AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE,
+        `${this.deleteMode}`
+      );
+    } else {
+      this.deleteMode = false;
+      this.cookieService.put(
+        AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE,
+        `${this.deleteMode}`
+      );
+
+      let draughtMode = mode.split(',');
+      console.log(mode, draughtMode);
+      this.draught = {
+        ...this.draught,
+        queen: draughtMode[0] == 'queen',
+        black: draughtMode[1] == 'black',
+      };
+      console.log(this.draught);
+      this.cookieService.putObject(
+        AppConstants.DRAUGHT_PLACE_COOKIE,
+        this.draught
+      );
+    }
+  }
+
   onSquareClicked(square: Square) {
     console.log('CLICKED', square);
     if (this.mode == AppConstants.WRITE_MODE) {
@@ -158,4 +187,6 @@ export class EditorComponent implements OnInit, OnChanges {
       this.squareClicked.emit(squareDraught);
     }
   }
+
+  onDraughtSelected() {}
 }

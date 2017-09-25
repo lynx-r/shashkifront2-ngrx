@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { PipesModule } from '../../shared/pipes';
-import { EditorComponent } from './editor.component';
+import { EditorComponent } from './editor/editor.component';
 import { BoardToolbarComponent } from './board-toolbar/board-toolbar.component';
 import { DraughtEditComponent } from './board-toolbar/draught-edit/draught-edit.component';
 import { OpenArticleDialogComponent } from './board-toolbar/dialogs/open-article-dialog/open-article-dialog.component';
