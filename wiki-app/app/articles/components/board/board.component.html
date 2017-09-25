@@ -6,7 +6,7 @@
     <div class="board-numbers-horizontal" *ngIf="i % boardDim != 0 && boardLength.length - i <= boardDim">
       {{ (boardLength.length - i - boardDim) * -1}}
     </div>
-    <square (click)="onSquareClicked($event)" *ngIf="squares[i]" [square]="squares[i]" class="square">
+    <square (click)="onSquareClicked(squares[i])" *ngIf="squares[i]" [square]="squares[i]" class="square">
       <draught class="draught" *ngIf="squares[i]?.draught != null" [playsBlack]="board?.black"
                [draught]="squares[i]?.draught"></draught>
     </square>

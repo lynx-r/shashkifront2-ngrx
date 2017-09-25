@@ -52,6 +52,7 @@ export class BoardComponent implements OnChanges {
   }
 
   onSquareClicked(square: Square) {
+    console.log('CLICKED', square);
     this.store.dispatch(new Click(square));
   }
 }

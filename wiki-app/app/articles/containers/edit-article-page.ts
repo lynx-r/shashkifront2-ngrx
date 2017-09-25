@@ -77,7 +77,7 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe(isOpen => isOpen && this.openCreateArticleDialog());
     this.store
       .select(getClickedSquare)
-      .subscribe(square => !!square && this.onSquareClicked(square));
+      .subscribe(square => this.onSquareClicked(square));
   }
 
   ngOnDestroy() {
@@ -86,10 +86,12 @@ export class EditArticlePageComponent implements OnDestroy {
   }
 
   onSquareClicked(clicked: Square) {
+    if (!clicked) {
+      return;
+    }
     this.store
       .select(fromArticles.getBoardMode)
       .do(mode => {
-        console.log('MODE', mode);
         this.store
           .select(fromArticles.getSelectedBoard)
           .do((selectedBoard: BoardBox) => {
