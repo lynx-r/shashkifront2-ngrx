@@ -2,14 +2,11 @@ import * as square from '../actions/square';
 import { Square } from '../models/square';
 
 export interface State {
-  square: Square;
+  square: Square | null;
 }
 
 const initialState: State = {
-  square: {
-    v: 0,
-    h: 0,
-  },
+  square: null,
 };
 
 export function reducer(state = initialState, action: square.Actions): State {

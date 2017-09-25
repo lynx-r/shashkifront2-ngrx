@@ -30,6 +30,7 @@ export const reducers = {
   search: fromSearch.reducer,
   articles: fromArticles.reducer,
   boards: fromBoards.reducer,
+  squares: fromSquares.reducer,
   articleCollection: fromArticleCollection.reducer,
   boardCollection: fromBoardCollection.reducer,
 

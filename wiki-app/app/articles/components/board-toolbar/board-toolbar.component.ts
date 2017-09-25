@@ -21,8 +21,8 @@ export class BoardToolbarComponent implements OnInit {
   backgroundColor: string;
   draught: any;
 
-  private mode: string;
-  private deleteMode: boolean;
+  mode: string;
+  deleteMode: boolean;
 
   constructor(
     private cookieService: CookieService,

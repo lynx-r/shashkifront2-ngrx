@@ -30,7 +30,7 @@ export class Edit implements Action {
 export class Click implements Action {
   readonly type = CLICK;
 
-  constructor(public boardId: string, public payload: Square) {}
+  constructor(public payload: Square) {}
 }
 
 export class LoadSuccess implements Action {

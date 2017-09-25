@@ -5,7 +5,7 @@
   <button md-raised-button (click)="handleOpenCreateArticle()">
     <md-icon>folder_open</md-icon>
   </button>
-  <md-button-toggle-group #boardModes="mdButtonToggleGroup" (change)="toggleMode(boardModes.value)" *ngIf="createMode">
+  <md-button-toggle-group [disabled]="!createMode" #boardModes="mdButtonToggleGroup" (change)="toggleMode(boardModes.value)">
     <md-button-toggle value="write" [checked]="mode == 'write'">
       <md-icon>
         text_format
@@ -17,10 +17,10 @@
       </md-icon>
     </md-button-toggle>
   </md-button-toggle-group>
-  <button md-raised-button value="write" (click)="handleUndo()" *ngIf="createMode">
+  <button md-raised-button value="write" (click)="handleUndo()" [disabled]="!createMode">
     <md-icon aria-label="Отмена">undo</md-icon>
   </button>
-  <button md-raised-button value="place" (click)="handleRedo()" *ngIf="createMode">
+  <button md-raised-button value="place" (click)="handleRedo()" [disabled]="!createMode">
     <md-icon>redo</md-icon>
   </button>
   <md-toolbar-row *ngIf="boardModes.value == 'place'">

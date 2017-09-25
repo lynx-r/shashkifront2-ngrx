@@ -20,6 +20,7 @@ import {
 } from '../reducers/index';
 import { DialogService } from '../services/dialog.service';
 import { Draught } from '../models/draught';
+import { OpenCreateArticleDialog } from '../actions/toolbar';
 
 @Component({
   selector: 'ac-create-article-page',
@@ -74,9 +75,9 @@ export class EditArticlePageComponent implements OnDestroy {
     this.store
       .select(getOpenCreateArticleDialog)
       .subscribe(isOpen => isOpen && this.openCreateArticleDialog());
-    // this.store
-    //   .select(getClickedSquare)
-    //   .subscribe(square => this.onSquareClicked(square));
+    this.store
+      .select(getClickedSquare)
+      .subscribe(square => !!square && this.onSquareClicked(square));
   }
 
   ngOnDestroy() {
@@ -88,6 +89,7 @@ export class EditArticlePageComponent implements OnDestroy {
     this.store
       .select(fromArticles.getBoardMode)
       .do(mode => {
+        console.log('MODE', mode);
         this.store
           .select(fromArticles.getSelectedBoard)
           .do((selectedBoard: BoardBox) => {
@@ -149,13 +151,11 @@ export class EditArticlePageComponent implements OnDestroy {
   }
 
   openCreateArticleDialog() {
-    this.dialogService
-      .createArticle()
-      .subscribe(
-        result =>
-          !!result &&
-          this.store.dispatch(new createArticle.Create(result)) &&
-          console.log('test', result.test)
-      );
+    this.dialogService.createArticle().subscribe(result => {
+      if (!!result) {
+        this.store.dispatch(new createArticle.Create(result));
+        this.store.dispatch(new OpenCreateArticleDialog(false));
+      }
+    });
   }
 }
