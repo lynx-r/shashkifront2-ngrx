@@ -2,9 +2,11 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromSearch from './search';
 import * as fromArticles from './articles';
 import * as fromBoards from './boards';
+import * as fromSquares from './squares';
 import * as fromCreateArticle from './create-article';
 import * as fromArticleCollection from './article-collection';
 import * as fromBoardCollection from './board-collection';
+import * as fromToolbar from './toolbars';
 import * as fromRoot from '../../reducers';
 
 export interface ArticlesState {
@@ -12,8 +14,11 @@ export interface ArticlesState {
   search: fromSearch.State;
   articles: fromArticles.State;
   boards: fromBoards.State;
+  squares: fromSquares.State;
   articleCollection: fromArticleCollection.State;
   boardCollection: fromBoardCollection.State;
+
+  toolbar: fromToolbar.State;
 }
 
 export interface State extends fromRoot.State {
@@ -27,6 +32,8 @@ export const reducers = {
   boards: fromBoards.reducer,
   articleCollection: fromArticleCollection.reducer,
   boardCollection: fromBoardCollection.reducer,
+
+  toolbar: fromToolbar.reducer,
 };
 
 /**
@@ -70,6 +77,16 @@ export const getArticleEntitiesState = createSelector(
 export const getBoardEntitiesState = createSelector(
   getArticlesState,
   state => state.boards
+);
+
+export const getToolbarState = createSelector(
+  getArticlesState,
+  state => state.toolbar
+);
+
+export const getSquareState = createSelector(
+  getArticlesState,
+  state => state.squares
 );
 
 export const getSelectedArticleId = createSelector(
@@ -188,11 +205,6 @@ export const getSelectedBoard = createSelector(
   (entities, selectedId) => selectedId && entities[selectedId]
 );
 
-export const getBoardMode = createSelector(
-  getBoardEntitiesState,
-  state => state.mode
-);
-
 /**
  * BoardBox Collection
  */
@@ -211,4 +223,19 @@ export const getBoardCollection = createSelector(
   getBoardEntities,
   getCollectionBoardIds,
   (entities, ids) => ids.map(id => entities[id])
+);
+
+export const getSelectedDraught = createSelector(
+  getToolbarState,
+  fromToolbar.getDraught
+);
+
+export const getBoardMode = createSelector(
+  getToolbarState,
+  fromToolbar.getBoardMode
+);
+
+export const getClickedSquare = createSelector(
+  getSquareState,
+  fromSquares.getSquare
 );

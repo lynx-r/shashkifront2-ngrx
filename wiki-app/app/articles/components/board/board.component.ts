@@ -9,6 +9,9 @@ import 'rxjs/add/observable/of';
 import { Rules } from '../../models/rules';
 import { Square } from '../../models/square';
 import { Board } from '../../models/board';
+import { Store } from '@ngrx/store';
+import { State } from '../../reducers/index';
+import { Click } from '../../actions/square';
 
 @Component({
   selector: 'ac-board',
@@ -17,13 +20,12 @@ import { Board } from '../../models/board';
 })
 export class BoardComponent implements OnChanges {
   @Input() board: Board;
-  @Output() squareClicked = new EventEmitter<Square>();
 
   boardLength: Array<number>;
   squares: Square[];
   boardDim: number;
 
-  constructor() {}
+  constructor(private store: Store<State>) {}
 
   ngOnChanges() {
     console.log('CHANGE', this.board);
@@ -47,5 +49,9 @@ export class BoardComponent implements OnChanges {
         }
       }
     }
+  }
+
+  onSquareClicked(square: Square) {
+    this.store.dispatch(new Click(this.board.id, square));
   }
 }

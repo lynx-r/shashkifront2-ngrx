@@ -66,11 +66,11 @@ export class Utils {
     return strings;
   }
 
-  static stringToBoolean(str: string): boolean | undefined {
+  static stringToBoolean(str: string): boolean {
     try {
       return JSON.parse(str);
     } catch (e) {
-      return undefined;
+      return false;
     }
   }
 }

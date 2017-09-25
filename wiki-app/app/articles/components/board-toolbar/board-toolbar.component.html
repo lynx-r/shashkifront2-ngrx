@@ -1,71 +1,116 @@
-<div class="ac-board-toolbar">
-  <div [hidden]="content">
-    <button class="btn btn-secondary" (click)="findArticles()" data-toggle="modal" title="Открыть"
-            data-target="#openArticle">
-      <i class="fa fa-folder-open"></i>
-    </button>
-  </div>
-  <div [hidden]="!content" class="btn-group">
-    <button (click)="updateArticle()" id="saveBoard" class="btn btn-secondary" title="Сохранить">
-      <i class="fa fa-save"></i>
-    </button>
-    <button id="open-content" class="btn btn-secondary" (click)="findArticles()" data-toggle="modal"
-            data-target="#openArticle">
-      <i class="fa fa-folder-open"></i>
-    </button>
-    <button (click)="eraseBoard()" id="clearBoard" class="btn btn-secondary" title="Стереть">
-      <i class="fa fa-eraser"></i>
-    </button>
-    <button (click)="fillInitBoard()" id="fillInitBoard" class="btn btn-secondary"
-            title="Расставить шашки в начальную позицию">
-      <i class="fa fa-file-excel-o"></i>
-    </button>
-  </div>
-  <button class="btn btn-primary" (click)="onToggleEditMode()" [hidden]="editMode"
-          title="Включить режим редактирования">
-    <i class="fa fa-edit"></i>
+<md-toolbar>
+  <button md-raised-button (click)="openCreateArticleDialog.emit()">
+    <md-icon>add</md-icon>
   </button>
-  <button class="btn btn-danger" (click)="onToggleEditMode()" [hidden]="!editMode"
-          title="Выключить режим редактирования">
-    <i class="fa fa-edit"></i>
+  <md-button-toggle-group #boardModes="mdButtonToggleGroup" (change)="toggleMode(boardModes.value)">
+    <md-button-toggle value="write" [checked]="mode == 'write'">
+      <md-icon>
+        text_format
+      </md-icon>
+    </md-button-toggle>
+    <md-button-toggle value="place" [checked]="mode == 'place'">
+      <md-icon>
+        create
+      </md-icon>
+    </md-button-toggle>
+  </md-button-toggle-group>
+  <button md-raised-button value="write" (click)="handleUndo()">
+    <md-icon aria-label="Отмена">undo</md-icon>
   </button>
-  <div class="btn-group">
-    <button class="btn btn-secondary" [hidden]="editMode" (click)="undo()" title="Отменить действие/ход">
-      <i class="fa fa-undo"></i>
-    </button>
-    <button class="btn btn-secondary" [hidden]="editMode" (click)="redo()" title="Повторить действие/ход" >
-      <i class="fa fa-undo fa-flip-horizontal"></i>
-    </button>
-  </div>
-  <div id="draughtsToAdd" [hidden]="!editMode">
-      <span #selectColor (click)="addBlack=false" class="float-left">
-        <span (click)="onDraughtSelected(false,false)" class="float-left">
-          <draught-edit [queen]="false" [selected]="!addQueen && !addBlack && !removeDraught"
-                        [black]="false"></draught-edit>
-        </span>
-        <span (click)="onDraughtSelected(false,true)" class="float-left">
-          <draught-edit [queen]="true" [selected]="addQueen && !addBlack && !removeDraught"
-                        [black]="false"></draught-edit>
-        </span>
-      </span>
-    <span #selectType (click)="addBlack=true" class="float-left">
-        <span (click)="onDraughtSelected(true,false)" class="float-left">
-          <draught-edit [queen]="false" [selected]="!addQueen && addBlack && !removeDraught"
-                        [black]="true"></draught-edit>
-        </span>
-        <span (click)="onDraughtSelected(true,true)" class="float-left">
-          <draught-edit [queen]="true" [selected]="addQueen && addBlack && !removeDraught"
-                        [black]="true"></draught-edit>
-        </span>
-      </span>
-    <span>
-          <a [ngClass]="{'selected-remove': removeDraught}" (click)="onRemoveDraught()" class="remove-draught"></a>
-        </span>
-  </div>
-  <div class="float-right">
-    <button (click)="removeArticle()" [disabled]="!content" id="removeBoard" class="btn btn-danger" data-toggle="modal"
-            data-target="#initBoardModal">
-      <i class="fa fa-remove"></i>
-    </button>
-  </div>
-</div>
+  <button md-raised-button value="place" (click)="handleRedo()">
+    <md-icon>redo</md-icon>
+  </button>
+  <md-toolbar-row *ngIf="boardModes.value == 'place'">
+    <md-button-toggle-group #draughtSelected="mdButtonToggleGroup" (change)="selectDraught(draughtSelected.value)">
+      <md-button-toggle value="," [checked]="!draught.queen && !draught.black && !deleteMode">
+        <draught-edit [queen]="false" [black]="false" [selected]="!draught.queen && !draught.black && !deleteMode"></draught-edit>
+      </md-button-toggle>
+      <md-button-toggle value="queen," [checked]="draught.queen && !draught.black && !deleteMode">
+        <draught-edit [queen]="true" [black]="false" [selected]="draught.queen && !draught.black && !deleteMode"></draught-edit>
+      </md-button-toggle>
+      <md-button-toggle value=",black" [checked]="!draught.queen && draught.black && !deleteMode">
+        <draught-edit [queen]="false" [black]="true" [selected]="!draught.queen && draught.black && !deleteMode"></draught-edit>
+      </md-button-toggle>
+      <md-button-toggle value="queen,black" [checked]="draught.queen && draught.black && !deleteMode">
+        <draught-edit [queen]="true" [black]="true" [selected]="draught.queen && draught.black && !deleteMode"></draught-edit>
+      </md-button-toggle>
+      <md-button-toggle value="remove" [checked]="deleteMode">
+        <div class="remove-draught-container">
+          <div class="remove-draught" [ngClass]="{'selected-remove': deleteMode}"></div>
+        </div>
+      </md-button-toggle>
+    </md-button-toggle-group>
+  </md-toolbar-row>
+</md-toolbar>
+
+<!--<div class="ac-board-toolbar">-->
+  <!--<div [hidden]="content">-->
+    <!--<button class="btn btn-secondary" (click)="findArticles()" data-toggle="modal" title="Открыть"-->
+            <!--data-target="#openArticle">-->
+      <!--<i class="fa fa-folder-open"></i>-->
+    <!--</button>-->
+  <!--</div>-->
+  <!--<div [hidden]="!content" class="btn-group">-->
+    <!--<button (click)="updateArticle()" id="saveBoard" class="btn btn-secondary" title="Сохранить">-->
+      <!--<i class="fa fa-save"></i>-->
+    <!--</button>-->
+    <!--<button id="open-content" class="btn btn-secondary" (click)="findArticles()" data-toggle="modal"-->
+            <!--data-target="#openArticle">-->
+      <!--<i class="fa fa-folder-open"></i>-->
+    <!--</button>-->
+    <!--<button (click)="eraseBoard()" id="clearBoard" class="btn btn-secondary" title="Стереть">-->
+      <!--<i class="fa fa-eraser"></i>-->
+    <!--</button>-->
+    <!--<button (click)="fillInitBoard()" id="fillInitBoard" class="btn btn-secondary"-->
+            <!--title="Расставить шашки в начальную позицию">-->
+      <!--<i class="fa fa-file-excel-o"></i>-->
+    <!--</button>-->
+  <!--</div>-->
+  <!--<button class="btn btn-primary" (click)="onToggleEditMode()" [hidden]="editMode"-->
+          <!--title="Включить режим редактирования">-->
+    <!--<i class="fa fa-edit"></i>-->
+  <!--</button>-->
+  <!--<button class="btn btn-danger" (click)="onToggleEditMode()" [hidden]="!editMode"-->
+          <!--title="Выключить режим редактирования">-->
+    <!--<i class="fa fa-edit"></i>-->
+  <!--</button>-->
+  <!--<div class="btn-group">-->
+    <!--<button class="btn btn-secondary" [hidden]="editMode" (click)="undo()" title="Отменить действие/ход">-->
+      <!--<i class="fa fa-undo"></i>-->
+    <!--</button>-->
+    <!--<button class="btn btn-secondary" [hidden]="editMode" (click)="redo()" title="Повторить действие/ход" >-->
+      <!--<i class="fa fa-undo fa-flip-horizontal"></i>-->
+    <!--</button>-->
+  <!--</div>-->
+  <!--<div id="draughtsToAdd" [hidden]="!editMode">-->
+      <!--<span #selectColor (click)="addBlack=false" class="float-left">-->
+        <!--<span (click)="onDraughtSelected(false,false)" class="float-left">-->
+          <!--<draught-edit [queen]="false" [selected]="!addQueen && !addBlack && !removeDraught"-->
+                        <!--[black]="false"></draught-edit>-->
+        <!--</span>-->
+        <!--<span (click)="onDraughtSelected(false,true)" class="float-left">-->
+          <!--<draught-edit [queen]="true" [selected]="addQueen && !addBlack && !removeDraught"-->
+                        <!--[black]="false"></draught-edit>-->
+        <!--</span>-->
+      <!--</span>-->
+    <!--<span #selectType (click)="addBlack=true" class="float-left">-->
+        <!--<span (click)="onDraughtSelected(true,false)" class="float-left">-->
+          <!--<draught-edit [queen]="false" [selected]="!addQueen && addBlack && !removeDraught"-->
+                        <!--[black]="true"></draught-edit>-->
+        <!--</span>-->
+        <!--<span (click)="onDraughtSelected(true,true)" class="float-left">-->
+          <!--<draught-edit [queen]="true" [selected]="addQueen && addBlack && !removeDraught"-->
+                        <!--[black]="true"></draught-edit>-->
+        <!--</span>-->
+      <!--</span>-->
+    <!--<span>-->
+          <!--<a [ngClass]="{'selected-remove': removeDraught}" (click)="onRemoveDraught()" class="remove-draught"></a>-->
+        <!--</span>-->
+  <!--</div>-->
+  <!--<div class="float-right">-->
+    <!--<button (click)="removeArticle()" [disabled]="!content" id="removeBoard" class="btn btn-danger" data-toggle="modal"-->
+            <!--data-target="#initBoardModal">-->
+      <!--<i class="fa fa-remove"></i>-->
+    <!--</button>-->
+  <!--</div>-->
+<!--</div>-->

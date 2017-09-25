@@ -11,8 +11,6 @@ export const EDIT = '[BoardBox] Edit';
 export const CREATE_SUCCESS = '[BoardBox] Success';
 export const LOAD_FAIL = '[BoardBox] Fail';
 
-export const MODE = '[BoardBox] Mode';
-
 export const UNDO = '[BoardBox] Undo';
 export const REDO = '[BoardBox] Redo';
 
@@ -77,12 +75,6 @@ export class Move implements Action {
   constructor(public payload: BoardBox) {}
 }
 
-export class Mode implements Action {
-  readonly type = MODE;
-
-  constructor(public payload: string) {}
-}
-
 export class Undo implements Action {
   readonly type = UNDO;
 
@@ -108,6 +100,5 @@ export type Actions =
   | Select
   | Click
   | Move
-  | Mode
   | Undo
   | Redo;

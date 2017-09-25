@@ -36,14 +36,6 @@ export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
 
 @Injectable()
 export class BoardEffects {
-  // @Effect()
-  // retrieve$: Observable<Action> = this.actions$
-  //   .ofType(board.RETRIEVE)
-  //   .map((action: board.Retrieve) => action.payload)
-  //   .switchMap((boardId: string) => this.boardService.findById(boardId))
-  //   .mergeMap((loadedBoard: BoardBox) => [new board.Load(loadedBoard), new board.Select(loadedBoard.id)])
-  //   .catch(err => of(new board.LoadFail(err)));
-
   @Effect()
   squareClick$: Observable<Action> = this.actions$
     .ofType(board.CLICK)
@@ -85,27 +77,5 @@ export class BoardEffects {
     .map((updated: BoardBox) => new board.Load(updated))
     .catch(err => of(new board.LoadFail(err)));
 
-  // @Effect()
-  // load$: Observable<Action> = this.actions$
-  //   .ofType(board.CLICK)
-  //   .map((action: board.Load) => action.payload)
-  //   .switchMap((boardId: string) => this.boardService.findBoardById(boardId))
-  //   .map((loadedBoard: BoardBox) => new board.LoadSuccess(loadedBoard))
-  //   .catch(err => of(new board.LoadFail(err)));
-
-  constructor(
-    private actions$: Actions,
-    private boardService: BoardService,
-    @Optional()
-    @Inject(SEARCH_DEBOUNCE)
-    private debounce: number = 300,
-    /**
-               * You inject an optional Scheduler that will be undefined
-               * in normal application usage, but its injected here so that you can mock out
-               * during testing using the RxJS TestScheduler for simulating passages of time.
-               */
-    @Optional()
-    @Inject(SEARCH_SCHEDULER)
-    private scheduler: Scheduler
-  ) {}
+  constructor(private actions$: Actions, private boardService: BoardService) {}
 }

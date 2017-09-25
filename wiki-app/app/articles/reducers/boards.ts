@@ -16,7 +16,6 @@ import { AppConstants } from '../../core/services/app-constants';
 export interface State extends EntityState<BoardBox> {
   selectedBoardId: string | null;
   selectedSquare: Square | null;
-  mode: string;
 }
 
 /**
@@ -39,7 +38,6 @@ export const adapter: EntityAdapter<BoardBox> = createEntityAdapter<BoardBox>({
 export const initialState: State = adapter.getInitialState({
   selectedBoardId: null,
   selectedSquare: null,
-  mode: AppConstants.WRITE_MODE,
 });
 
 export function reducer(
@@ -85,13 +83,6 @@ export function reducer(
       return {
         ...state,
         selectedBoardId: action.payload,
-      };
-    }
-
-    case board.MODE: {
-      return {
-        ...state,
-        mode: action.payload,
       };
     }
 

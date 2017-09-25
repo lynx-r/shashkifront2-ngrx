@@ -11,14 +11,15 @@ import { Observable } from 'rxjs/Observable';
 import { BoardBox } from '../models/board-box';
 import { Square } from '../models/square';
 import { AppConstants } from '../../core/services/app-constants';
-import { DialogRole, MdDialog } from '@angular/material';
-import { CreateArticleDialogComponent } from '../components/board-toolbar/dialogs/create-article-dialog/create-article-dialog.component';
-import { CreateArticleRequest } from '../models/create-article-request';
-import { Rules } from '../models/rules';
 import * as fromArticles from '../reducers';
 import * as createArticle from '../actions/create-article';
-import { getSelectedBoard } from '../reducers/index';
+import {
+  getClickedSquare,
+  getSelectedBoard,
+  getSelectedDraught,
+} from '../reducers/index';
 import { DialogService } from '../services/dialog.service';
+import { Draught } from '../models/draught';
 
 @Component({
   selector: 'ac-create-article-page',
@@ -26,11 +27,7 @@ import { DialogService } from '../services/dialog.service';
   template: `
     <ac-editor [article]="article$ | async"
                [boardBox]="boardBox$ | async"
-               (editToggled)="toggleEdit($event)"
-               (squareClicked)="onSquareClicked($event)"
                (openCreateArticleDialog)="openCreateArticleDialog()"
-               (undo)="onUndoClicked()"
-               (redo)="onRedoClicked()"
     ></ac-editor>
   `,
 })
@@ -42,6 +39,9 @@ export class EditArticlePageComponent implements OnDestroy {
   boardBox$: Observable<BoardBox>;
   boardMode$: Observable<string>;
   checkedMode$: Observable<string>;
+  selectedDraught$: Observable<Draught>;
+
+  draught: Draught;
 
   constructor(
     private store: Store<fromArticles.State>,
@@ -61,14 +61,20 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe();
 
     this.article$ = this.store.select(fromArticles.getSelectedArticle);
-    this.boardBox$ = this.store
-      .select(fromArticles.getSelectedBoard)
-      .do(board => {
-        console.log('SELECTED BOARD ', board);
-      });
+    this.boardBox$ = this.store.select(fromArticles.getSelectedBoard);
     this.boardMode$ = this.store.select(fromArticles.getBoardMode);
 
     this.checkedMode$ = this.store.select(fromArticles.getBoardMode);
+
+    this.selectedDraught$ = this.store.select(fromArticles.getSelectedDraught);
+
+    this.store
+      .select(getSelectedDraught)
+      .subscribe(draught => (this.draught = draught));
+
+    this.store
+      .select(getClickedSquare)
+      .subscribe(square => this.onSquareClicked(square));
   }
 
   ngOnDestroy() {
@@ -149,25 +155,5 @@ export class EditArticlePageComponent implements OnDestroy {
           this.store.dispatch(new createArticle.Create(result)) &&
           console.log('test', result.test)
       );
-  }
-
-  toggleEdit(mode: string) {
-    this.store.dispatch(new board.Mode(mode));
-  }
-
-  onUndoClicked() {
-    this.store
-      .select(getSelectedBoard)
-      .do((selected: BoardBox) => this.store.dispatch(new board.Undo(selected)))
-      .take(1)
-      .subscribe();
-  }
-
-  onRedoClicked() {
-    this.store
-      .select(getSelectedBoard)
-      .do((selected: BoardBox) => this.store.dispatch(new board.Redo(selected)))
-      .take(1)
-      .subscribe();
   }
 }
