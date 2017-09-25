@@ -15,6 +15,7 @@ import { Utils } from '../../core/services/utils.service';
 import { AppConstants } from '../../core/services/app-constants';
 import { Draught } from '../models/draught';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'ac-editor',
@@ -36,28 +37,48 @@ export class EditorComponent implements OnInit, OnChanges {
 
   rowHeight: number;
   backgroundColor: string;
-  draught: Draught;
+  draught: any;
 
   @ViewChild('boardTile') boardTileRef: MdGridTile;
   private mode: string;
   private deleteMode: boolean;
 
-  constructor() {
-    this.draught = {
-      v: 0,
-      h: 1,
-      black: false,
-      highlighted: false,
-      beaten: false,
-      queen: false,
-    };
-  }
+  constructor(private cookieService: CookieService) {}
 
   ngOnInit() {
     this.rowHeight = window.innerHeight;
-    this.mode = AppConstants.WRITE_MODE;
+    this.mode = this.cookieService.get(AppConstants.EDIT_MODE_COOKIE);
+    if (!this.mode) {
+      this.cookieService.put(
+        AppConstants.EDIT_MODE_COOKIE,
+        AppConstants.WRITE_MODE
+      );
+      this.mode = AppConstants.WRITE_MODE;
+    }
     this.backgroundColor = Utils.getModeColor(this.mode);
-    this.deleteMode = false;
+    this.deleteMode = Utils.stringToBoolean(
+      this.cookieService.get(AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE)
+    );
+    if (!this.deleteMode) {
+      this.cookieService.put(
+        AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE,
+        'false'
+      );
+      this.deleteMode = false;
+    }
+    this.draught = this.cookieService.getObject(
+      AppConstants.DRAUGHT_PLACE_COOKIE
+    );
+    if (!this.draught) {
+      this.draught = {
+        black: false,
+        queen: false,
+      };
+      this.cookieService.putObject(
+        AppConstants.DRAUGHT_PLACE_COOKIE,
+        this.draught
+      );
+    }
   }
 
   ngOnChanges() {
@@ -88,11 +109,16 @@ export class EditorComponent implements OnInit, OnChanges {
   toggleMode(mode: string) {
     this.editToggled.emit(mode);
     this.mode = mode;
+    this.cookieService.put(AppConstants.EDIT_MODE_COOKIE, mode);
     this.backgroundColor = Utils.getModeColor(mode);
   }
 
   toggleDelete(action: string) {
     this.deleteMode = action == 'delete';
+    this.cookieService.put(
+      AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE,
+      `${this.deleteMode}`
+    );
   }
 
   toggleColor(color: string) {
@@ -100,6 +126,10 @@ export class EditorComponent implements OnInit, OnChanges {
       ...this.draught,
       black: color == 'black',
     };
+    this.cookieService.putObject(
+      AppConstants.DRAUGHT_PLACE_COOKIE,
+      this.draught
+    );
   }
 
   toggleType(type: string) {
@@ -107,6 +137,10 @@ export class EditorComponent implements OnInit, OnChanges {
       ...this.draught,
       queen: type == 'queen',
     };
+    this.cookieService.putObject(
+      AppConstants.DRAUGHT_PLACE_COOKIE,
+      this.draught
+    );
   }
 
   onSquareClicked(square: Square) {

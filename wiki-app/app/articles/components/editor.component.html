@@ -3,12 +3,12 @@
     <md-icon>add</md-icon>
   </button>
   <md-button-toggle-group #boardModes="mdButtonToggleGroup" (change)="toggleMode(boardModes.value)">
-    <md-button-toggle value="write" [checked]="true">
+    <md-button-toggle value="write" [checked]="mode == 'write'">
       <md-icon>
         text_format
       </md-icon>
     </md-button-toggle>
-    <md-button-toggle value="place">
+    <md-button-toggle value="place" [checked]="mode == 'place'">
       <md-icon>
         create
       </md-icon>
@@ -22,27 +22,27 @@
   </button>
   <md-toolbar-row *ngIf="boardModes.value == 'place'">
     <md-button-toggle-group #draughtColor="mdButtonToggleGroup" (change)="toggleColor(draughtColor.value)">
-      <md-button-toggle value="white" [checked]="true">
+      <md-button-toggle value="white" [checked]="!draught.black">
         Белая
       </md-button-toggle>
-      <md-button-toggle value="black">
+      <md-button-toggle value="black" [checked]="draught.black">
         Черная
       </md-button-toggle>
     </md-button-toggle-group>
 
     <md-button-toggle-group #draughtType="mdButtonToggleGroup" (change)="toggleType(draughtType.value)">
-      <md-button-toggle value="draught" [checked]="true">
+      <md-button-toggle value="draught" [checked]="!draught.queen">
         Простая
       </md-button-toggle>
-      <md-button-toggle value="queen">
+      <md-button-toggle value="queen" [checked]="draught.queen">
         Дамка
       </md-button-toggle>
     </md-button-toggle-group>
     <md-button-toggle-group #draughtDelete="mdButtonToggleGroup" (change)="toggleDelete(draughtDelete.value)">
-      <md-button-toggle value="add" [checked]="true">
+      <md-button-toggle value="add" [checked]="!deleteMode">
         Добавить шашку
       </md-button-toggle>
-      <md-button-toggle value="delete">
+      <md-button-toggle value="delete" [checked]="deleteMode">
         Удалить шашку
       </md-button-toggle>
     </md-button-toggle-group>

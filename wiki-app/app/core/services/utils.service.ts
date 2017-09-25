@@ -65,4 +65,12 @@ export class Utils {
     console.log('BOARDS NOTATION', strings);
     return strings;
   }
+
+  static stringToBoolean(str: string): boolean | undefined {
+    try {
+      return JSON.parse(str);
+    } catch (e) {
+      return undefined;
+    }
+  }
 }
