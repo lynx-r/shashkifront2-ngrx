@@ -4,4 +4,5 @@ export interface BoardBox {
   id: string;
   articleId: string;
   board: Board;
+  blackTurn: boolean;
 }

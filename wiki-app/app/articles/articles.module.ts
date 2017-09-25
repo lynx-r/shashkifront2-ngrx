@@ -16,6 +16,7 @@ import { BoardEffects } from './effects/board';
 import { BoardService } from '../core/services/board.service';
 import { ApiBoardService } from '../core/services/api-board.service';
 import { ArticleExistsGuard } from './guards/article-exists';
+import { DialogService } from './services/dialog.service';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { ArticleExistsGuard } from './guards/article-exists';
     ApiArticleService,
     BoardService,
     ApiBoardService,
+    DialogService,
   ],
 })
 export class ArticlesModule {}

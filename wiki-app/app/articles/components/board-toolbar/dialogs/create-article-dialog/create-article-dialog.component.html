@@ -30,7 +30,7 @@
   <button md-button md-dialog-close type="button" class="btn btn-secondary" data-dismiss="modal"
           (click)="dialogRef.close()">Отмена
   </button>
-  <button md-button [md-dialog-close]="data" type="button" class="btn btn-primary"
+  <button md-button (click)="dialogRef.close(data)" type="button" class="btn btn-primary"
           data-dismiss="modal">Создать
   </button>
 </div>

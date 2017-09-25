@@ -21,7 +21,20 @@ import {
 
 @Component({
   selector: 'draught',
-  templateUrl: './draught.component.html',
+  template: `
+    <div class="draught-container fit">
+      <div #draughtRef
+           [ngStyle]="{'color': draught?.black ? 'black' : 'white'}"
+           [ngClass]="{
+       'beaten' : draught?.beaten,
+     'highlight': draught?.highlighted,
+     'draught': !draught?.queen,
+     'draught-queen': draught?.queen}"
+           (click)="onDraughtClick()">
+        <md-icon *ngIf="draught?.queen">spa</md-icon>
+      </div>
+    </div>
+  `,
   styleUrls: ['./draught.component.css'],
 })
 export class DraughtComponent implements OnInit, OnDestroy {

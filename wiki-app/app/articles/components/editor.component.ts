@@ -32,7 +32,6 @@ export class EditorComponent implements OnInit, OnChanges {
 
   notationPrevious$ = new BehaviorSubject<string[]>([]);
   notationNext$ = new BehaviorSubject<string[]>([]);
-  notationNext: string[];
   currentStroke: string;
 
   rowHeight: number;
@@ -62,15 +61,19 @@ export class EditorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    let board = this.boardBox.board;
-    this.notationPrevious$.next(
-      Utils.getNotation(this.boardBox.board.previousBoards)
-    );
-    this.notationNext$.next(Utils.getNotation(this.boardBox.board.nextBoards));
-    if (board.selectedSquare) {
-      this.currentStroke = board.selectedSquare.notation;
-    } else {
-      this.currentStroke = '';
+    if (!!this.boardBox) {
+      let board = this.boardBox.board;
+      this.notationPrevious$.next(
+        Utils.getNotation(this.boardBox.board.previousBoards)
+      );
+      this.notationNext$.next(
+        Utils.getNotation(this.boardBox.board.nextBoards)
+      );
+      if (board.selectedSquare) {
+        this.currentStroke = board.selectedSquare.notation;
+      } else {
+        this.currentStroke = '';
+      }
     }
   }
 

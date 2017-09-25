@@ -11,13 +11,14 @@ import { Observable } from 'rxjs/Observable';
 import { BoardBox } from '../models/board-box';
 import { Square } from '../models/square';
 import { AppConstants } from '../../core/services/app-constants';
-import { MdDialog } from '@angular/material';
+import { DialogRole, MdDialog } from '@angular/material';
 import { CreateArticleDialogComponent } from '../components/board-toolbar/dialogs/create-article-dialog/create-article-dialog.component';
 import { CreateArticleRequest } from '../models/create-article-request';
 import { Rules } from '../models/rules';
 import * as fromArticles from '../reducers';
 import * as createArticle from '../actions/create-article';
 import { getSelectedBoard } from '../reducers/index';
+import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'ac-create-article-page',
@@ -42,12 +43,10 @@ export class EditArticlePageComponent implements OnDestroy {
   boardMode$: Observable<string>;
   checkedMode$: Observable<string>;
 
-  private initialArticle: CreateArticleRequest;
-
   constructor(
     private store: Store<fromArticles.State>,
     private route: ActivatedRoute,
-    private dialog: MdDialog
+    private dialogService: DialogService
   ) {
     this.articleSubscription = route.params
       .map(params => new article.Select(params.id))
@@ -70,22 +69,6 @@ export class EditArticlePageComponent implements OnDestroy {
     this.boardMode$ = this.store.select(fromArticles.getBoardMode);
 
     this.checkedMode$ = this.store.select(fromArticles.getBoardMode);
-
-    this.initialArticle = {
-      article: {
-        id: '',
-        createdAt: new Date(),
-        title: 'Новая статья',
-        content: '',
-        author: '',
-        boardBoxId: '',
-      },
-      boardRequest: {
-        black: false,
-        rules: Rules.RUSSIAN,
-        fillBoard: true,
-      },
-    };
   }
 
   ngOnDestroy() {
@@ -133,7 +116,7 @@ export class EditArticlePageComponent implements OnDestroy {
 
   private highlightSquare(selectedBoard: BoardBox, clicked: Square) {
     let isOwnSquare =
-      selectedBoard && clicked.draught.black == selectedBoard.board.black;
+      selectedBoard && selectedBoard.blackTurn == clicked.draught.black;
     if (isOwnSquare) {
       let updated = {
         ...selectedBoard,
@@ -158,13 +141,14 @@ export class EditArticlePageComponent implements OnDestroy {
   }
 
   openCreateArticleDialog() {
-    let openDialogHref = this.dialog.open(CreateArticleDialogComponent, {
-      data: this.initialArticle,
-      width: '400px',
-    });
-    openDialogHref.afterClosed().subscribe(result => {
-      !!result && this.store.dispatch(new createArticle.Create(result));
-    });
+    this.dialogService
+      .createArticle()
+      .subscribe(
+        result =>
+          !!result &&
+          this.store.dispatch(new createArticle.Create(result)) &&
+          console.log('test', result.test)
+      );
   }
 
   toggleEdit(mode: string) {

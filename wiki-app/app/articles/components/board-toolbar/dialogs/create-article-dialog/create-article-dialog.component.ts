@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { Rules } from '../../../../models/rules';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
+import { CreateArticleRequest } from '../../../../models/create-article-request';
 
 @Component({
   selector: 'create-article-dialog',
@@ -12,6 +13,6 @@ export class CreateArticleDialogComponent {
 
   constructor(
     public dialogRef: MdDialogRef<CreateArticleDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    @Inject(MD_DIALOG_DATA) public data: CreateArticleRequest
   ) {}
 }

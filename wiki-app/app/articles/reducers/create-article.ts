@@ -11,6 +11,7 @@ import { CreateArticleRequest } from '../models/create-article-request';
  */
 export interface State extends EntityState<CreateArticleRequest> {
   selectedArticleId: string | null;
+  createArticle: CreateArticleRequest | null;
   loading: boolean;
   loaded: boolean;
 }
@@ -32,9 +33,10 @@ export const adapter: EntityAdapter<CreateArticleRequest> = createEntityAdapter<
 /** getInitialState returns the default initial state
  * for the generated entity state. Initial state
  * additional properties can also be defined.
-*/
+ */
 export const initialState: State = adapter.getInitialState({
   selectedArticleId: null,
+  createArticle: null,
   loading: false,
   loaded: false,
 });
