@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import 'rxjs/Rx';
 import { CookieService } from 'ngx-cookie';
 import { AppConstants } from '../../../core/services/app-constants';
@@ -16,7 +16,7 @@ import { getSelectedBoard } from '../../reducers/index';
   styleUrls: ['./board-toolbar.component.css'],
 })
 export class BoardToolbarComponent implements OnInit {
-  @Output() openCreateArticleDialog = new EventEmitter();
+  @Input() createMode: boolean = true;
 
   backgroundColor: string;
   draught: any;
@@ -58,7 +58,7 @@ export class BoardToolbarComponent implements OnInit {
       this.draught = {
         black: false,
         queen: false,
-        beaten: false,
+        beaten: this.deleteMode,
       };
       this.cookieService.putObject(
         AppConstants.DRAUGHT_PLACE_COOKIE,
@@ -75,7 +75,7 @@ export class BoardToolbarComponent implements OnInit {
     this.store.dispatch(new toolbar.PlaceModeToggle(mode));
   }
 
-  selectDraught(mode: string) {
+  handleSelectDraught(mode: string) {
     if (mode == 'remove') {
       this.deleteMode = true;
       this.draught = {

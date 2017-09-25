@@ -1,4 +1,4 @@
-<ac-board-toolbar></ac-board-toolbar>
+<ac-board-toolbar [createMode]="!!article"></ac-board-toolbar>
 <md-grid-list [rowHeight]="rowHeight" #editorGrid *ngIf="article; else createArticle" cols="12">
   <md-grid-tile colspan="5">
     <ac-board #boardRef
