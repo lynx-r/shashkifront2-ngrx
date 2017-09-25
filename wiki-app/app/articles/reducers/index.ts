@@ -235,6 +235,11 @@ export const getBoardMode = createSelector(
   fromToolbar.getBoardMode
 );
 
+export const getOpenCreateArticleDialog = createSelector(
+  getToolbarState,
+  fromToolbar.getCreateArticleDialog
+);
+
 export const getClickedSquare = createSelector(
   getSquareState,
   fromSquares.getSquare

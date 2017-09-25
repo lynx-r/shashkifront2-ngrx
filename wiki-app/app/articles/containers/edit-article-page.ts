@@ -15,7 +15,7 @@ import * as fromArticles from '../reducers';
 import * as createArticle from '../actions/create-article';
 import {
   getClickedSquare,
-  getSelectedBoard,
+  getOpenCreateArticleDialog,
   getSelectedDraught,
 } from '../reducers/index';
 import { DialogService } from '../services/dialog.service';
@@ -27,7 +27,6 @@ import { Draught } from '../models/draught';
   template: `
     <ac-editor [article]="article$ | async"
                [boardBox]="boardBox$ | async"
-               (openCreateArticleDialog)="openCreateArticleDialog()"
     ></ac-editor>
   `,
 })
@@ -73,8 +72,11 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe(draught => (this.draught = draught));
 
     this.store
-      .select(getClickedSquare)
-      .subscribe(square => this.onSquareClicked(square));
+      .select(getOpenCreateArticleDialog)
+      .subscribe(isOpen => isOpen && this.openCreateArticleDialog());
+    // this.store
+    //   .select(getClickedSquare)
+    //   .subscribe(square => this.onSquareClicked(square));
   }
 
   ngOnDestroy() {

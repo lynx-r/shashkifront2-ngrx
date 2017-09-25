@@ -38,6 +38,7 @@ export class BoardToolbarComponent implements OnInit {
       );
       this.mode = AppConstants.WRITE_MODE;
     }
+    this.store.dispatch(new toolbar.PlaceModeToggle(this.mode));
 
     this.backgroundColor = Utils.getModeColor(this.mode);
     this.deleteMode = Utils.stringToBoolean(
@@ -64,14 +65,14 @@ export class BoardToolbarComponent implements OnInit {
         this.draught
       );
     }
-    this.store.dispatch(new toolbar.DraughtSelected(this.draught));
+    this.store.dispatch(new toolbar.DraughtSelect(this.draught));
   }
 
   toggleMode(mode: string) {
     this.mode = mode;
     this.cookieService.put(AppConstants.EDIT_MODE_COOKIE, mode);
     this.backgroundColor = Utils.getModeColor(mode);
-    this.store.dispatch(new toolbar.PlaceModeToggled(mode));
+    this.store.dispatch(new toolbar.PlaceModeToggle(mode));
   }
 
   selectDraught(mode: string) {
@@ -81,7 +82,7 @@ export class BoardToolbarComponent implements OnInit {
         ...this.draught,
         beaten: this.deleteMode,
       };
-      this.store.dispatch(new toolbar.DraughtSelected(this.draught));
+      this.store.dispatch(new toolbar.DraughtSelect(this.draught));
 
       this.cookieService.put(
         AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE,
@@ -101,7 +102,7 @@ export class BoardToolbarComponent implements OnInit {
         black: draughtMode[1] == 'black',
         beaten: this.deleteMode,
       };
-      this.store.dispatch(new toolbar.DraughtSelected(this.draught));
+      this.store.dispatch(new toolbar.DraughtSelect(this.draught));
 
       this.cookieService.putObject(
         AppConstants.DRAUGHT_PLACE_COOKIE,
@@ -124,5 +125,9 @@ export class BoardToolbarComponent implements OnInit {
       .do((selected: BoardBox) => this.store.dispatch(new Redo(selected)))
       .take(1)
       .subscribe();
+  }
+
+  handleOpenCreateArticle() {
+    this.store.dispatch(new toolbar.OpenCreateArticleDialog(true));
   }
 }

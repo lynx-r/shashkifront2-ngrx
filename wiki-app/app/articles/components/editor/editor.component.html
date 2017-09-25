@@ -1,9 +1,4 @@
-<ac-board-toolbar
-  (openCreateArticleDialog)="openCreateArticleDialog.emit($event)"
-  (editToggled)="editToggled.emit($event)"
-  (undo)="undo.emit($event)"
-  (redo)="redo.emit($event)"
-></ac-board-toolbar>
+<ac-board-toolbar></ac-board-toolbar>
 <md-grid-list [rowHeight]="rowHeight" #editorGrid *ngIf="article; else createArticle" cols="12">
   <md-grid-tile colspan="5">
     <ac-board #boardRef

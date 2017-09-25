@@ -28,7 +28,6 @@ import { getBoardMode, getSelectedDraught } from '../../reducers/index';
 export class EditorComponent implements OnInit, OnChanges {
   @Input() article: Article;
   @Input() boardBox: BoardBox;
-  @Output() openCreateArticleDialog = new EventEmitter();
 
   notationPrevious$ = new BehaviorSubject<string[]>([]);
   notationNext$ = new BehaviorSubject<string[]>([]);
