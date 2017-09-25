@@ -13,7 +13,6 @@ import {
   RouterStateSerializer,
 } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-// import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
@@ -25,6 +24,7 @@ import { CustomRouterStateSerializer } from './shared/utils';
 
 import { AppComponent } from './core/containers/app';
 import { environment } from '../environments/environment';
+import { CookieModule } from 'ngx-cookie';
 
 // export function instrumentOptions() {
 //   return {
@@ -40,6 +40,7 @@ import { environment } from '../environments/environment';
     HttpModule,
     RouterModule.forRoot(routes, { useHash: true }),
 
+    CookieModule.forRoot(),
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

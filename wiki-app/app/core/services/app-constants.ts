@@ -33,4 +33,5 @@ export class AppConstants {
   static PAGE_SIZE: number = 5;
   static PLACE_MODE: string = 'place';
   static WRITE_MODE: string = 'write';
+  static ARTICLE_CREATE_COOKIE: string = 'article-create-cookie';
 }
