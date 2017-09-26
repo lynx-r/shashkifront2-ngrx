@@ -10,8 +10,6 @@ import { NavItemComponent } from './components/nav-item';
 import { SidenavComponent } from './components/sidenav';
 import { ToolbarComponent } from './components/toolbar';
 
-import { GoogleBooksService } from './services/google-books';
-
 export const COMPONENTS = [
   AppComponent,
   NotFoundPageComponent,
@@ -30,7 +28,7 @@ export class CoreModule {
   static forRoot() {
     return {
       ngModule: CoreModule,
-      providers: [GoogleBooksService],
+      providers: [],
     };
   }
 }

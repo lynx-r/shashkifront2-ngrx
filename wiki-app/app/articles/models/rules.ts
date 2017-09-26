@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
 
 export class Rules {
-  static RUSSIAN: number = 0;
-  static RUSSIAN_GIVEAWAY: number = 1;
-  static INTERNATIONAL: number = 2;
-  static INTERNATIONAL_GIVEAWAY: number = 3;
+  public RUSSIAN: number = 0;
+  public RUSSIAN_GIVEAWAY: number = 1;
+  public INTERNATIONAL: number = 2;
+  public INTERNATIONAL_GIVEAWAY: number = 3;
 
   static getChunk(boardDimension: Array<number>, length: number) {
     return _.chunk(boardDimension, length);

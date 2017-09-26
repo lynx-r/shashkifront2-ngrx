@@ -56,25 +56,6 @@ export class ArticleEffects {
     .ofType(createArticle.CREATE_SUCCESS)
     .map((action: createArticle.CreateSuccess) => action.payload)
     .do(articleId => this.router.navigate([`/articles/${articleId}`]));
-  // @Effect()
-  // load$: Observable<Action> = this.actions$
-  //   .ofType(article.CLICK)
-  //   .map((action: article.Load) => action.payload)
-  //   .switchMap((article: Article) =>
-  //     this.boardService.findById(article.boardId)
-  //   )
-  //   .map((loadedBoard: BoardBox) => new board.Load(loadedBoard))
-  //   .catch(err => of(new board.LoadFail(err)));
-
-  // @Effect()
-  // load$: Observable<Action> = this.actions$
-  //   .ofType(article.SELECT)
-  //   .map((action: article.Select) => action.payload)
-  //   .switchMap((articleId: string) =>
-  //     this.boardService.findByArticleId(articleId)
-  //   )
-  //   .map((loadedBoard: BoardBox) => new board.LoadSuccess(loadedBoard))
-  //   .catch(err => of(new board.LoadFail(err)));
 
   constructor(
     private actions$: Actions,

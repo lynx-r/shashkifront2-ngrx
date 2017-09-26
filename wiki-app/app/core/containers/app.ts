@@ -37,7 +37,7 @@ import * as Auth from '../../auth/actions/auth';
         <!--</ac-nav-item>-->
       </ac-sidenav>
       <ac-toolbar (openMenu)="openSidenav()">
-        Меню вики
+        Меню
       </ac-toolbar>
 
       <router-outlet></router-outlet>

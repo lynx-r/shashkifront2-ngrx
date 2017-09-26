@@ -10,7 +10,7 @@ import { Article } from '../models/article';
           <md-card-title>{{ article.title | acEllipsis:35 }}</md-card-title>
         </md-card-title-group>
         <md-card-content>
-          <p *ngIf="description">{{ article.content | acEllipsis }}</p>
+          <p>{{ article.content | acEllipsis }}</p>
           <a md-button [routerLink]="[article.id, 'edit']">
             <md-icon>edit</md-icon>
           </a>

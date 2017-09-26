@@ -9,7 +9,7 @@ import { CreateArticleRequest } from '../../../../models/create-article-request'
   styleUrls: ['./create-article-dialog.component.css'],
 })
 export class CreateArticleDialogComponent {
-  Rules: Rules = Rules;
+  rules: Rules = new Rules();
 
   constructor(
     public dialogRef: MdDialogRef<CreateArticleDialogComponent>,

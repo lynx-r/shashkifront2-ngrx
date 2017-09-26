@@ -26,12 +26,6 @@ import { AppComponent } from './core/containers/app';
 import { environment } from '../environments/environment';
 import { CookieModule } from 'ngx-cookie';
 
-// export function instrumentOptions() {
-//   return {
-//     monitor: useLogMonitor({ visible: true, position: 'right' })
-//   };
-// }
-
 @NgModule({
   imports: [
     CommonModule,

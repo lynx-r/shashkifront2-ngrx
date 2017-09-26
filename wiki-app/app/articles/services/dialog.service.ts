@@ -8,8 +8,6 @@ import { CookieService } from 'ngx-cookie';
 
 @Injectable()
 export class DialogService {
-  private initialArticle: CreateArticleRequest;
-
   constructor(private dialog: MdDialog, private cookieService: CookieService) {}
 
   private getCreateArticleRequest(): CreateArticleRequest {
@@ -28,7 +26,7 @@ export class DialogService {
         },
         boardRequest: {
           black: false,
-          rules: Rules.RUSSIAN,
+          rules: 'RUSSIAN',
           fillBoard: true,
         },
         test: true,
