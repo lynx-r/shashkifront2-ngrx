@@ -13,9 +13,6 @@ import * as articleCollection from '../actions/article-collection';
 import * as boardCollection from '../actions/board-collection';
 import { ArticleService } from '../../core/services/article.service';
 import { Article } from '../models/article';
-import { BoardService } from '../../core/services/board.service';
-import { BoardBox } from '../models/board-box';
-import { ArticleCompositeKey } from '../models/article-composite-key';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Injectable()
@@ -48,19 +45,19 @@ export class CollectionEffects {
     .do(() => this.blockUI.stop())
     .catch(error => of(new articleCollection.LoadFail(error)));
 
-  @Effect()
-  loadBoardCollection$: Observable<Action> = this.actions$
-    .ofType(boardCollection.LOAD)
-    .do(() => this.blockUI.start())
-    .map((action: boardCollection.Load) => action.payload)
-    .switchMap((boardIds: string[]) =>
-      this.boardService
-        .listBoards(boardIds)
-        .map((boards: BoardBox[]) => new boardCollection.LoadSuccess(boards))
-        .catch(error => of(new boardCollection.LoadFail(error)))
-    )
-    .do(() => this.blockUI.stop())
-    .catch(error => of(new boardCollection.LoadFail(error)));
+  // @Effect()
+  // loadBoardCollection$: Observable<Action> = this.actions$
+  //   .ofType(boardCollection.LOAD)
+  //   .do(() => this.blockUI.start())
+  //   .map((action: boardCollection.Load) => action.payload)
+  //   .switchMap((boardIds: string[]) =>
+  //     this.boardService
+  //       .listBoards(boardIds)
+  //       .map((boards: BoardBox[]) => new boardCollection.LoadSuccess(boards))
+  //       .catch(error => of(new boardCollection.LoadFail(error)))
+  //   )
+  //   .do(() => this.blockUI.stop())
+  //   .catch(error => of(new boardCollection.LoadFail(error)));
 
   // @Effect()
   // addBookToCollection$: Observable<Action> = this.actions$
@@ -86,7 +83,6 @@ export class CollectionEffects {
 
   constructor(
     private actions$: Actions,
-    private articleService: ArticleService,
-    private boardService: BoardService
+    private articleService: ArticleService
   ) {}
 }

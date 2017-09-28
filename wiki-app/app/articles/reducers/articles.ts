@@ -48,8 +48,12 @@ export function reducer(
     }
 
     case article.LOAD: {
+      let entities = {};
+      entities[action.payload.id] = { ...action.payload };
       return {
-        ...adapter.addOne(action.payload, state),
+        ...state,
+        ids: [action.payload.id],
+        entities: entities,
         selectedArticleId: action.payload.id,
       };
     }

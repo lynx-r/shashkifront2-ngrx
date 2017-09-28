@@ -2,8 +2,8 @@
   <button md-raised-button (click)="handleOpenCreateArticle()">
     <md-icon>add</md-icon>
   </button>
-  <button md-raised-button (click)="handleOpenCreateArticle()">
-    <md-icon>folder_open</md-icon>
+  <button md-raised-button (click)="handleSaveArticle()">
+    <md-icon>save</md-icon>
   </button>
   <md-button-toggle-group [disabled]="!createMode" #boardModes="mdButtonToggleGroup" (change)="toggleMode(boardModes.value)">
     <md-button-toggle value="write" [checked]="mode == 'write'">

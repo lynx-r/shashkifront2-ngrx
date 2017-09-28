@@ -241,6 +241,11 @@ export const getOpenCreateArticleDialog = createSelector(
   fromToolbar.getCreateArticleDialog
 );
 
+export const getSavedArticle = createSelector(
+  getToolbarState,
+  fromToolbar.getSavedArticle
+);
+
 export const getClickedSquare = createSelector(
   getSquareState,
   fromSquares.getSquare

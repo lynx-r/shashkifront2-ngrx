@@ -114,4 +114,8 @@ export class ArticleService {
       AppConstants.ARTICLE_RESOURCE + `/${articleId}`
     );
   }
+
+  saveArticle(saving: Article): Observable<Article> {
+    return this.apiArticleService.put(AppConstants.ARTICLE_RESOURCE, saving);
+  }
 }

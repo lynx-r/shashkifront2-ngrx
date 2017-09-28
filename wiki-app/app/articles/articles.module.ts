@@ -17,6 +17,7 @@ import { BoardService } from '../core/services/board.service';
 import { ApiBoardService } from '../core/services/api-board.service';
 import { ArticleExistsGuard } from './guards/article-exists';
 import { DialogService } from './services/dialog.service';
+import { ToolbarEffects } from './effects/toolbar';
 
 @NgModule({
   imports: [
@@ -52,7 +53,12 @@ import { DialogService } from './services/dialog.service';
      * All Effects will only be instantiated once regardless of
      * whether they are registered once or multiple times.
      */
-    EffectsModule.forFeature([ArticleEffects, BoardEffects, CollectionEffects]),
+    EffectsModule.forFeature([
+      ArticleEffects,
+      BoardEffects,
+      CollectionEffects,
+      ToolbarEffects,
+    ]),
   ],
   declarations: [
     EditArticlePageComponent,

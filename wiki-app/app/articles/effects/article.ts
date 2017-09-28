@@ -14,6 +14,7 @@ import { of } from 'rxjs/observable/of';
 import * as createArticle from '../actions/create-article';
 import * as article from '../actions/article';
 import * as board from '../actions/board';
+import * as toolbar from '../actions/toolbar';
 import { ArticleService } from '../../core/services/article.service';
 import { CreateArticleResponse } from '../models/create-article-response';
 import { CreateArticleRequest } from '../models/create-article-request';

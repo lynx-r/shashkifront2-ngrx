@@ -8,7 +8,7 @@ import * as fromArticles from '../../reducers';
 import * as toolbar from '../../actions/toolbar';
 import { Undo, Redo } from '../../actions/board';
 import { BoardBox } from '../../models/board-box';
-import { getSelectedBoard } from '../../reducers/index';
+import { getSelectedArticle, getSelectedBoard } from '../../reducers/index';
 
 @Component({
   selector: 'ac-board-toolbar',
@@ -129,5 +129,13 @@ export class BoardToolbarComponent implements OnInit {
 
   handleOpenCreateArticle() {
     this.store.dispatch(new toolbar.OpenCreateArticleDialog(true));
+  }
+
+  handleSaveArticle() {
+    this.store
+      .select(getSelectedArticle)
+      .do(selected => this.store.dispatch(new toolbar.SaveArticle(selected)))
+      .take(1)
+      .subscribe();
   }
 }

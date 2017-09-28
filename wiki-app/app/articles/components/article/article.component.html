@@ -1,16 +1,13 @@
 <md-card class="fit overflow-scroll">
-  <!--<md-list class="fit">-->
-    <!--<md-list-item>-->
-      <md-form-field class="full-width">
-        <input mdInput title="Название статьи" required [(ngModel)]="article.title">
-      </md-form-field>
-    <!--</md-list-item>-->
-    <!--<md-list-item class="fit">-->
-      <md-input-container class="fit overflow-scroll">
+  <md-form-field class="full-width">
+    <input mdInput title="Название статьи" required [(ngModel)]="currentArticle.title" (blur)="handleChanges()">
+  </md-form-field>
+  <md-input-container class="fit overflow-scroll">
         <textarea title="Текст статьи" mdTextareaAutosize class="fit" placeholder="Текст статьи" required mdInput
-                  [(ngModel)]="article.content"></textarea>
-      </md-input-container>
-    <!--</md-list-item>-->
-  <!--</md-list>-->
+                  (blur)="handleChanges()"
+                  (past)="handleChanges()"
+                  (cut)="handleChanges()"
+                  [(ngModel)]="currentArticle.content"></textarea>
+  </md-input-container>
 </md-card>
 

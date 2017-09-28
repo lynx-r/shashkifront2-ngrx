@@ -52,15 +52,6 @@ export function reducer(
     }
 
     case board.LOAD: {
-      let s = {
-        ...adapter.addOne(action.payload, state),
-        selectedBoardId: action.payload.id,
-      };
-      console.log('RELOAD', s);
-      // return {
-      //   ...adapter.addOne(action.payload,state),
-      //   selectedBoardId: action.payload.id
-      // }
       let entities = {};
       entities[action.payload.id] = { ...action.payload };
       return {
