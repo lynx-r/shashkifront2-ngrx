@@ -9,6 +9,7 @@ import { LayoutComponent } from './components/layout';
 import { NavItemComponent } from './components/nav-item';
 import { SidenavComponent } from './components/sidenav';
 import { ToolbarComponent } from './components/toolbar';
+import { BlockUIModule } from 'ng-block-ui';
 
 export const COMPONENTS = [
   AppComponent,
@@ -20,7 +21,7 @@ export const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, MaterialModule],
+  imports: [CommonModule, RouterModule, MaterialModule, BlockUIModule],
   declarations: COMPONENTS,
   exports: COMPONENTS,
 })

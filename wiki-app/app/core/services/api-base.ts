@@ -10,6 +10,14 @@ export class ApiBase {
     return this.getConfig().api_article_url;
   }
 
+  protected apiArticleApiKey() {
+    return this.getConfig().api_key_article;
+  }
+
+  protected apiBoardApiKey() {
+    return this.getConfig().api_key_board;
+  }
+
   private getConfig() {
     return (<any>config)[profile];
   }

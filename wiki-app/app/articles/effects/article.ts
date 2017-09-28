@@ -18,6 +18,7 @@ import { ArticleService } from '../../core/services/article.service';
 import { CreateArticleResponse } from '../models/create-article-response';
 import { CreateArticleRequest } from '../models/create-article-request';
 import { Router } from '@angular/router';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
 export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
@@ -37,9 +38,12 @@ export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>(
 
 @Injectable()
 export class ArticleEffects {
+  @BlockUI() blockUI: NgBlockUI;
+
   @Effect()
   create$: Observable<Action> = this.actions$
     .ofType(createArticle.CREATE)
+    .do(() => this.blockUI.start())
     .map((action: createArticle.Create) => action.payload)
     .switchMap((createArticleRequest: CreateArticleRequest) =>
       this.articleService.createArticle(createArticleRequest)
@@ -49,6 +53,7 @@ export class ArticleEffects {
       new board.CreateSuccess(createdArticleResponse.board),
       new createArticle.CreateSuccess(createdArticleResponse.article.id),
     ])
+    .do(() => this.blockUI.stop())
     .catch(err => of(new createArticle.CreateFail(err)));
 
   @Effect({ dispatch: false })

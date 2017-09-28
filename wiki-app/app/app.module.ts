@@ -25,6 +25,7 @@ import { CustomRouterStateSerializer } from './shared/utils';
 import { AppComponent } from './core/containers/app';
 import { environment } from '../environments/environment';
 import { CookieModule } from 'ngx-cookie';
+import { BlockUIModule } from 'ng-block-ui';
 
 @NgModule({
   imports: [

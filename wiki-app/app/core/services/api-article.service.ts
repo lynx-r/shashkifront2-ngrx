@@ -10,15 +10,23 @@ export class ApiArticleService extends ApiBase {
   }
 
   get(resource: string) {
-    return this.http.get(this.apiArticleUrl() + resource).map(resp => {
-      return Utils.processRequest(resp);
-    });
+    return this.http
+      .get(this.apiArticleUrl() + resource, {
+        headers: this.apiArticleApiKey(),
+      })
+      .map(resp => {
+        return Utils.processRequest(resp);
+      });
   }
 
   post(resource: string, config: any) {
-    return this.http.post(this.apiArticleUrl() + resource, config).map(resp => {
-      return Utils.processRequest(resp);
-    });
+    return this.http
+      .post(this.apiArticleUrl() + resource, config, {
+        headers: this.apiArticleUrl(),
+      })
+      .map(resp => {
+        return Utils.processRequest(resp);
+      });
   }
 
   put(resource: string, param: any) {

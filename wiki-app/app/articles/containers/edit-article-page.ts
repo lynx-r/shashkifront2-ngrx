@@ -34,13 +34,16 @@ import { OpenCreateArticleDialog } from '../actions/toolbar';
 export class EditArticlePageComponent implements OnDestroy {
   articleSubscription: Subscription;
   boardSubscription: Subscription;
+  private openCreateArticleDialogSubscription: Subscription;
+  private squareClickSubscription: Subscription;
+  private selectDraughtSubscription: Subscription;
 
   article$: Observable<Article>;
   boardBox$: Observable<BoardBox>;
   boardMode$: Observable<string>;
   checkedMode$: Observable<string>;
-  selectedDraught$: Observable<Draught>;
 
+  selectedDraught$: Observable<Draught>;
   draught: Draught;
 
   constructor(
@@ -68,14 +71,14 @@ export class EditArticlePageComponent implements OnDestroy {
 
     this.selectedDraught$ = this.store.select(fromArticles.getSelectedDraught);
 
-    this.store
+    this.selectDraughtSubscription = this.store
       .select(getSelectedDraught)
       .subscribe(draught => (this.draught = draught));
 
-    this.store
+    this.openCreateArticleDialogSubscription = this.store
       .select(getOpenCreateArticleDialog)
       .subscribe(isOpen => isOpen && this.openCreateArticleDialog());
-    this.store
+    this.squareClickSubscription = this.store
       .select(getClickedSquare)
       .subscribe(square => this.onSquareClicked(square));
   }
@@ -83,6 +86,9 @@ export class EditArticlePageComponent implements OnDestroy {
   ngOnDestroy() {
     this.articleSubscription.unsubscribe();
     this.boardSubscription.unsubscribe();
+    this.openCreateArticleDialogSubscription.unsubscribe();
+    this.squareClickSubscription.unsubscribe();
+    this.selectDraughtSubscription.unsubscribe();
   }
 
   onSquareClicked(clicked: Square) {

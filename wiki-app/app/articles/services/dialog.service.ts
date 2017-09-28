@@ -29,7 +29,6 @@ export class DialogService {
           rules: 'RUSSIAN',
           fillBoard: true,
         },
-        test: true,
       };
       this.cookieService.putObject(
         AppConstants.ARTICLE_CREATE_COOKIE,
