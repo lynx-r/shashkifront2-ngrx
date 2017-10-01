@@ -1,5 +1,8 @@
+import { Headers } from '@angular/http';
 import config from '../../config/config.json';
 import { profile } from '../../config/profile';
+import { ParamMap, Params } from '@angular/router';
+import { Dictionary } from '../../../../modules/entity/src/models';
 
 export class ApiBase {
   protected apiBoardUrl() {
@@ -16,6 +19,19 @@ export class ApiBase {
 
   protected apiBoardApiKey() {
     return this.getConfig().api_key_board;
+  }
+
+  protected getParamsSign(queryParams: ParamMap): Headers {
+    let headers = new Headers();
+    let sign = '';
+    for (let key of queryParams.keys) {
+      if (key === 'sign' || key === 'hash' || key === 'api_result') {
+        continue;
+      }
+      sign += queryParams.get(key);
+    }
+    headers.append('sign', sign);
+    return headers;
   }
 
   private getConfig() {

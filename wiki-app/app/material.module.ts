@@ -14,6 +14,7 @@ import {
   MdCheckboxModule,
   MdDialogModule,
   MdSelectModule,
+  MdListModule,
 } from '@angular/material';
 
 const COMPONENTS = [
@@ -30,6 +31,7 @@ const COMPONENTS = [
   MdCheckboxModule,
   MdDialogModule,
   MdSelectModule,
+  MdListModule,
 ];
 
 @NgModule({

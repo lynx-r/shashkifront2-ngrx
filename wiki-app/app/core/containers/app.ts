@@ -14,7 +14,11 @@ import * as layout from '../actions/layout';
     <block-ui>
       <ac-layout>
         <ac-sidenav [open]="showSidenav$ | async">
-          <ac-nav-item (activate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/articles/create" icon="article"
+          <ac-nav-item (navigate)="closeSidenav()" routerLink="/articles" hint="Все статьи сайта" icon="">
+            Статьи
+          </ac-nav-item>
+          <ac-nav-item (navigate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/articles/create"
+                       icon="article"
                        hint="Написать статью">
             Новая статья
           </ac-nav-item>
