@@ -8,6 +8,7 @@ import {
   MdCardModule,
   MdGridListModule,
   MdSidenavModule,
+  MdInputModule,
 } from '@angular/material';
 
 const COMPONENTS = [
@@ -17,7 +18,8 @@ const COMPONENTS = [
   MdIconModule,
   MdCardModule,
   MdGridListModule,
-  MdSidenavModule
+  MdSidenavModule,
+  MdInputModule,
 ];
 
 @NgModule({

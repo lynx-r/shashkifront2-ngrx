@@ -4753,11 +4753,19 @@ nested-error-stacks@^1.0.0, nested-error-stacks@^1.0.1:
   dependencies:
     inherits "~2.0.1"
 
+ng-block-ui@^0.9.2:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/ng-block-ui/-/ng-block-ui-0.9.2.tgz#b9cd4bbea4a4bfec16ea34a58c5be2693731e878"
+
 ngrx-store-freeze@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/ngrx-store-freeze/-/ngrx-store-freeze-0.2.0.tgz#74c231947bbe1938af722f6a72624dc69788d39f"
   dependencies:
     deep-freeze-strict "^1.1.1"
+
+ngx-cookie@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-cookie/-/ngx-cookie-1.0.0.tgz#004fc653febd849b4dd3ee2c63c4cf171f464da9"
 
 no-case@^2.2.0:
   version "2.3.1"
