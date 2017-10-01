@@ -19,7 +19,7 @@ import { DialogService } from './services/dialog.service';
 import { ToolbarEffects } from './effects/toolbar';
 import { AuthGuard } from '../auth/services/auth-guard.service';
 import { ViewArticlePageComponent } from './containers/view-article-page';
-import {MaterialModule} from "../material.module";
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
