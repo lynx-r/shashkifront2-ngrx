@@ -9,10 +9,16 @@ import {
   MdGridListModule,
   MdSidenavModule,
   MdInputModule,
+  MdButtonToggleModule,
+  MdOptionModule,
+  MdCheckboxModule,
+  MdDialogModule,
+  MdSelectModule,
 } from '@angular/material';
 
 const COMPONENTS = [
   MdButtonModule,
+  MdButtonToggleModule,
   MdMenuModule,
   MdToolbarModule,
   MdIconModule,
@@ -20,6 +26,10 @@ const COMPONENTS = [
   MdGridListModule,
   MdSidenavModule,
   MdInputModule,
+  MdOptionModule,
+  MdCheckboxModule,
+  MdDialogModule,
+  MdSelectModule,
 ];
 
 @NgModule({

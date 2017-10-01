@@ -16,6 +16,7 @@ import { ArticleComponent } from './article/article.component';
 import { ArticlePreviewListComponent } from './article-preview-list';
 import { ArticlePreviewComponent } from './article-preview';
 import { NotationComponent } from './notation/notation.component';
+import { MaterialModule } from '../../material.module';
 
 export const COMPONENTS = [
   EditorComponent,
@@ -39,6 +40,7 @@ export const COMPONENTS = [
     RouterModule,
     PipesModule,
     FormsModule,
+    MaterialModule,
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,

@@ -9,7 +9,7 @@ import { NavItemComponent } from './components/nav-item';
 import { SidenavComponent } from './components/sidenav';
 import { ToolbarComponent } from './components/toolbar';
 import { BlockUIModule } from 'ng-block-ui';
-import {MaterialModule} from "../material.module";
+import { MaterialModule } from '../material.module';
 
 export const COMPONENTS = [
   AppComponent,
