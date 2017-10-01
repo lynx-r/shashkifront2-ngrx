@@ -1,0 +1,26 @@
+<ac-board-toolbar [edit]="edit" [createMode]="!!article"></ac-board-toolbar>
+<md-grid-list [rowHeight]="rowHeight" #editorGrid *ngIf="article; else createArticle" cols="12">
+  <md-grid-tile colspan="5">
+    <ac-board #boardRef
+              class="fit"
+              [board]="boardBox.board"
+              [style.backgroundColor]="backgroundColor"
+    ></ac-board>
+  </md-grid-tile>
+  <md-grid-tile colspan="1">
+    <ac-notation
+      [currentStroke]="currentStroke"
+      [notationPrevious]="notationPrevious$ | async"
+      [notationNext]="notationNext$ | async"
+    ></ac-notation>
+  </md-grid-tile>
+  <md-grid-tile colspan="6">
+    <ac-board-article [edit]="edit" class="fit" [article]="article"></ac-board-article>
+  </md-grid-tile>
+</md-grid-list>
+<ng-template #createArticle>
+  <div>
+    Нажмите Создать, чтобы создать новую статью или
+    Открыть, чтобы открыть существующую.
+  </div>
+</ng-template>

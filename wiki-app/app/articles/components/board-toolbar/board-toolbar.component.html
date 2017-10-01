@@ -1,0 +1,47 @@
+<md-toolbar>
+  <button md-raised-button (click)="handleOpenCreateArticle()" *ngIf="edit">
+    <md-icon>add</md-icon>
+  </button>
+  <button md-raised-button (click)="handleSaveArticle()" *ngIf="edit">
+    <md-icon>save</md-icon>
+  </button>
+  <md-button-toggle-group [disabled]="!createMode" #boardModes="mdButtonToggleGroup" (change)="toggleMode(boardModes.value)" *ngIf="edit">
+    <md-button-toggle value="write" [checked]="mode == 'write'">
+      <md-icon>
+        text_format
+      </md-icon>
+    </md-button-toggle>
+    <md-button-toggle value="place" [checked]="mode == 'place'">
+      <md-icon>
+        create
+      </md-icon>
+    </md-button-toggle>
+  </md-button-toggle-group>
+  <button md-raised-button value="write" (click)="handleUndo()" [disabled]="!createMode">
+    <md-icon aria-label="Отмена">undo</md-icon>
+  </button>
+  <button md-raised-button value="place" (click)="handleRedo()" [disabled]="!createMode">
+    <md-icon>redo</md-icon>
+  </button>
+  <md-toolbar-row *ngIf="boardModes?.value == 'place' && edit">
+    <md-button-toggle-group #draughtSelected="mdButtonToggleGroup" (change)="handleSelectDraught(draughtSelected.value)">
+      <md-button-toggle value="," [checked]="!draught.queen && !draught.black && !deleteMode">
+        <draught-edit [queen]="false" [black]="false" [selected]="!draught.queen && !draught.black && !deleteMode"></draught-edit>
+      </md-button-toggle>
+      <md-button-toggle value="queen," [checked]="draught.queen && !draught.black && !deleteMode">
+        <draught-edit [queen]="true" [black]="false" [selected]="draught.queen && !draught.black && !deleteMode"></draught-edit>
+      </md-button-toggle>
+      <md-button-toggle value=",black" [checked]="!draught.queen && draught.black && !deleteMode">
+        <draught-edit [queen]="false" [black]="true" [selected]="!draught.queen && draught.black && !deleteMode"></draught-edit>
+      </md-button-toggle>
+      <md-button-toggle value="queen,black" [checked]="draught.queen && draught.black && !deleteMode">
+        <draught-edit [queen]="true" [black]="true" [selected]="draught.queen && draught.black && !deleteMode"></draught-edit>
+      </md-button-toggle>
+      <md-button-toggle value="remove" [checked]="deleteMode">
+        <div class="remove-draught-container">
+          <div class="remove-draught" [ngClass]="{'selected-remove': deleteMode}"></div>
+        </div>
+      </md-button-toggle>
+    </md-button-toggle-group>
+  </md-toolbar-row>
+</md-toolbar>

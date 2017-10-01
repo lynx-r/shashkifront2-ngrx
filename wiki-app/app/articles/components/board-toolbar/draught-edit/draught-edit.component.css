@@ -1,0 +1,52 @@
+.draught-edit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 46px;
+}
+
+.draught-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.draught {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  border: 4px solid;
+}
+
+.draught:before {
+  border: 4px solid;
+  content: '';
+  width: 52%;
+  height: 52%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+}
+
+.draught-queen {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  border: 4px solid;
+}
+
+.selected {
+  background-color: indianred !important;
+}

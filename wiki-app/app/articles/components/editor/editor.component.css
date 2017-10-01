@@ -1,0 +1,26 @@
+.board-toolbar{
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+#draughtsToAdd {
+  margin-right: 8px;
+}
+
+#linkOnPosition {
+  padding-left: 8px;
+  border-left: 1px solid lightgray;
+}
+
+#undoMove {
+  margin-left: 8px;
+}
+
+#redoMove {
+  margin-right: 8px;
+}
+
+#toggleEdit{
+  margin-left: 8px;
+}
+

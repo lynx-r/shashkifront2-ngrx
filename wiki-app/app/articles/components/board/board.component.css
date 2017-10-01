@@ -1,0 +1,31 @@
+.square {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.draught {
+  width:80%;
+  height:80%;
+}
+.board-numbers-vertical{
+  position: absolute;
+  left: 50%;
+  padding-top: 40%;
+  padding-left: 20%;
+  background-color: antiquewhite;
+  height: 100%;
+  width: 100%;
+}
+
+.board-numbers-horizontal{
+  position: absolute;
+  bottom: 50%;
+  padding-top: 50%;
+  padding-left: 40%;
+  background-color: antiquewhite;
+  height: 100%;
+  width: 100%;
+}
+

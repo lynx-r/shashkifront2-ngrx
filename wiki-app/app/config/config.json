@@ -1,0 +1,16 @@
+{
+  "dev": {
+    "api_article_url": "http://localhost:14567/api/v1",
+    "api_board_url": "http://localhost:24567/api/v1"
+  },
+  "local": {
+    "api_article_url": "http://localhost:4567/api/v1",
+    "api_board_url": "http://localhost:8002/v1"
+  },
+  "prod": {
+    "api_article_url": "https://hzvzddncfb.execute-api.eu-west-1.amazonaws.com/dev/api/v1",
+    "api_board_url": "https://8vc9rklqxh.execute-api.eu-west-1.amazonaws.com/dev/api/v1",
+    "api_key_article": "123ARTICLE_API_KEY",
+    "api_key_board": "123BOARD_API_KEY"
+  }
+}

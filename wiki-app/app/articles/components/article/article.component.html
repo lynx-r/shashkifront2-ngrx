@@ -1,0 +1,19 @@
+<md-card class="fit overflow-scroll">
+  <md-form-field class="full-width" *ngIf="edit">
+    <input mdInput title="Название статьи" required [(ngModel)]="currentArticle.title" (blur)="handleChanges()">
+  </md-form-field>
+  <div title="Название статьи" *ngIf="!edit">
+    {{currentArticle.title}}
+  </div>
+  <md-input-container *ngIf="edit" class="fit overflow-scroll">
+      <textarea title="Текст статьи" mdTextareaAutosize class="fit" placeholder="Текст статьи" required mdInput
+                (blur)="handleChanges()"
+                (past)="handleChanges()"
+                (cut)="handleChanges()"
+                [(ngModel)]="currentArticle.content"></textarea>
+  </md-input-container>
+  <div *ngIf="!edit" title="Текст статьи" class="fit">
+    {{currentArticle.content}}
+  </div>
+</md-card>
+

@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -ms-overflow-style: none;
+  overflow: auto;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.full-width {
+  width: 100%;
+  /*width: -moz-calc(100% - 64px);*/
+  /*width: -webkit-calc(100% - 64px);*/
+  /*width: calc(100% - 64px);*/
+}
+
+.full-height {
+  height: 100%;
+  /*height: -moz-calc(100% - 64px);*/
+  /*height: -webkit-calc(100% - 64px);*/
+  /*height: calc(100% - 64px);*/
+}
+
+.fit {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; /* For IE and modern versions of Chrome */
+  -moz-box-sizing: border-box; /* For Firefox                          */
+  -webkit-box-sizing: border-box; /* For Safari                           */
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.justify-text {
+  text-align: center;
+  vertical-align: middle;
+  display: block;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
