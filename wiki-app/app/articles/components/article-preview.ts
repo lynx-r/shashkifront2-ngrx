@@ -7,14 +7,16 @@ import { Article } from '../models/article';
     <md-card *ngIf="article">
       <md-card-title-group>
         <md-card-title>
-          {{ article.title | acEllipsis:35 }}
+            {{ article.title | acEllipsis:26 }}
+        </md-card-title>
+        <md-card-subtitle>
           <a md-button [routerLink]="[article.id, 'view']" class="tool-button">
             <md-icon>pageview</md-icon>
           </a>
           <a md-button [routerLink]="[article.id, 'edit']" class="tool-button">
             <md-icon>edit</md-icon>
           </a>
-        </md-card-title>
+        </md-card-subtitle>
       </md-card-title-group>
       <md-card-content>
         <p>{{ article.content | acEllipsis }}</p>

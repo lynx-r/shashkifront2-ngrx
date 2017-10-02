@@ -19,6 +19,7 @@ import { CookieService } from 'ngx-cookie';
 import { Store } from '@ngrx/store';
 import * as fromArticles from '../../reducers';
 import { getBoardMode, getSelectedDraught } from '../../reducers/index';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ac-editor',
@@ -39,7 +40,10 @@ export class EditorComponent implements OnInit, OnChanges {
   mode: string;
   draught: Draught;
 
-  constructor(private store: Store<fromArticles.State>) {}
+  constructor(
+    private store: Store<fromArticles.State>,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.rowHeight = window.innerHeight;
@@ -61,5 +65,9 @@ export class EditorComponent implements OnInit, OnChanges {
         this.currentStroke = '';
       }
     }
+  }
+
+  handleBack() {
+    this.location.back();
   }
 }

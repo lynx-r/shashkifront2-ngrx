@@ -1,3 +1,6 @@
+<button md-button (click)="handleBack()">
+  Назад
+</button>
 <ac-board-toolbar [edit]="edit" [createMode]="!!article"></ac-board-toolbar>
 <md-grid-list #editorGrid *ngIf="article; else createArticle" cols="12" [rowHeight]="rowHeight">
   <md-grid-tile colspan="5">
