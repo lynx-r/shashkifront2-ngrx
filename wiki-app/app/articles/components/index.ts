@@ -17,6 +17,7 @@ import { ArticlePreviewListComponent } from './article-preview-list';
 import { ArticlePreviewComponent } from './article-preview';
 import { NotationComponent } from './notation/notation.component';
 import { MaterialModule } from '../../material.module';
+import { PlaceDraughtRowComponent } from './board-toolbar/row/place-draught-row.component';
 
 export const COMPONENTS = [
   EditorComponent,
@@ -31,6 +32,7 @@ export const COMPONENTS = [
   ArticleComponent,
   ArticlePreviewListComponent,
   ArticlePreviewComponent,
+  PlaceDraughtRowComponent,
 ];
 
 @NgModule({

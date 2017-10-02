@@ -104,7 +104,6 @@ export class EditArticlePageComponent implements OnDestroy {
           .do((selectedBoard: BoardBox) => {
             if (!!selectedBoard) {
               if (mode == AppConstants.WRITE_MODE) {
-                console.log(clicked);
                 if (clicked.draught != null) {
                   this.highlightSquare(selectedBoard, clicked);
                 } else {

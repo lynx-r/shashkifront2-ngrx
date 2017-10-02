@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import 'rxjs/Rx';
 import { CookieService } from 'ngx-cookie';
 import { AppConstants } from '../../../core/services/app-constants';
@@ -8,7 +8,7 @@ import * as fromArticles from '../../reducers';
 import * as toolbar from '../../actions/toolbar';
 import { Undo, Redo } from '../../actions/board';
 import { BoardBox } from '../../models/board-box';
-import { getSelectedArticle, getSelectedBoard } from '../../reducers/index';
+import { getSelectedBoard } from '../../reducers/index';
 
 @Component({
   selector: 'ac-board-toolbar',
@@ -20,10 +20,8 @@ export class BoardToolbarComponent implements OnInit {
   @Input() createMode: boolean = true;
 
   backgroundColor: string;
-  draught: any;
 
   mode: string;
-  deleteMode: boolean;
 
   constructor(
     private cookieService: CookieService,
@@ -42,74 +40,14 @@ export class BoardToolbarComponent implements OnInit {
     this.store.dispatch(new toolbar.PlaceModeToggle(this.mode));
 
     this.backgroundColor = Utils.getModeColor(this.mode);
-    this.deleteMode = Utils.stringToBoolean(
-      this.cookieService.get(AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE)
-    );
-    if (!this.deleteMode) {
-      this.cookieService.put(
-        AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE,
-        'false'
-      );
-      this.deleteMode = false;
-    }
-    this.draught = this.cookieService.getObject(
-      AppConstants.DRAUGHT_PLACE_COOKIE
-    );
-    if (!this.draught) {
-      this.draught = {
-        black: false,
-        queen: false,
-        beaten: this.deleteMode,
-      };
-      this.cookieService.putObject(
-        AppConstants.DRAUGHT_PLACE_COOKIE,
-        this.draught
-      );
-    }
-    this.store.dispatch(new toolbar.DraughtSelect(this.draught));
   }
 
-  toggleMode(mode: string) {
+  toggleMode(mode: any) {
+    console.log(mode);
     this.mode = mode;
     this.cookieService.put(AppConstants.EDIT_MODE_COOKIE, mode);
     this.backgroundColor = Utils.getModeColor(mode);
     this.store.dispatch(new toolbar.PlaceModeToggle(mode));
-  }
-
-  handleSelectDraught(mode: string) {
-    if (mode == 'remove') {
-      this.deleteMode = true;
-      this.draught = {
-        ...this.draught,
-        beaten: this.deleteMode,
-      };
-      this.store.dispatch(new toolbar.DraughtSelect(this.draught));
-
-      this.cookieService.put(
-        AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE,
-        `${this.deleteMode}`
-      );
-    } else {
-      this.deleteMode = false;
-      this.cookieService.put(
-        AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE,
-        `${this.deleteMode}`
-      );
-
-      let draughtMode = mode.split(',');
-      this.draught = {
-        ...this.draught,
-        queen: draughtMode[0] == 'queen',
-        black: draughtMode[1] == 'black',
-        beaten: this.deleteMode,
-      };
-      this.store.dispatch(new toolbar.DraughtSelect(this.draught));
-
-      this.cookieService.putObject(
-        AppConstants.DRAUGHT_PLACE_COOKIE,
-        this.draught
-      );
-    }
   }
 
   handleUndo() {
