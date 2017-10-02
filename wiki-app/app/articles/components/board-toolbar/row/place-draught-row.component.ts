@@ -122,7 +122,7 @@ export class PlaceDraughtRowComponent implements OnInit {
     }
     this.draught = {
       ...this.draught,
-      beaten: this.deleteMode,
+      captured: this.deleteMode,
     };
     this.store.dispatch(new toolbar.DraughtSelect(this.draught));
   }
@@ -132,7 +132,7 @@ export class PlaceDraughtRowComponent implements OnInit {
       this.deleteMode = true;
       this.draught = {
         ...this.draught,
-        beaten: this.deleteMode,
+        captured: this.deleteMode,
       };
       console.log('remove draught', this.draught);
       this.store.dispatch(new toolbar.DraughtSelect(this.draught));
@@ -153,7 +153,7 @@ export class PlaceDraughtRowComponent implements OnInit {
         ...this.draught,
         queen: draughtMode[0] == 'queen',
         black: draughtMode[1] == 'black',
-        beaten: this.deleteMode,
+        captured: this.deleteMode,
       };
       this.store.dispatch(new toolbar.DraughtSelect(this.draught));
 

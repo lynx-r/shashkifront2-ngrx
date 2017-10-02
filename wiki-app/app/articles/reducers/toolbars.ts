@@ -13,7 +13,8 @@ export interface State {
 let initDraught = {
   black: false,
   queen: false,
-  beaten: false,
+  captured: false,
+  markCaptured: false,
 };
 
 const initialState: State = {

@@ -27,7 +27,7 @@
   <button md-raised-button (click)="handleMakeWhiteStroke()" [disabled]="!createMode" title="Поменять последовательность ходов">
     <md-icon>swap_horiz</md-icon>
   </button>
-  <md-toolbar-row *ngIf="mode == 'place' && edit">
+  <md-toolbar-row *ngIf="mode == 'place' && edit && !create">
     <bc-place-draught-row></bc-place-draught-row>
   </md-toolbar-row>
 </md-toolbar>

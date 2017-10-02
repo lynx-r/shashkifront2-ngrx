@@ -10,15 +10,7 @@ import { Store } from '@ngrx/store';
 import * as article from '../actions/article';
 import * as board from '../actions/board';
 import * as fromArticles from '../reducers';
-import * as createArticle from '../actions/create-article';
 import { ActivatedRoute } from '@angular/router';
-import { DialogService } from '../services/dialog.service';
-import {
-  getClickedSquare,
-  getOpenCreateArticleDialog,
-  getSelectedDraught,
-} from '../reducers/index';
-import { AppConstants } from '../../core/services/app-constants';
 
 @Component({
   selector: 'bc-view-article-page-component',

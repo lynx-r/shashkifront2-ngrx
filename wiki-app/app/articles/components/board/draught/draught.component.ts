@@ -26,10 +26,11 @@ import {
       <div #draughtRef
            [ngStyle]="{'color': draught?.black ? 'black' : 'white'}"
            [ngClass]="{
-       'beaten' : draught?.beaten,
-     'highlight': draught?.highlighted,
-     'draught': !draught?.queen,
-     'draught-queen': draught?.queen}"
+        'captured' : draught?.captured,
+        'highlight': draught?.highlighted,
+        'draught': !draught?.queen,
+        'draught-queen': draught?.queen 
+      }"
       >
         <md-icon *ngIf="draught?.queen">spa</md-icon>
       </div>
