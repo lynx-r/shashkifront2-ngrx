@@ -9,9 +9,7 @@ export class Utils {
   constructor() {}
 
   public static randomString(length: number = 5): string {
-    return Math.random()
-      .toString(36)
-      .substring(2, 2 + length);
+    return Math.random().toString(36).substring(2, 2 + length);
   }
 
   static handleError(error: any) {
@@ -42,11 +40,11 @@ export class Utils {
   }
 
   static processRequest(resp: any) {
-    console.log('RESPONSE ', resp);
+    let json = resp.json();
     if (resp.ok) {
-      return resp.json();
+      return json.body;
     }
-    throw { message: resp.message };
+    throw { message: json.message };
   }
 
   static equalsSquares(source: Square, target: Square) {

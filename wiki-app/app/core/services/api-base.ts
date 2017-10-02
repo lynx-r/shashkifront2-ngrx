@@ -3,6 +3,7 @@ import config from '../../config/config.json';
 import { profile } from '../../config/profile';
 import { ParamMap, Params } from '@angular/router';
 import { Dictionary } from '../../../../modules/entity/src/models';
+import { AppConstants } from './app-constants';
 
 export class ApiBase {
   protected apiBoardUrl() {
@@ -30,7 +31,8 @@ export class ApiBase {
       }
       sign += queryParams.get(key);
     }
-    headers.append('sign', sign);
+    headers.append(AppConstants.SIGN_REQUEST, sign);
+    headers.append(AppConstants.SIGN, queryParams.get(AppConstants.SIGN));
     return headers;
   }
 

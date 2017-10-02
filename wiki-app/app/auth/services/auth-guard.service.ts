@@ -17,21 +17,18 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(): Observable<boolean> {
-    return this.store
-      .select(fromAuth.getLoggedIn)
-      .take(1)
-      .map(authed => {
-        let cookie: boolean = Utils.stringToBoolean(
-          this.cookieService.get('isLoggedIn')
-        );
-        if (!authed && !cookie) {
-          this.store.dispatch(new Auth.LoginRedirect());
-          return false;
-        }
+    return this.store.select(fromAuth.getLoggedIn).take(1).map(authed => {
+      let cookie: boolean = Utils.stringToBoolean(
+        this.cookieService.get('isLoggedIn')
+      );
+      if (!authed && !cookie) {
+        this.store.dispatch(new Auth.LoginRedirect());
+        return false;
+      }
 
-        let user = <User>{ name: 'User' };
-        this.store.dispatch(new Auth.LoginSuccess({ user: user }));
-        return true;
-      });
+      let user = <User>{ name: 'User' };
+      this.store.dispatch(new Auth.LoginSuccess({ user: user }));
+      return true;
+    });
   }
 }

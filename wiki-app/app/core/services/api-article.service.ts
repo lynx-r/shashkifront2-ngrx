@@ -11,35 +11,20 @@ export class ApiArticleService extends ApiBase {
   }
 
   get(resource: string) {
-    let signHeaders = this.getParamsSign(this.router.snapshot.queryParamMap);
-    return this.http
-      .get(this.apiArticleUrl() + resource, {
-        headers: signHeaders,
-      })
-      .map(resp => {
-        return Utils.processRequest(resp);
-      });
+    return this.http.get(this.apiArticleUrl() + resource).map(resp => {
+      return Utils.processRequest(resp);
+    });
   }
 
   post(resource: string, config: any) {
-    let signHeaders = this.getParamsSign(this.router.snapshot.queryParamMap);
-    return this.http
-      .post(this.apiArticleUrl() + resource, config, {
-        headers: signHeaders,
-      })
-      .map(resp => {
-        return Utils.processRequest(resp);
-      });
+    return this.http.post(this.apiArticleUrl() + resource, config).map(resp => {
+      return Utils.processRequest(resp);
+    });
   }
 
   put(resource: string, param: any) {
-    let signHeaders = this.getParamsSign(this.router.snapshot.queryParamMap);
-    return this.http
-      .put(this.apiArticleUrl() + resource, param, {
-        headers: signHeaders,
-      })
-      .map(resp => {
-        return Utils.processRequest(resp);
-      });
+    return this.http.put(this.apiArticleUrl() + resource, param).map(resp => {
+      return Utils.processRequest(resp);
+    });
   }
 }

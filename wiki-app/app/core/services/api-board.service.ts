@@ -11,22 +11,29 @@ export class ApiBoardService extends ApiBase {
   }
 
   get(resource: string) {
-    let signHeaders = this.getParamsSign(this.router.snapshot.queryParamMap);
+    // let signHeaders = this.getParamsSign(this.router.snapshot.queryParamMap);
     return this.http
-      .get(this.apiBoardUrl() + resource, {
-        headers: signHeaders,
-      })
+      .get(
+        this.apiBoardUrl() + resource,
+        {
+          // headers: signHeaders,
+        }
+      )
       .map(resp => {
         return Utils.processRequest(resp);
       });
   }
 
   post(resource: string, param: any) {
-    let signHeaders = this.getParamsSign(this.router.snapshot.queryParamMap);
+    // let signHeaders = this.getParamsSign(this.router.snapshot.queryParamMap);
     return this.http
-      .post(this.apiBoardUrl() + resource, param, {
-        headers: signHeaders,
-      })
+      .post(
+        this.apiBoardUrl() + resource,
+        param,
+        {
+          // headers: signHeaders,
+        }
+      )
       .map(resp => {
         return Utils.processRequest(resp);
       });

@@ -14,4 +14,6 @@ export class AppConstants {
   static DRAUGHT_PLACE_COOKIE: string = 'draught-place-cookie';
   static DELETE_DRAUGHT_CHECKED_COOKIE: string = 'delete-draught-checked';
   static EDIT_MODE_COOKIE: string = 'edit-mode-cookie';
+  static SIGN_REQUEST: string = 'signRequest';
+  static SIGN: string = 'sign';
 }

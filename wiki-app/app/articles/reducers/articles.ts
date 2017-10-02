@@ -41,6 +41,7 @@ export function reducer(
 ): State {
   switch (action.type) {
     case articleCollection.LOAD_SUCCESS: {
+      console.log('LOAD SUCCESS', action.payload);
       return {
         ...adapter.addMany(action.payload, state),
         selectedArticleId: state.selectedArticleId,
@@ -48,12 +49,8 @@ export function reducer(
     }
 
     case article.LOAD: {
-      let entities = {};
-      entities[action.payload.id] = { ...action.payload };
       return {
-        ...state,
-        ids: [action.payload.id],
-        entities: entities,
+        ...adapter.addOne(action.payload, state),
         selectedArticleId: action.payload.id,
       };
     }

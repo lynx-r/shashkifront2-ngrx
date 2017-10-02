@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -26,6 +26,7 @@ import { AppComponent } from './core/containers/app';
 import { environment } from '../environments/environment';
 import { CookieModule } from 'ngx-cookie';
 import { HomeComponent } from './home/home.component';
+import { httpFactory } from './core/interceptors/http.factory';
 
 @NgModule({
   imports: [
@@ -89,6 +90,11 @@ import { HomeComponent } from './home/home.component';
      * by `@ngrx/router-store` to include only the desired pieces of the snapshot.
      */
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+    {
+      provide: Http,
+      useFactory: httpFactory,
+      deps: [XHRBackend, RequestOptions, ActivatedRoute],
+    },
   ],
   bootstrap: [AppComponent],
   declarations: [HomeComponent],
