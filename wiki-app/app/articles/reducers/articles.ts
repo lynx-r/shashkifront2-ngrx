@@ -42,7 +42,6 @@ export function reducer(
 ): State {
   switch (action.type) {
     case articleCollection.LOAD_SUCCESS: {
-      console.log('LOAD SUCCESS', action.payload);
       return {
         ...adapter.addMany(action.payload, state),
         selectedArticleId: state.selectedArticleId,

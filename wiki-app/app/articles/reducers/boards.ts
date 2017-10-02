@@ -54,16 +54,15 @@ export function reducer(
     case board.LOAD: {
       return {
         ...adapter.addOne(action.payload, state),
-        selectedBoardId: state.selectedBoardId,
+        selectedBoardId: action.payload.id,
       };
-      // let entities = {};
-      // entities[action.payload.id] = { ...action.payload };
-      // return {
-      //   ...state,
-      //   ids: [action.payload.id],
-      //   entities: entities,
-      //   selectedBoardId: action.payload.id,
-      // };
+    }
+
+    case board.UPDATE: {
+      return {
+        ...adapter.addOne(action.payload, state),
+        selectedBoardId: action.payload.id,
+      };
     }
 
     case board.CLICK: {

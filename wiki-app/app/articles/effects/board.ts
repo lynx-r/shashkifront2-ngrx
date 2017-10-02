@@ -58,7 +58,7 @@ export class BoardEffects {
     .mergeMap((action: board.AddDraught) =>
       this.boardService.addDraught(action.payload)
     )
-    .mergeMap(updated => [new board.Load(updated)])
+    .map(updated => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
   @Effect()

@@ -3,6 +3,7 @@ import { BoardBox } from '../models/board-box';
 
 export const LOAD = '[BoardBox] Load';
 export const LOAD_SUCCESS = '[BoardBox] Load Success';
+export const UPDATE = '[BoardBox] Update';
 export const SELECT = '[BoardBox] Select';
 export const CLICK = '[BoardBox] Click';
 export const ADD_DRAUGHT = '[BoardBox] Add draught';
@@ -35,6 +36,12 @@ export class Edit implements Action {
 
 export class Load implements Action {
   readonly type = LOAD;
+
+  constructor(public payload: BoardBox) {}
+}
+
+export class Update implements Action {
+  readonly type = UPDATE;
 
   constructor(public payload: BoardBox) {}
 }
@@ -97,6 +104,7 @@ export type Actions =
   | Load
   | LoadSuccess
   | LoadFail
+  | Update
   | Select
   | Click
   | Move

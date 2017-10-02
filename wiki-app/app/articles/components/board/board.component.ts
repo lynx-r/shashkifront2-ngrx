@@ -1,17 +1,12 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-} from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import 'rxjs/add/observable/of';
 import { Rules } from '../../models/rules';
 import { Square } from '../../models/square';
 import { Board } from '../../models/board';
 import { Store } from '@ngrx/store';
-import { State } from '../../reducers/index';
+import { getSelectedDraught, State } from '../../reducers/index';
 import { Click } from '../../actions/square';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ac-board',
@@ -52,7 +47,16 @@ export class BoardComponent implements OnChanges {
   }
 
   onSquareClicked(square: Square) {
-    console.log('CLICKED', square);
-    this.store.dispatch(new Click(square));
+    this.store
+      .select(getSelectedDraught)
+      .do(draught => {
+        let clicked = {
+          ...square,
+          draught: draught,
+        };
+        this.store.dispatch(new Click(clicked));
+      })
+      .take(1)
+      .subscribe();
   }
 }
