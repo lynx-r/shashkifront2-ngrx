@@ -30,7 +30,6 @@ import { MaterialModule } from '../material.module';
       {
         path: 'create',
         component: EditArticlePageComponent,
-        canActivate: [AuthGuard],
       },
       {
         path: ':id',
@@ -38,7 +37,6 @@ import { MaterialModule } from '../material.module';
           {
             path: 'edit',
             component: EditArticlePageComponent,
-            canActivate: [AuthGuard],
           },
           { path: 'view', component: ViewArticlePageComponent },
         ],

@@ -63,7 +63,6 @@ export class InterceptedHttp extends Http {
       options.headers = new Headers();
     }
     this.getParamsSign(options.headers);
-
     return options;
   }
 

@@ -1,6 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as article from '../actions/article';
 import * as articleCollection from '../actions/article-collection';
+import * as _ from 'lodash';
 import { Article } from '../models/article';
 
 /**
@@ -49,10 +50,15 @@ export function reducer(
     }
 
     case article.LOAD: {
+      console.log('LOAD', action.payload);
       return {
-        ...adapter.addOne(action.payload, state),
+        ...adapter.addOne(_.merge({}, action.payload), state),
         selectedArticleId: action.payload.id,
       };
+      // return {
+      //   ...adapter.addOne(action.payload, state),
+      //   selectedArticleId: action.payload.id,
+      // };
     }
 
     case article.SELECT: {

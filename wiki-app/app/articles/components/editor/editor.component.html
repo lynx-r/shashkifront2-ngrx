@@ -1,5 +1,5 @@
 <ac-board-toolbar [edit]="edit" [createMode]="!!article"></ac-board-toolbar>
-<md-grid-list #editorGrid *ngIf="article; else createArticle" cols="12">
+<md-grid-list #editorGrid *ngIf="article; else createArticle" cols="12" [rowHeight]="rowHeight">
   <md-grid-tile colspan="5">
     <ac-board #boardRef
               class="fit"
