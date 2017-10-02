@@ -60,7 +60,10 @@ export function reducer(
 
     case board.UPDATE: {
       return {
-        ...adapter.addOne(action.payload, state),
+        ...adapter.updateOne(
+          { id: action.payload.id, changes: action.payload },
+          state
+        ),
         selectedBoardId: action.payload.id,
       };
     }

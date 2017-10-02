@@ -42,14 +42,14 @@ export class BoardEffects {
     .mergeMap((action: board.Click) =>
       this.boardService.highlightBoard(action.payload)
     )
-    .mergeMap(highlighted => [new board.Load(highlighted)])
+    .map(highlighted => new board.Update(highlighted))
     .catch(err => of(new board.LoadFail(err)));
 
   @Effect()
   squareMove$: Observable<Action> = this.actions$
     .ofType(board.MOVE)
     .mergeMap((action: board.Move) => this.boardService.move(action.payload))
-    .mergeMap(updated => [new board.Load(updated)])
+    .map(updated => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
   @Effect()
@@ -66,7 +66,7 @@ export class BoardEffects {
     .ofType(board.UNDO)
     .map((action: board.Undo) => action.payload)
     .switchMap((selected: BoardBox) => this.boardService.undo(selected))
-    .map((updated: BoardBox) => new board.Load(updated))
+    .map((updated: BoardBox) => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
   @Effect()
@@ -74,7 +74,7 @@ export class BoardEffects {
     .ofType(board.REDO)
     .map((action: board.Redo) => action.payload)
     .switchMap((selected: BoardBox) => this.boardService.redo(selected))
-    .map((updated: BoardBox) => new board.Load(updated))
+    .map((updated: BoardBox) => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
   constructor(private actions$: Actions, private boardService: BoardService) {}
