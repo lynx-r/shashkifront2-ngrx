@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { getBoardMode, getSelectedDraught, State } from '../../reducers/index';
 import { Click } from '../../actions/square';
 import { AppConstants } from '../../../core/services/app-constants';
+import { Utils } from '../../../core/services/utils.service';
 
 @Component({
   selector: 'ac-board',

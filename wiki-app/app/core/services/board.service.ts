@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, Injectable, Output } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Utils } from './utils.service';
 import { AppConstants } from './app-constants';
 import { ApiBoardService } from './api-board.service';
@@ -6,7 +6,6 @@ import 'rxjs/Rx';
 import { BoardBox } from '../../articles/models/board-box';
 import { Move } from '../../articles/models/move';
 import { Article } from '../../articles/models/article';
-import { Square } from '../../articles/models/square';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -20,21 +19,21 @@ export class BoardService {
   addDraught(boardBox: BoardBox): Observable<BoardBox> {
     return this.apiBoardService.post(
       AppConstants.BOARD_RESOURCE + '/add-draught',
-      this.resetSquaresOnBoard(boardBox)
+      Utils.resetSquaresOnBoardBox(boardBox)
     );
   }
 
   undo(boardBox: BoardBox) {
     return this.apiBoardService.post(
       AppConstants.BOARD_RESOURCE + AppConstants.UNDO,
-      this.resetSquaresOnBoard(boardBox)
+      Utils.resetSquaresOnBoardBox(boardBox)
     );
   }
 
   redo(boardBox: BoardBox) {
     return this.apiBoardService.post(
       AppConstants.BOARD_RESOURCE + AppConstants.REDO,
-      this.resetSquaresOnBoard(boardBox)
+      Utils.resetSquaresOnBoardBox(boardBox)
     );
   }
 
@@ -57,31 +56,21 @@ export class BoardService {
   highlightBoard(board: BoardBox): Observable<BoardBox> {
     return this.apiBoardService.post(
       AppConstants.BOARD_RESOURCE + '/highlight',
-      this.resetSquaresOnBoard(board)
+      Utils.resetSquaresOnBoardBox(board)
     );
   }
 
   move(board: BoardBox) {
     return this.apiBoardService.post(
       AppConstants.BOARD_RESOURCE + '/move',
-      this.resetSquaresOnBoard(board)
+      Utils.resetSquaresOnBoardBox(board)
     );
   }
 
   makeWhiteStroke(boardBox: BoardBox) {
     return this.apiBoardService.post(
       AppConstants.BOARD_RESOURCE + '/make-white-stroke',
-      this.resetSquaresOnBoard(boardBox)
+      Utils.resetSquaresOnBoardBox(boardBox)
     );
-  }
-
-  private resetSquaresOnBoard(board: BoardBox) {
-    return {
-      ...board,
-      board: {
-        ...board.board,
-        squares: null,
-      },
-    };
   }
 }

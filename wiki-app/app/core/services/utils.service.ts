@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { Square } from '../../articles/models/square';
 import { AppConstants } from './app-constants';
 import { BoardIdNotation } from '../../articles/models/boardid-notation';
+import { BoardBox } from '../../articles/models/board-box';
+import { Board } from '../../articles/models/board';
 
 @Injectable()
 export class Utils {
@@ -72,5 +74,15 @@ export class Utils {
     } catch (e) {
       return false;
     }
+  }
+
+  public static resetSquaresOnBoardBox(boardBox: BoardBox) {
+    return {
+      ...boardBox,
+      board: {
+        ...boardBox.board,
+        squares: null,
+      },
+    };
   }
 }

@@ -14,6 +14,7 @@ import { AppConstants } from '../../core/services/app-constants';
 import * as fromArticles from '../reducers';
 import * as createArticle from '../actions/create-article';
 import {
+  getBoardMode,
   getClickedSquare,
   getOpenCreateArticleDialog,
   getSelectedDraught,
@@ -21,13 +22,14 @@ import {
 import { DialogService } from '../services/dialog.service';
 import { Draught } from '../models/draught';
 import { OpenCreateArticleDialog } from '../actions/toolbar';
+import { Utils } from '../../core/services/utils.service';
 
 @Component({
   selector: 'ac-create-article-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ac-editor [edit]="true" 
-      [article]="article$ | async"
+    <ac-editor [edit]="true"
+               [article]="article$ | async"
                [boardBox]="boardBox$ | async"
     ></ac-editor>
   `,
@@ -41,11 +43,11 @@ export class EditArticlePageComponent implements OnDestroy {
 
   article$: Observable<Article>;
   boardBox$: Observable<BoardBox>;
-  boardMode$: Observable<string>;
-  checkedMode$: Observable<string>;
 
   selectedDraught$: Observable<Draught>;
   draught: Draught;
+
+  mode: string;
 
   constructor(
     private store: Store<fromArticles.State>,
@@ -65,10 +67,16 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe();
 
     this.article$ = this.store.select(fromArticles.getSelectedArticle);
-    this.boardBox$ = this.store.select(fromArticles.getSelectedBoard);
-    this.boardMode$ = this.store.select(fromArticles.getBoardMode);
-
-    this.checkedMode$ = this.store.select(fromArticles.getBoardMode);
+    this.boardBox$ = this.store
+      .select(fromArticles.getSelectedBoard)
+      .do(boardBox =>
+        this.store.select(getBoardMode).do(mode => {
+          if (mode !== this.mode) {
+            Utils.resetSquaresOnBoardBox(boardBox);
+            this.mode = mode;
+          }
+        })
+      );
 
     this.selectedDraught$ = this.store.select(fromArticles.getSelectedDraught);
 
@@ -137,7 +145,7 @@ export class EditArticlePageComponent implements OnDestroy {
 
   private highlightSquare(selectedBoard: BoardBox, clicked: Square) {
     let isOwnSquare =
-      selectedBoard && selectedBoard.blackTurn == clicked.draught.black;
+      selectedBoard && selectedBoard.board.blackTurn == clicked.draught.black;
     if (isOwnSquare) {
       let updated = {
         ...selectedBoard,

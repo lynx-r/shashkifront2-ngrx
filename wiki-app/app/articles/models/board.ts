@@ -10,4 +10,5 @@ export class Board {
   nextBoards: BoardIdNotation[];
   rules: string;
   black: boolean;
+  blackTurn: boolean;
 }
