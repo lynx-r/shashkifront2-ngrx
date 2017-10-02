@@ -99,6 +99,7 @@ export class PlaceDraughtRowComponent implements OnInit {
     this.deleteMode = Utils.stringToBoolean(
       this.cookieService.get(AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE)
     );
+    console.log('DELETE MODE', this.deleteMode);
     if (!this.deleteMode) {
       this.cookieService.put(
         AppConstants.DELETE_DRAUGHT_CHECKED_COOKIE,
@@ -113,13 +114,16 @@ export class PlaceDraughtRowComponent implements OnInit {
       this.draught = {
         black: false,
         queen: false,
-        beaten: this.deleteMode,
       };
       this.cookieService.putObject(
         AppConstants.DRAUGHT_PLACE_COOKIE,
         this.draught
       );
     }
+    this.draught = {
+      ...this.draught,
+      beaten: this.deleteMode,
+    };
     this.store.dispatch(new toolbar.DraughtSelect(this.draught));
   }
 
@@ -130,6 +134,7 @@ export class PlaceDraughtRowComponent implements OnInit {
         ...this.draught,
         beaten: this.deleteMode,
       };
+      console.log('remove draught', this.draught);
       this.store.dispatch(new toolbar.DraughtSelect(this.draught));
 
       this.cookieService.put(

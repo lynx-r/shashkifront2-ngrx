@@ -6,7 +6,6 @@ import { Board } from '../../models/board';
 import { Store } from '@ngrx/store';
 import { getSelectedDraught, State } from '../../reducers/index';
 import { Click } from '../../actions/square';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'ac-board',
@@ -50,9 +49,10 @@ export class BoardComponent implements OnChanges {
     this.store
       .select(getSelectedDraught)
       .do(draught => {
+        console.log('selected draught: ', draught);
         let clicked = {
           ...square,
-          draught: draught,
+          draught: { ...draught },
         };
         this.store.dispatch(new Click(clicked));
       })
