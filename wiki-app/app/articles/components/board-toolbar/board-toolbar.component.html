@@ -25,7 +25,7 @@
     <md-icon>redo</md-icon>
   </button>
   <button md-raised-button (click)="handleMakeWhiteStroke()" [disabled]="!createMode" title="Поменять последовательность ходов">
-    Поменять ходы
+    <md-icon>swap_horiz</md-icon>
   </button>
   <md-toolbar-row *ngIf="mode == 'place' && edit">
     <bc-place-draught-row></bc-place-draught-row>

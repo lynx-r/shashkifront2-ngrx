@@ -19,8 +19,11 @@ export class BoardComponent implements OnChanges {
   boardLength: Array<number>;
   squares: Square[];
   boardDim: number;
+  alph: { [key: number]: string };
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>) {
+    this.alph = AppConstants.ALPH;
+  }
 
   ngOnChanges() {
     console.log('CHANGE', this.board);

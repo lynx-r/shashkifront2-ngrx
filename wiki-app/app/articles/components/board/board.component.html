@@ -4,7 +4,7 @@
       {{ boardDim - i / boardDim - 1 }}
     </div>
     <div class="board-numbers-horizontal" *ngIf="i % boardDim != 0 && boardLength.length - i <= boardDim">
-      {{ (boardLength.length - i - boardDim) * -1}}
+      {{ alph[(boardLength.length - i - boardDim) * -1] }}
     </div>
     <square (click)="onSquareClicked(squares[i])" *ngIf="squares[i]" [square]="squares[i]" class="square">
       <draught class="draught" *ngIf="squares[i]?.draught != null"
