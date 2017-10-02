@@ -6,12 +6,14 @@ import { ArticleService } from '../../core/services/article.service';
 import { of } from 'rxjs/observable/of';
 import * as article from '../actions/article';
 import { Injectable } from '@angular/core';
+import { AppConstants } from '../../core/services/app-constants';
 
 @Injectable()
 export class ToolbarEffects {
   @Effect()
   saveArticle$: Observable<Action> = this.actions$
     .ofType(toolbar.SAVE_ARTICLE)
+    .debounceTime(AppConstants.DEBOUNCE_ARTICLE_SAVE)
     .map((action: toolbar.SaveArticle) => action.payload)
     .switchMap(saving => this.articleService.saveArticle(saving))
     .map(saved => new article.Load(saved))

@@ -131,12 +131,4 @@ export class BoardToolbarComponent implements OnInit {
   handleOpenCreateArticle() {
     this.store.dispatch(new toolbar.OpenCreateArticleDialog(true));
   }
-
-  handleSaveArticle() {
-    this.store
-      .select(getSelectedArticle)
-      .do(selected => this.store.dispatch(new toolbar.SaveArticle(selected)))
-      .take(1)
-      .subscribe();
-  }
 }

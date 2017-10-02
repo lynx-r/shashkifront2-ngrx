@@ -50,15 +50,10 @@ export function reducer(
     }
 
     case article.LOAD: {
-      console.log('LOAD', action.payload);
       return {
-        ...adapter.addOne(_.merge({}, action.payload), state),
+        ...adapter.addOne(action.payload, state),
         selectedArticleId: action.payload.id,
       };
-      // return {
-      //   ...adapter.addOne(action.payload, state),
-      //   selectedArticleId: action.payload.id,
-      // };
     }
 
     case article.SELECT: {

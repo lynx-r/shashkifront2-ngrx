@@ -1,15 +1,8 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Article } from '../../models/article';
 import { Store } from '@ngrx/store';
 import * as fromArticles from '../../reducers';
-import * as articleAction from '../../actions/article';
+import * as toolbar from '../../actions/toolbar';
 import * as _ from 'lodash';
 
 @Component({
@@ -26,14 +19,12 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {
     this.currentArticle = _.merge({}, this.article);
-    console.log('NG INIT ARTICLE', this.currentArticle);
   }
 
   handleChanges() {
     if (!!this.currentArticle) {
       let article = _.merge({}, this.currentArticle);
-      console.log('changes ', article);
-      this.store.dispatch(new articleAction.Load(article));
+      this.store.dispatch(new toolbar.SaveArticle(article));
     }
   }
 }

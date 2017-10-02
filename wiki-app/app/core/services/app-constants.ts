@@ -16,4 +16,5 @@ export class AppConstants {
   static EDIT_MODE_COOKIE: string = 'edit-mode-cookie';
   static SIGN_REQUEST: string = 'signRequest';
   static SIGN: string = 'sign';
+  static DEBOUNCE_ARTICLE_SAVE = 1500;
 }
