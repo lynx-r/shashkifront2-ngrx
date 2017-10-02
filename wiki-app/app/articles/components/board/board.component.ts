@@ -4,8 +4,9 @@ import { Rules } from '../../models/rules';
 import { Square } from '../../models/square';
 import { Board } from '../../models/board';
 import { Store } from '@ngrx/store';
-import { getSelectedDraught, State } from '../../reducers/index';
+import { getBoardMode, getSelectedDraught, State } from '../../reducers/index';
 import { Click } from '../../actions/square';
+import { AppConstants } from '../../../core/services/app-constants';
 
 @Component({
   selector: 'ac-board',
@@ -48,14 +49,19 @@ export class BoardComponent implements OnChanges {
   onSquareClicked(square: Square) {
     this.store
       .select(getSelectedDraught)
-      .do(draught => {
-        console.log('selected draught: ', draught);
-        let clicked = {
-          ...square,
-          draught: { ...draught },
-        };
-        this.store.dispatch(new Click(clicked));
-      })
+      .switchMap(draught =>
+        this.store.select(getBoardMode).map(mode => {
+          console.log('selected draught: ', draught);
+          let clicked = { ...square };
+          if (mode === AppConstants.PLACE_MODE) {
+            clicked = {
+              ...square,
+              draught: { ...draught },
+            };
+          }
+          this.store.dispatch(new Click(clicked));
+        })
+      )
       .take(1)
       .subscribe();
   }

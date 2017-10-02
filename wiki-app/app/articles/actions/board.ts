@@ -15,6 +15,8 @@ export const LOAD_FAIL = '[BoardBox] Fail';
 export const UNDO = '[BoardBox] Undo';
 export const REDO = '[BoardBox] Redo';
 
+export const MAKE_WHITE_STROKE = '[BoardBox] Make white stroke';
+
 /**
  * Every action is comprised of at least a type and an optional
  * payload. Expressing actions as classes enables powerful
@@ -94,6 +96,12 @@ export class Redo implements Action {
   constructor(public payload: BoardBox) {}
 }
 
+export class MakeWhiteStroke implements Action {
+  readonly type = MAKE_WHITE_STROKE;
+
+  constructor(public payload: BoardBox) {}
+}
+
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -109,4 +117,5 @@ export type Actions =
   | Click
   | Move
   | Undo
-  | Redo;
+  | Redo
+  | MakeWhiteStroke;

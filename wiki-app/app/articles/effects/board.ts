@@ -39,7 +39,7 @@ export class BoardEffects {
   @Effect()
   squareClick$: Observable<Action> = this.actions$
     .ofType(board.CLICK)
-    .mergeMap((action: board.Click) =>
+    .switchMap((action: board.Click) =>
       this.boardService.highlightBoard(action.payload)
     )
     .map(highlighted => new board.Update(highlighted))
@@ -48,14 +48,14 @@ export class BoardEffects {
   @Effect()
   squareMove$: Observable<Action> = this.actions$
     .ofType(board.MOVE)
-    .mergeMap((action: board.Move) => this.boardService.move(action.payload))
+    .switchMap((action: board.Move) => this.boardService.move(action.payload))
     .map(updated => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
   @Effect()
   addDraught$: Observable<Action> = this.actions$
     .ofType(board.ADD_DRAUGHT)
-    .mergeMap((action: board.AddDraught) =>
+    .switchMap((action: board.AddDraught) =>
       this.boardService.addDraught(action.payload)
     )
     .map(updated => new board.Update(updated))
@@ -74,6 +74,16 @@ export class BoardEffects {
     .ofType(board.REDO)
     .map((action: board.Redo) => action.payload)
     .switchMap((selected: BoardBox) => this.boardService.redo(selected))
+    .map((updated: BoardBox) => new board.Update(updated))
+    .catch(err => of(new board.LoadFail(err)));
+
+  @Effect()
+  makeWhiteStroke$: Observable<Action> = this.actions$
+    .ofType(board.MAKE_WHITE_STROKE)
+    .map((action: board.MakeWhiteStroke) => action.payload)
+    .switchMap((selected: BoardBox) =>
+      this.boardService.makeWhiteStroke(selected)
+    )
     .map((updated: BoardBox) => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 

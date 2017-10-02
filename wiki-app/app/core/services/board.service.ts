@@ -68,6 +68,13 @@ export class BoardService {
     );
   }
 
+  makeWhiteStroke(boardBox: BoardBox) {
+    return this.apiBoardService.post(
+      AppConstants.BOARD_RESOURCE + '/make-white-stroke',
+      this.resetSquaresOnBoard(boardBox)
+    );
+  }
+
   private resetSquaresOnBoard(board: BoardBox) {
     return {
       ...board,

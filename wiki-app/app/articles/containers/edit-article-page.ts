@@ -103,6 +103,8 @@ export class EditArticlePageComponent implements OnDestroy {
           .select(fromArticles.getSelectedBoard)
           .do((selectedBoard: BoardBox) => {
             if (!!selectedBoard) {
+              console.log('USING MODE ', mode);
+              console.log('CLICKED ', clicked);
               if (mode == AppConstants.WRITE_MODE) {
                 if (clicked.draught != null) {
                   this.highlightSquare(selectedBoard, clicked);
@@ -129,6 +131,7 @@ export class EditArticlePageComponent implements OnDestroy {
         nextSquare: clicked,
       },
     };
+    console.log('MOVE ', updated);
     this.store.dispatch(new board.Move(updated));
   }
 

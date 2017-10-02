@@ -6,7 +6,7 @@ import { Utils } from '../../../core/services/utils.service';
 import { Store } from '@ngrx/store';
 import * as fromArticles from '../../reducers';
 import * as toolbar from '../../actions/toolbar';
-import { Undo, Redo } from '../../actions/board';
+import { Undo, Redo, MakeWhiteStroke } from '../../actions/board';
 import { BoardBox } from '../../models/board-box';
 import { getSelectedBoard } from '../../reducers/index';
 
@@ -37,13 +37,14 @@ export class BoardToolbarComponent implements OnInit {
       );
       this.mode = AppConstants.WRITE_MODE;
     }
+    console.log('MODE INIT', this.mode);
     this.store.dispatch(new toolbar.PlaceModeToggle(this.mode));
 
     this.backgroundColor = Utils.getModeColor(this.mode);
   }
 
   toggleMode(mode: any) {
-    console.log(mode);
+    console.log('TOGGLE MODE', mode);
     this.mode = mode;
     this.cookieService.put(AppConstants.EDIT_MODE_COOKIE, mode);
     this.backgroundColor = Utils.getModeColor(mode);
@@ -62,6 +63,14 @@ export class BoardToolbarComponent implements OnInit {
     this.store
       .select(getSelectedBoard)
       .do((selected: BoardBox) => this.store.dispatch(new Redo(selected)))
+      .take(1)
+      .subscribe();
+  }
+
+  handleMakeWhiteStroke() {
+    this.store
+      .select(getSelectedBoard)
+      .do(selected => this.store.dispatch(new MakeWhiteStroke(selected)))
       .take(1)
       .subscribe();
   }
