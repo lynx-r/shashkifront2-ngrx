@@ -4,6 +4,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Component({
   selector: 'ac-notation',
   template: `
+    <div>
+      Ход {{ blackTurn ? 'Чёрных' : 'Белых' }}
+    </div>
     <span *ngFor="let stroke of notationPrevious">
       {{stroke}}
     </span>
@@ -24,6 +27,7 @@ export class NotationComponent implements OnInit, OnChanges {
   @Input() notationPrevious: string[];
   @Input() notationNext: string[];
   @Input() currentStroke: string;
+  @Input() blackTurn: boolean;
 
   constructor() {}
 

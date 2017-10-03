@@ -50,7 +50,7 @@ export class CollectionEffects {
   //   .do(() => this.blockUI.start())
   //   .map((action: boardCollection.Load) => action.payload)
   //   .switchMap((boardIds: string[]) =>
-  //     this.boardService
+  //     this.boardBoxService
   //       .listBoards(boardIds)
   //       .map((boards: BoardBox[]) => new boardCollection.LoadSuccess(boards))
   //       .catch(error => of(new boardCollection.LoadFail(error)))

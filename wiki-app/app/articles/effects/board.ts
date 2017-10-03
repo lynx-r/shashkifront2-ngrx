@@ -13,7 +13,7 @@ import { of } from 'rxjs/observable/of';
 
 import * as board from '../actions/board';
 import * as square from '../actions/square';
-import { BoardService } from '../../core/services/board.service';
+import { BoardBoxService } from '../../core/services/board-box.service';
 import { BoardBox } from '../models/board-box';
 import { Square } from '../models/square';
 import { getSelectedBoard } from '../reducers/index';
@@ -40,7 +40,7 @@ export class BoardEffects {
   squareClick$: Observable<Action> = this.actions$
     .ofType(board.CLICK)
     .switchMap((action: board.Click) =>
-      this.boardService.highlightBoard(action.payload)
+      this.boardBoxService.highlightBoard(action.payload)
     )
     .map(highlighted => new board.Update(highlighted))
     .catch(err => of(new board.LoadFail(err)));
@@ -48,7 +48,9 @@ export class BoardEffects {
   @Effect()
   squareMove$: Observable<Action> = this.actions$
     .ofType(board.MOVE)
-    .switchMap((action: board.Move) => this.boardService.move(action.payload))
+    .switchMap((action: board.Move) =>
+      this.boardBoxService.move(action.payload)
+    )
     .map(updated => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
@@ -56,7 +58,7 @@ export class BoardEffects {
   addDraught$: Observable<Action> = this.actions$
     .ofType(board.ADD_DRAUGHT)
     .switchMap((action: board.AddDraught) =>
-      this.boardService.addDraught(action.payload)
+      this.boardBoxService.addDraught(action.payload)
     )
     .map(updated => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
@@ -65,7 +67,7 @@ export class BoardEffects {
   undo$: Observable<Action> = this.actions$
     .ofType(board.UNDO)
     .map((action: board.Undo) => action.payload)
-    .switchMap((selected: BoardBox) => this.boardService.undo(selected))
+    .switchMap((selected: BoardBox) => this.boardBoxService.undo(selected))
     .map((updated: BoardBox) => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
@@ -73,7 +75,7 @@ export class BoardEffects {
   redo$: Observable<Action> = this.actions$
     .ofType(board.REDO)
     .map((action: board.Redo) => action.payload)
-    .switchMap((selected: BoardBox) => this.boardService.redo(selected))
+    .switchMap((selected: BoardBox) => this.boardBoxService.redo(selected))
     .map((updated: BoardBox) => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
@@ -82,10 +84,13 @@ export class BoardEffects {
     .ofType(board.MAKE_WHITE_STROKE)
     .map((action: board.MakeWhiteStroke) => action.payload)
     .switchMap((selected: BoardBox) =>
-      this.boardService.makeWhiteStroke(selected)
+      this.boardBoxService.makeWhiteStroke(selected)
     )
     .map((updated: BoardBox) => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
-  constructor(private actions$: Actions, private boardService: BoardService) {}
+  constructor(
+    private actions$: Actions,
+    private boardBoxService: BoardBoxService
+  ) {}
 }

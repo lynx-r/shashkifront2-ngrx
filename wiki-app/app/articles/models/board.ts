@@ -11,4 +11,7 @@ export class Board {
   rules: string;
   black: boolean;
   blackTurn: boolean;
+  strokeNumber: number;
+  stroke: string;
+  notation: string;
 }

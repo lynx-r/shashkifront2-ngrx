@@ -12,8 +12,8 @@ import { ApiArticleService } from '../core/services/api-article.service';
 import { CollectionPageComponent } from './containers/collection-page';
 import { CollectionEffects } from './effects/collection';
 import { BoardEffects } from './effects/board';
-import { BoardService } from '../core/services/board.service';
-import { ApiBoardService } from '../core/services/api-board.service';
+import { BoardBoxService } from '../core/services/board-box.service';
+import { ApiBoardBoxService } from '../core/services/api-board-box.service';
 import { ArticleExistsGuard } from './guards/article-exists';
 import { DialogService } from './services/dialog.service';
 import { ToolbarEffects } from './effects/toolbar';
@@ -82,8 +82,8 @@ import { MaterialModule } from '../material.module';
     ArticleExistsGuard,
     ArticleService,
     ApiArticleService,
-    BoardService,
-    ApiBoardService,
+    BoardBoxService,
+    ApiBoardBoxService,
     DialogService,
   ],
 })

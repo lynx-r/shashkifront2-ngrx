@@ -6,7 +6,7 @@ import { OpenArticleDialogComponent } from './dialogs/open-article-dialog/open-a
 import { CreateArticleDialogComponent } from './dialogs/create-article-dialog/create-article-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { ArticleService } from '../../service/article.service';
-import { BoardService } from 'app/service/ac-board.service';
+import { BoardBoxService } from 'app/service/ac-board.service';
 import { SocketService } from '../../service/socket.service';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { By } from '@angular/platform-browser';
@@ -34,7 +34,7 @@ describe('BoardToolbarComponent', () => {
             caseSensitive: true,
           }),
         ],
-        providers: [ArticleService, BoardService, SocketService],
+        providers: [ArticleService, BoardBoxService, SocketService],
       }).compileComponents();
     })
   );

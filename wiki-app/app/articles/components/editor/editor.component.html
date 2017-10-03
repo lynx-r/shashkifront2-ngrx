@@ -12,13 +12,15 @@
   </md-grid-tile>
   <md-grid-tile colspan="1">
     <ac-notation
+      [blackTurn]="boardBox.board.blackTurn"
       [currentStroke]="currentStroke"
       [notationPrevious]="notationPrevious$ | async"
       [notationNext]="notationNext$ | async"
     ></ac-notation>
   </md-grid-tile>
   <md-grid-tile colspan="6">
-    <ac-board-article [edit]="edit" class="fit" [article]="article"></ac-board-article>
+    <bc-article-view *ngIf="!edit" class="fit" [article]="article"></bc-article-view>
+    <bc-article-edit *ngIf="edit" class="fit" [article]="article" [boardBox]="boardBox"></bc-article-edit>
   </md-grid-tile>
 </md-grid-list>
 <ng-template #createArticle>

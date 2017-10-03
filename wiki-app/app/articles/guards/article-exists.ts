@@ -16,7 +16,7 @@ import * as article from '../actions/article';
 import * as board from '../actions/board';
 import { ArticleService } from '../../core/services/article.service';
 import { Article } from '../models/article';
-import { BoardService } from '../../core/services/board.service';
+import { BoardBoxService } from '../../core/services/board-box.service';
 
 /**
  * Guards are hooks into the route resolution process, providing an opportunity
@@ -28,7 +28,7 @@ export class ArticleExistsGuard implements CanActivate {
   constructor(
     private store: Store<fromArticles.State>,
     private articleService: ArticleService,
-    private boardService: BoardService,
+    private boardBoxService: BoardBoxService,
     private router: Router
   ) {}
 
@@ -78,7 +78,7 @@ export class ArticleExistsGuard implements CanActivate {
       .findArticleById(id)
       .map(articleEntity => new article.Load(articleEntity))
       .switchMap((articleLoad: article.Load) =>
-        this.boardService
+        this.boardBoxService
           .findBoardById(articleLoad.payload.boardBoxId)
           .map(boardEntity => new board.Load(boardEntity))
           .do((action: board.Load) => this.store.dispatch(action))

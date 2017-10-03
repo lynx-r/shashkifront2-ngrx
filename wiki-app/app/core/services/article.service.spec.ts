@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { ArticleService } from './article.service';
 import { Ng2Webstorage } from 'ngx-webstorage';
-import { BoardService } from './board.service';
+import { BoardBoxService } from './board-box.service';
 import { SocketService } from './socket.service';
 
 describe('ArticleService', () => {
@@ -16,7 +16,7 @@ describe('ArticleService', () => {
           caseSensitive: true,
         }),
       ],
-      providers: [ArticleService, BoardService, SocketService],
+      providers: [ArticleService, BoardBoxService, SocketService],
     });
   });
 

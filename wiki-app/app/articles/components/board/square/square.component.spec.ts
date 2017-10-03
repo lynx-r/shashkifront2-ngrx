@@ -4,7 +4,7 @@ import { SquareComponent } from './square.component';
 import { FormsModule } from '@angular/forms';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { ArticleService } from '../../../service/article.service';
-import { BoardService } from '../../../service/ac-board.service';
+import { BoardBoxService } from '../../../service/ac-board.service';
 import { SocketService } from '../../../service/socket.service';
 
 describe('SquareComponent', () => {
@@ -24,7 +24,7 @@ describe('SquareComponent', () => {
             caseSensitive: true,
           }),
         ],
-        providers: [ArticleService, BoardService, SocketService],
+        providers: [ArticleService, BoardBoxService, SocketService],
       }).compileComponents();
     })
   );

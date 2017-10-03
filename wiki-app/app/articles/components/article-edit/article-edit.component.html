@@ -1,0 +1,23 @@
+<md-card class="fit overflow-scroll">
+  <md-input-container class="full-width">
+    <input mdInput title="Название статьи" required [(ngModel)]="boardBox.whitePlayer"
+           (blur)="handleArticleChanges()"
+           (keypress)="handleArticleChanges()"
+    >
+  </md-input-container>
+  <md-input-container class="full-width">
+    <input mdInput title="Название статьи" required [(ngModel)]="article.title"
+           (blur)="handleArticleChanges()"
+           (keypress)="handleArticleChanges()"
+    >
+  </md-input-container>
+  <md-input-container class="fit overflow-scroll">
+      <textarea title="Текст статьи" mdTextareaAutosize class="fit" placeholder="Текст статьи" required mdInput
+                (blur)="handleArticleChanges()"
+                (past)="handleArticleChanges()"
+                (cut)="handleArticleChanges()"
+                (keypress)="handleArticleChanges()"
+                [(ngModel)]="article.content"></textarea>
+  </md-input-container>
+</md-card>
+

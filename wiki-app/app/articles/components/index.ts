@@ -12,12 +12,13 @@ import { CreateArticleDialogComponent } from './board-toolbar/dialogs/create-art
 import { BoardComponent } from './board/board.component';
 import { SquareComponent } from './board/square/square.component';
 import { DraughtComponent } from './board/draught/draught.component';
-import { ArticleComponent } from './article/article.component';
+import { ArticleViewComponent } from './article-view/article-view.component';
 import { ArticlePreviewListComponent } from './article-preview-list';
 import { ArticlePreviewComponent } from './article-preview';
 import { NotationComponent } from './notation/notation.component';
 import { MaterialModule } from '../../material.module';
 import { PlaceDraughtRowComponent } from './board-toolbar/row/place-draught-row.component';
+import { ArticleEditComponent } from './article-edit/article-edit.component';
 
 export const COMPONENTS = [
   EditorComponent,
@@ -29,7 +30,8 @@ export const COMPONENTS = [
   NotationComponent,
   SquareComponent,
   DraughtComponent,
-  ArticleComponent,
+  ArticleViewComponent,
+  ArticleEditComponent,
   ArticlePreviewListComponent,
   ArticlePreviewComponent,
   PlaceDraughtRowComponent,
