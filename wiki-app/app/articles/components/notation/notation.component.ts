@@ -7,33 +7,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
     <div>
       Ход {{ blackTurn ? 'Чёрных' : 'Белых' }}
     </div>
-    <span *ngFor="let stroke of notationPrevious">
-      {{stroke}}
-    </span>
-    <span class="current-move">{{currentStroke}}</span>
-    <span *ngFor="let stroke of notationNext">
-      {{stroke}}
-    </span>
+    <div>
+      <div *ngFor="let n of notation">
+        {{n}}
+      </div>
+    </div>
   `,
-  styles: [
-    `
-      .current-move {
-        color: darkred;
-      }
-    `,
-  ],
+  styles: [],
 })
-export class NotationComponent implements OnInit, OnChanges {
-  @Input() notationPrevious: string[];
-  @Input() notationNext: string[];
-  @Input() currentStroke: string;
+export class NotationComponent {
   @Input() blackTurn: boolean;
-
-  constructor() {}
-
-  ngOnInit() {}
-
-  ngOnChanges() {
-    console.log('1 ', this.notationPrevious);
-  }
+  @Input() notation: string[];
 }

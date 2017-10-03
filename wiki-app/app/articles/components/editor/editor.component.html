@@ -13,9 +13,7 @@
   <md-grid-tile colspan="1">
     <ac-notation
       [blackTurn]="boardBox.board.blackTurn"
-      [currentStroke]="currentStroke"
-      [notationPrevious]="notationPrevious$ | async"
-      [notationNext]="notationNext$ | async"
+      [notation]="notation"
     ></ac-notation>
   </md-grid-tile>
   <md-grid-tile colspan="6">

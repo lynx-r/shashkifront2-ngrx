@@ -31,6 +31,7 @@ import { Utils } from '../../core/services/utils.service';
     <ac-editor [edit]="true"
                [article]="article$ | async"
                [boardBox]="boardBox$ | async"
+               [notation]="notation$ | async"
     ></ac-editor>
   `,
 })
@@ -43,6 +44,7 @@ export class EditArticlePageComponent implements OnDestroy {
 
   article$: Observable<Article>;
   boardBox$: Observable<BoardBox>;
+  notation$: Observable<string[]>;
 
   selectedDraught$: Observable<Draught>;
   draught: Draught;
@@ -77,6 +79,16 @@ export class EditArticlePageComponent implements OnDestroy {
           }
         })
       );
+
+    this.notation$ = this.store
+      .select(fromArticles.getSelectedBoard)
+      .map(boardBox => {
+        if (!!boardBox) {
+          return this.formatNotation(boardBox.board.notation);
+        } else {
+          return [];
+        }
+      });
 
     this.selectedDraught$ = this.store.select(fromArticles.getSelectedDraught);
 
@@ -176,5 +188,12 @@ export class EditArticlePageComponent implements OnDestroy {
         this.store.dispatch(new OpenCreateArticleDialog(false));
       }
     });
+  }
+
+  formatNotation(notation: string): string[] {
+    if (!!notation) {
+      return notation.split('#');
+    }
+    return [];
   }
 }

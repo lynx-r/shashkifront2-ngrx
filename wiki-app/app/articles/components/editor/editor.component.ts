@@ -26,14 +26,11 @@ import { Location } from '@angular/common';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css'],
 })
-export class EditorComponent implements OnInit, OnChanges {
+export class EditorComponent implements OnInit {
   @Input() edit: boolean;
   @Input() article: Article;
   @Input() boardBox: BoardBox;
-
-  notationPrevious$ = new BehaviorSubject<string[]>([]);
-  notationNext$ = new BehaviorSubject<string[]>([]);
-  currentStroke: string;
+  @Input() notation: string[];
 
   rowHeight: number;
 
@@ -48,23 +45,6 @@ export class EditorComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.rowHeight = window.innerHeight;
     this.store.select(getBoardMode).subscribe(mode => (this.mode = mode));
-  }
-
-  ngOnChanges() {
-    if (!!this.boardBox) {
-      let board = this.boardBox.board;
-      this.notationPrevious$.next(
-        Utils.getNotation(this.boardBox.board.previousBoards)
-      );
-      this.notationNext$.next(
-        Utils.getNotation(this.boardBox.board.nextBoards)
-      );
-      if (board.selectedSquare) {
-        this.currentStroke = board.selectedSquare.notation;
-      } else {
-        this.currentStroke = '';
-      }
-    }
   }
 
   handleBack() {
