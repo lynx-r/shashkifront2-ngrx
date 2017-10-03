@@ -23,7 +23,7 @@ import { AppConstants } from '../../../core/services/app-constants';
             {{stroke.count}}. {{formatStroke(stroke.first)}}
           </a>
           <a *ngIf="stroke.second" (click)="loadBoard.emit(stroke.second?.boardId)" class="notation-link">
-            {{formatStroke(stroke.first)}}
+            {{formatStroke(stroke.second)}}
           </a>
         </div>
       </div>
