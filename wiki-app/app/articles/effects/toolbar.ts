@@ -26,7 +26,7 @@ export class ToolbarEffects {
     .ofType(toolbar.SAVE_BOARD_BOX)
     .debounceTime(AppConstants.DEBOUNCE_SAVE)
     .map((action: toolbar.SaveBoardBox) => action.payload)
-    .switchMap(saving => this.boardBoxService.save(saving))
+    .switchMap(saving => this.boardBoxService.saveBoardBox(saving))
     .map(saved => new board.Load(saved))
     .catch(err => of(new board.LoadFail(err)));
 

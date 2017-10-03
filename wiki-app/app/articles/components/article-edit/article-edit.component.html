@@ -1,23 +1,99 @@
 <md-card class="fit overflow-scroll">
-  <md-input-container class="full-width">
-    <input mdInput title="Название статьи" required [(ngModel)]="boardBox.whitePlayer"
-           (blur)="handleArticleChanges()"
-           (keypress)="handleArticleChanges()"
-    >
-  </md-input-container>
-  <md-input-container class="full-width">
-    <input mdInput title="Название статьи" required [(ngModel)]="article.title"
-           (blur)="handleArticleChanges()"
-           (keypress)="handleArticleChanges()"
-    >
-  </md-input-container>
-  <md-input-container class="fit overflow-scroll">
+  <md-tab-group>
+    <md-tab label="Статья">
+      <md-input-container class="full-width">
+        <input mdInput
+               title="Название статьи"
+               placeholder="Название статьи"
+               required
+               [(ngModel)]="article.title"
+               (blur)="handleArticleChanges()"
+               (keypress)="handleArticleChanges()"
+        >
+      </md-input-container>
+      <md-input-container class="fit overflow-scroll">
       <textarea title="Текст статьи" mdTextareaAutosize class="fit" placeholder="Текст статьи" required mdInput
                 (blur)="handleArticleChanges()"
                 (past)="handleArticleChanges()"
                 (cut)="handleArticleChanges()"
                 (keypress)="handleArticleChanges()"
                 [(ngModel)]="article.content"></textarea>
-  </md-input-container>
+      </md-input-container>
+    </md-tab>
+    <md-tab label="Мета информация">
+      <md-input-container class="full-width">
+        <input mdInput
+               title="Игрок белыми"
+               placeholder="Игрок белыми"
+               [(ngModel)]="boardBox.whitePlayer"
+               (blur)="handleBoardBoxChanges()"
+               (keypress)="handleBoardBoxChanges()"
+        >
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput
+               title="Игрок чёрными"
+               placeholder="Игрок чёрными"
+               [(ngModel)]="boardBox.blackPlayer"
+               (blur)="handleBoardBoxChanges()"
+               (keypress)="handleBoardBoxChanges()"
+        >
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput
+               title="Событие"
+               placeholder="Событие"
+               [(ngModel)]="boardBox.event"
+               (blur)="handleBoardBoxChanges()"
+               (keypress)="handleBoardBoxChanges()"
+        >
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput
+               title="Место"
+               placeholder="Место"
+               [(ngModel)]="boardBox.site"
+               (blur)="handleBoardBoxChanges()"
+               (keypress)="handleBoardBoxChanges()"
+        >
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput
+               title="Раунд"
+               placeholder="Раунд"
+               [(ngModel)]="boardBox.round"
+               (blur)="handleBoardBoxChanges()"
+               (keypress)="handleBoardBoxChanges()"
+        >
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput
+               title="Дата"
+               placeholder="Дата"
+               [(ngModel)]="boardBox.date"
+               (blur)="handleBoardBoxChanges()"
+               (keypress)="handleBoardBoxChanges()"
+        >
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput
+               title="Результат"
+               placeholder="Результат"
+               [(ngModel)]="boardBox.result"
+               (blur)="handleBoardBoxChanges()"
+               (keypress)="handleBoardBoxChanges()"
+        >
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput
+               title="Тип игры"
+               placeholder="Тип игры"
+               [(ngModel)]="boardBox.gameType"
+               (blur)="handleBoardBoxChanges()"
+               (keypress)="handleBoardBoxChanges()"
+        >
+      </md-input-container>
+    </md-tab>
+  </md-tab-group>
 </md-card>
 

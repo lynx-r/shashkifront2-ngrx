@@ -15,6 +15,7 @@ import {
   MdDialogModule,
   MdSelectModule,
   MdListModule,
+  MdTabsModule,
 } from '@angular/material';
 
 const COMPONENTS = [
@@ -32,6 +33,7 @@ const COMPONENTS = [
   MdDialogModule,
   MdSelectModule,
   MdListModule,
+  MdTabsModule,
 ];
 
 @NgModule({

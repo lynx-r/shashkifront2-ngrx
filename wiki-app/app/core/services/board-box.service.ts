@@ -1,20 +1,13 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Utils } from './utils.service';
 import { AppConstants } from './app-constants';
 import { ApiBoardBoxService } from './api-board-box.service';
 import 'rxjs/Rx';
 import { BoardBox } from '../../articles/models/board-box';
-import { Move } from '../../articles/models/move';
-import { Article } from '../../articles/models/article';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BoardBoxService {
-  board: BoardBox;
-
-  @Output() moveToSquareEvent = new EventEmitter<Move>();
-  article: Article;
-
   constructor(private apiBoardBoxService: ApiBoardBoxService) {}
 
   addDraught(boardBox: BoardBox): Observable<BoardBox> {
@@ -75,10 +68,10 @@ export class BoardBoxService {
     );
   }
 
-  save(boardBox: BoardBox) {
+  saveBoardBox(boardBox: BoardBox) {
     return this.apiBoardBoxService.put(
       AppConstants.BOARD_RESOURCE,
-      Utils.resetSquaresOnBoardBox(this.board)
+      Utils.resetSquaresOnBoardBox(boardBox)
     );
   }
 }
