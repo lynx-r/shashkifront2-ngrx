@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import 'rxjs/Rx';
 import * as article from '../actions/article';
 import * as board from '../actions/board';
+import * as toolbar from '../actions/toolbar';
 import { Article } from '../models/article';
 import { Observable } from 'rxjs/Observable';
 import { BoardBox } from '../models/board-box';
@@ -17,12 +18,17 @@ import {
   getBoardMode,
   getClickedSquare,
   getOpenCreateArticleDialog,
+  getSelectedBoard,
   getSelectedDraught,
 } from '../reducers/index';
 import { DialogService } from '../services/dialog.service';
 import { Draught } from '../models/draught';
 import { OpenCreateArticleDialog } from '../actions/toolbar';
 import { Utils } from '../../core/services/utils.service';
+import { Board } from '../models/board';
+import { NotationStroke } from '../models/notation-stroke';
+import { BoardIdNotation } from '../models/boardid-notation';
+import { Notation } from '../models/notation';
 
 @Component({
   selector: 'ac-create-article-page',
@@ -32,6 +38,7 @@ import { Utils } from '../../core/services/utils.service';
                [article]="article$ | async"
                [boardBox]="boardBox$ | async"
                [notation]="notation$ | async"
+               (loadBoard)="handleLoadBoard($event)"
     ></ac-editor>
   `,
 })
@@ -44,7 +51,7 @@ export class EditArticlePageComponent implements OnDestroy {
 
   article$: Observable<Article>;
   boardBox$: Observable<BoardBox>;
-  notation$: Observable<string[]>;
+  notation$: Observable<Notation>;
 
   selectedDraught$: Observable<Draught>;
   draught: Draught;
@@ -74,7 +81,9 @@ export class EditArticlePageComponent implements OnDestroy {
       .do(boardBox =>
         this.store.select(getBoardMode).do(mode => {
           if (mode !== this.mode) {
-            Utils.resetSquaresOnBoardBox(boardBox);
+            if (!!boardBox) {
+              Utils.resetSquaresOnBoardBox(boardBox);
+            }
             this.mode = mode;
           }
         })
@@ -84,9 +93,9 @@ export class EditArticlePageComponent implements OnDestroy {
       .select(fromArticles.getSelectedBoard)
       .map(boardBox => {
         if (!!boardBox) {
-          return this.formatNotation(boardBox.board.notation);
+          return this.formatNotation(boardBox.notation);
         } else {
-          return [];
+          return null;
         }
       });
 
@@ -101,7 +110,7 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe(isOpen => isOpen && this.openCreateArticleDialog());
     this.squareClickSubscription = this.store
       .select(getClickedSquare)
-      .subscribe(square => this.onSquareClicked(square));
+      .subscribe(square => !!square && this.onSquareClicked(square));
   }
 
   ngOnDestroy() {
@@ -113,9 +122,6 @@ export class EditArticlePageComponent implements OnDestroy {
   }
 
   onSquareClicked(clicked: Square) {
-    if (!clicked) {
-      return;
-    }
     this.store
       .select(fromArticles.getBoardMode)
       .do(mode => {
@@ -190,10 +196,22 @@ export class EditArticlePageComponent implements OnDestroy {
     });
   }
 
-  formatNotation(notation: string): string[] {
-    if (!!notation) {
-      return notation.split('#');
-    }
-    return [];
+  formatNotation(notation: Notation): Notation {
+    console.log('NOTATION', notation);
+    return notation;
+  }
+
+  handleLoadBoard(boardId: string) {
+    this.store
+      .select(getSelectedBoard)
+      .do((boardBox: BoardBox) => {
+        let updated = {
+          ...boardBox,
+          boardId: boardId,
+        };
+        this.store.dispatch(new toolbar.SaveBoardBox(updated));
+      })
+      .take(1)
+      .subscribe();
   }
 }

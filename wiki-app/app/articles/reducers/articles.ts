@@ -55,6 +55,16 @@ export function reducer(
       };
     }
 
+    case article.UPDATE: {
+      return {
+        ...adapter.updateOne(
+          { id: action.payload.id, changes: action.payload },
+          state
+        ),
+        selectedArticleId: action.payload.id,
+      };
+    }
+
     case article.SELECT: {
       return {
         ...state,

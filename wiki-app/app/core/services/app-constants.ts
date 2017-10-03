@@ -29,4 +29,6 @@ export class AppConstants {
     9: 'i',
     10: 'j',
   };
+  static NOTATION_NEW_LINE: string = '#';
+  static SIMPLE_STROKE: string = 'SIMPLE';
 }

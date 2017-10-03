@@ -6,6 +6,7 @@ export const SEARCH_COMPLETE = '[Article] Search Complete';
 export const LOAD = '[Article] Load';
 export const LOAD_SUCCESS = '[Article] Load Success';
 export const LOAD_FAIL = '[Article] Load Fail';
+export const UPDATE = '[Article] Update';
 export const EDIT = '[Article] Edit';
 export const CREATE_SUCCESS = '[Article] Success';
 export const SELECT = '[Article] Select';
@@ -59,6 +60,12 @@ export class LoadFail implements Action {
   constructor(public payload: any) {}
 }
 
+export class Update implements Action {
+  readonly type = UPDATE;
+
+  constructor(public payload: Article) {}
+}
+
 export class Select implements Action {
   readonly type = SELECT;
 
@@ -76,4 +83,5 @@ export type Actions =
   | Edit
   | Load
   | LoadSuccess
+  | Update
   | Select;

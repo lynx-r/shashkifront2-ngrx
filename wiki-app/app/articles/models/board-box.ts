@@ -1,8 +1,10 @@
 import { Board } from './board';
+import { Notation } from './notation';
 
 export interface BoardBox {
   id: string;
   articleId: string;
+  boardId: string;
   board: Board;
   whitePlayer: string;
   blackPlayer: string;
@@ -12,4 +14,5 @@ export interface BoardBox {
   date: Date;
   result: string;
   gameType: string;
+  notation: Notation;
 }

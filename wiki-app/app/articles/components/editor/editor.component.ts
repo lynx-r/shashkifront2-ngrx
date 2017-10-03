@@ -20,6 +20,8 @@ import { Store } from '@ngrx/store';
 import * as fromArticles from '../../reducers';
 import { getBoardMode, getSelectedDraught } from '../../reducers/index';
 import { Location } from '@angular/common';
+import { NotationStroke } from '../../models/notation-stroke';
+import { Notation } from '../../models/notation';
 
 @Component({
   selector: 'ac-editor',
@@ -27,10 +29,12 @@ import { Location } from '@angular/common';
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
+  @Output() loadBoard = new EventEmitter<string>();
+
   @Input() edit: boolean;
   @Input() article: Article;
   @Input() boardBox: BoardBox;
-  @Input() notation: string[];
+  @Input() notation: Notation;
 
   rowHeight: number;
 

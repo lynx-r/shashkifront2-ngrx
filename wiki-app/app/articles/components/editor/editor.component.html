@@ -13,7 +13,9 @@
   <md-grid-tile colspan="1">
     <ac-notation
       [blackTurn]="boardBox.board.blackTurn"
+      [rowHeight]="rowHeight"
       [notation]="notation"
+      (loadBoard)="loadBoard.emit($event)"
     ></ac-notation>
   </md-grid-tile>
   <md-grid-tile colspan="6">
