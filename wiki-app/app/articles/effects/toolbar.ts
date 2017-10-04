@@ -19,7 +19,7 @@ export class ToolbarEffects {
     .debounceTime(AppConstants.DEBOUNCE_SAVE)
     .map((action: toolbar.SaveArticle) => action.payload)
     .switchMap((saving: Article) => this.articleService.saveArticle(saving))
-    .map(article => new article.Select(article.id))
+    .map(articleSaved => new article.Select(articleSaved.id))
     .catch(err => of(new article.LoadFail(err)));
 
   @Effect()

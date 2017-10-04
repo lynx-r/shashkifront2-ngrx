@@ -12,15 +12,16 @@
                [(ngModel)]="article.title"
                (blur)="handleArticleChanges()"
                (keyup)="handleArticleChanges()"
+               (paste)="handleArticleChanges()"
         >
       </md-input-container>
       <md-input-container class="fit overflow-scroll">
-      <textarea title="Текст статьи" mdTextareaAutosize class="fit" placeholder="Текст статьи" required mdInput
-                (blur)="handleArticleChanges()"
-                (past)="handleArticleChanges()"
-                (cut)="handleArticleChanges()"
-                (keyup)="handleArticleChanges()"
-                [(ngModel)]="article.content"></textarea>
+        <textarea title="Текст статьи" mdTextareaAutosize class="fit" placeholder="Текст статьи" required mdInput
+                  (blur)="handleArticleChanges()"
+                  (paste)="handleArticleChanges()"
+                  (cut)="handleArticleChanges()"
+                  (keyup)="handleArticleChanges()"
+                  [(ngModel)]="article.content"></textarea>
       </md-input-container>
     </md-tab>
     <md-tab label="Мета информация">
@@ -31,6 +32,7 @@
                [(ngModel)]="boardBox.notation.whitePlayer"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
+               (paste)="handleBoardBoxChanges()"
         >
       </md-input-container>
       <md-input-container class="full-width">
@@ -40,6 +42,7 @@
                [(ngModel)]="boardBox.notation.blackPlayer"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
+               (paste)="handleBoardBoxChanges()"
         >
       </md-input-container>
       <md-input-container class="full-width">
@@ -49,6 +52,7 @@
                [(ngModel)]="boardBox.notation.event"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
+               (paste)="handleBoardBoxChanges()"
         >
       </md-input-container>
       <md-input-container class="full-width">
@@ -58,6 +62,7 @@
                [(ngModel)]="boardBox.notation.site"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
+               (paste)="handleBoardBoxChanges()"
         >
       </md-input-container>
       <md-input-container class="full-width">
@@ -67,6 +72,7 @@
                [(ngModel)]="boardBox.notation.round"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
+               (paste)="handleBoardBoxChanges()"
         >
       </md-input-container>
       <md-input-container class="full-width">
@@ -76,6 +82,7 @@
                [(ngModel)]="boardBox.notation.date"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
+               (paste)="handleBoardBoxChanges()"
         >
       </md-input-container>
       <md-input-container class="full-width">
@@ -85,6 +92,7 @@
                [(ngModel)]="boardBox.notation.result"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
+               (paste)="handleBoardBoxChanges()"
         >
       </md-input-container>
       <md-input-container class="full-width">
@@ -94,6 +102,7 @@
                [(ngModel)]="boardBox.notation.gameType"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
+               (paste)="handleBoardBoxChanges()"
         >
       </md-input-container>
     </md-tab>

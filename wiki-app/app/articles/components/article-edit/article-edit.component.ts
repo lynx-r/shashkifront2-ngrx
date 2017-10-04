@@ -41,6 +41,10 @@ export class ArticleEditComponent implements OnInit {
     }
   }
 
+  handleArticlePaste(event: any) {
+    console.log('paste ', event);
+  }
+
   handleBoardBoxChanges() {
     if (!!this.boardBox) {
       this.store.dispatch(new toolbar.SaveBoardBox(_.merge({}, this.boardBox)));
