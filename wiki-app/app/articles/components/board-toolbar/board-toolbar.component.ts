@@ -16,7 +16,6 @@ import { getSelectedBoard } from '../../reducers/index';
   styleUrls: ['./board-toolbar.component.css'],
 })
 export class BoardToolbarComponent implements OnInit {
-  @Input() edit: boolean;
   @Input() create: boolean;
   @Input() createMode: boolean = true;
 

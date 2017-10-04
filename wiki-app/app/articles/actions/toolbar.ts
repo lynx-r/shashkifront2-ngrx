@@ -17,7 +17,7 @@ export const SAVE_BOARD_BOX = '[Toolbar] Save board box';
  * Save and update board in board box
  * @type {string}
  */
-export const UPDATE_BOARD_BOX = '[Toolbar] Update board box';
+export const LOAD_BOARD = '[Toolbar] Update board box';
 
 export class DraughtSelect implements Action {
   readonly type = DRAUGHT_SELECTED;
@@ -49,8 +49,8 @@ export class SaveBoardBox implements Action {
   constructor(public payload: BoardBox) {}
 }
 
-export class UpdateBoardBox implements Action {
-  readonly type = UPDATE_BOARD_BOX;
+export class LoadBoard implements Action {
+  readonly type = LOAD_BOARD;
 
   constructor(public payload: BoardBox) {}
 }
@@ -58,7 +58,7 @@ export class UpdateBoardBox implements Action {
 export type Actions =
   | SaveArticle
   | SaveBoardBox
-  | UpdateBoardBox
+  | LoadBoard
   | DraughtSelect
   | PlaceModeToggle
   | OpenCreateArticleDialog;

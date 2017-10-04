@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import 'rxjs/Rx';
 import * as article from '../actions/article';
 import * as board from '../actions/board';
-import * as toolbar from '../actions/toolbar';
 import { Article } from '../models/article';
 import { Observable } from 'rxjs/Observable';
 import { BoardBox } from '../models/board-box';
@@ -38,7 +37,6 @@ import { Notation } from '../models/notation';
                [article]="article$ | async"
                [boardBox]="boardBox$ | async"
                [notation]="notation$ | async"
-               (loadBoard)="handleLoadBoard($event)"
     ></ac-editor>
   `,
 })
@@ -91,13 +89,7 @@ export class EditArticlePageComponent implements OnDestroy {
 
     this.notation$ = this.store
       .select(fromArticles.getSelectedBoard)
-      .map(boardBox => {
-        if (!!boardBox) {
-          return this.formatNotation(boardBox.notation);
-        } else {
-          return null;
-        }
-      });
+      .map(boardBox => !!boardBox && boardBox.notation);
 
     this.selectedDraught$ = this.store.select(fromArticles.getSelectedDraught);
 
@@ -194,24 +186,5 @@ export class EditArticlePageComponent implements OnDestroy {
         this.store.dispatch(new OpenCreateArticleDialog(false));
       }
     });
-  }
-
-  formatNotation(notation: Notation): Notation {
-    console.log('NOTATION', notation);
-    return notation;
-  }
-
-  handleLoadBoard(boardId: string) {
-    this.store
-      .select(getSelectedBoard)
-      .do((boardBox: BoardBox) => {
-        let updated = {
-          ...boardBox,
-          boardId: boardId,
-        };
-        this.store.dispatch(new toolbar.UpdateBoardBox(updated));
-      })
-      .take(1)
-      .subscribe();
   }
 }

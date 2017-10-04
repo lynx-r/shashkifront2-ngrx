@@ -11,6 +11,7 @@ import * as article from '../actions/article';
 import * as board from '../actions/board';
 import * as fromArticles from '../reducers';
 import { ActivatedRoute } from '@angular/router';
+import { Notation } from '../models/notation';
 
 @Component({
   selector: 'bc-view-article-page-component',
@@ -18,6 +19,7 @@ import { ActivatedRoute } from '@angular/router';
     <ac-editor [edit]="false"
                [article]="article$ | async"
                [boardBox]="boardBox$ | async"
+               [notation]="notation$ | async"
     ></ac-editor>
   `,
   styles: [],
@@ -27,6 +29,7 @@ export class ViewArticlePageComponent {
   boardSubscription: Subscription;
   article$: Observable<Article>;
   boardBox$: Observable<BoardBox>;
+  notation$: Observable<Notation>;
 
   constructor(
     private store: Store<fromArticles.State>,
@@ -46,6 +49,10 @@ export class ViewArticlePageComponent {
 
     this.article$ = this.store.select(fromArticles.getSelectedArticle);
     this.boardBox$ = this.store.select(fromArticles.getSelectedBoard);
+
+    this.notation$ = this.store
+      .select(fromArticles.getSelectedBoard)
+      .map(boardBox => !!boardBox && boardBox.notation);
   }
 
   ngOnDestroy() {

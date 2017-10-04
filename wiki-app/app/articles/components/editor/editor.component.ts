@@ -18,10 +18,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { CookieService } from 'ngx-cookie';
 import { Store } from '@ngrx/store';
 import * as fromArticles from '../../reducers';
-import { getBoardMode, getSelectedDraught } from '../../reducers/index';
+import {
+  getBoardMode,
+  getSelectedBoard,
+  getSelectedDraught,
+} from '../../reducers/index';
 import { Location } from '@angular/common';
 import { NotationStroke } from '../../models/notation-stroke';
 import { Notation } from '../../models/notation';
+import * as toolbar from '../../actions/toolbar';
 
 @Component({
   selector: 'ac-editor',
@@ -53,5 +58,19 @@ export class EditorComponent implements OnInit {
 
   handleBack() {
     this.location.back();
+  }
+
+  handleLoadBoard(boardId: string) {
+    this.store
+      .select(getSelectedBoard)
+      .do((boardBox: BoardBox) => {
+        let updated = {
+          ...boardBox,
+          boardId: boardId,
+        };
+        this.store.dispatch(new toolbar.LoadBoard(updated));
+      })
+      .take(1)
+      .subscribe();
   }
 }

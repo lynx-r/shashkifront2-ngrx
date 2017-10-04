@@ -33,9 +33,9 @@ export class ToolbarEffects {
 
   @Effect()
   updateBoardBox: Observable<Action> = this.actions$
-    .ofType(toolbar.UPDATE_BOARD_BOX)
-    .map((action: toolbar.UpdateBoardBox) => action.payload)
-    .switchMap(saving => this.boardBoxService.updateBoardBox(saving))
+    .ofType(toolbar.LOAD_BOARD)
+    .map((action: toolbar.LoadBoard) => action.payload)
+    .switchMap(saving => this.boardBoxService.loadBoardBoard(saving))
     .map(updated => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 

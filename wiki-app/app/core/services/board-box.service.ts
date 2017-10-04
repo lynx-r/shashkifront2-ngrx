@@ -75,9 +75,9 @@ export class BoardBoxService {
     );
   }
 
-  updateBoardBox(boardBox: BoardBox) {
+  loadBoardBoard(boardBox: BoardBox) {
     return this.apiBoardBoxService.put(
-      AppConstants.BOARD_RESOURCE + '/update',
+      AppConstants.BOARD_RESOURCE + '/load-board',
       Utils.resetSquaresOnBoardBox(boardBox)
     );
   }

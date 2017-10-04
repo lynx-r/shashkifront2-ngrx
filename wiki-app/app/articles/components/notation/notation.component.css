@@ -3,8 +3,16 @@
   font-size:18px;
   overflow-y: scroll;
 }
+.notation-stroke{
+  margin-top: 4px;
+}
 .notation-link {
   text-decoration: underline;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+.cursor {
+  background-color: orange;
 }
 .white-turn {
   background-color: floralwhite;

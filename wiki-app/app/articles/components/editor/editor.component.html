@@ -1,7 +1,7 @@
 <button md-button (click)="handleBack()">
   Назад
 </button>
-<ac-board-toolbar [edit]="edit" [create]="!article" [createMode]="!!article"></ac-board-toolbar>
+<ac-board-toolbar *ngIf="edit" [create]="!article" [createMode]="!!article"></ac-board-toolbar>
 <md-grid-list #editorGrid *ngIf="article; else createArticle" cols="12" [rowHeight]="rowHeight">
   <md-grid-tile colspan="5">
     <ac-board #boardRef
@@ -15,7 +15,7 @@
       [blackTurn]="boardBox.board.blackTurn"
       [rowHeight]="rowHeight"
       [notation]="notation"
-      (loadBoard)="loadBoard.emit($event)"
+      (loadBoard)="handleLoadBoard($event)"
     ></ac-notation>
   </md-grid-tile>
   <md-grid-tile colspan="5">
