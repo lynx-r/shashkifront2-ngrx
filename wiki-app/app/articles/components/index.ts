@@ -19,6 +19,8 @@ import { NotationComponent } from './notation/notation.component';
 import { MaterialModule } from '../../material.module';
 import { PlaceDraughtRowComponent } from './board-toolbar/row/place-draught-row.component';
 import { ArticleEditComponent } from './article-edit/article-edit.component';
+import { NotationStrokeComponent } from './notation/notation-stroke.component';
+import { NotationMenuComponent } from './notation/notation-alternative-menu.component';
 
 export const COMPONENTS = [
   EditorComponent,
@@ -28,6 +30,8 @@ export const COMPONENTS = [
   CreateArticleDialogComponent,
   BoardComponent,
   NotationComponent,
+  NotationStrokeComponent,
+  NotationMenuComponent,
   SquareComponent,
   DraughtComponent,
   ArticleViewComponent,

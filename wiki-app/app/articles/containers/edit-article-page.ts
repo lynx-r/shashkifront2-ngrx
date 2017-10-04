@@ -89,6 +89,9 @@ export class EditArticlePageComponent implements OnDestroy {
 
     this.notation$ = this.store
       .select(fromArticles.getSelectedBoard)
+      .do(boardBox =>
+        console.log('NOTATION', boardBox.notation.notationStrokes)
+      )
       .map(boardBox => !!boardBox && boardBox.notation);
 
     this.selectedDraught$ = this.store.select(fromArticles.getSelectedDraught);

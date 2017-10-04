@@ -1,0 +1,17 @@
+<div [style.height.px]="rowHeight">
+  <div>
+    Ход <span class="white-turn" *ngIf="!blackTurn">Белых</span><span class="black-turn"
+                                                                      *ngIf="blackTurn">Чёрных</span>
+  </div>
+  <div class="notation">
+    <div *ngFor="let stroke of notation.notationStrokes" class="notation-stroke">
+          <span>
+            {{stroke.count}}.
+          </span>
+      <bc-notation-stroke *ngIf="!!stroke.first" [stroke]="stroke.first"
+                          (loadBoard)="loadBoard.emit($event)"></bc-notation-stroke>
+      <bc-notation-stroke *ngIf="!!stroke.second" [stroke]="stroke.second"
+                          (loadBoard)="loadBoard.emit($event)"></bc-notation-stroke>
+    </div>
+  </div>
+</div>

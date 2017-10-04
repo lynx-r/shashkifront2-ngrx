@@ -19,7 +19,7 @@ import { Article } from '../models/article';
         </md-card-subtitle>
       </md-card-title-group>
       <md-card-content>
-        <p>{{ article.content | acEllipsis }}</p>
+        <p>{{ article.content | acEllipsis:150 }}</p>
       </md-card-content>
       <md-card-footer>
         <p>
