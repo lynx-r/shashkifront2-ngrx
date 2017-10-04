@@ -1,5 +1,8 @@
 <md-card class="fit overflow-scroll">
-  <md-tab-group>
+  <md-tab-group [selectedIndex]="selectedInfoTab"
+                [disableRipple]="true"
+                [dynamicHeight]="true"
+                (selectedIndexChange)="handleTabChange($event)">
     <md-tab label="Статья">
       <md-input-container class="full-width">
         <input mdInput
@@ -25,7 +28,7 @@
         <input mdInput
                title="Игрок белыми"
                placeholder="Игрок белыми"
-               [(ngModel)]="boardBox.whitePlayer"
+               [(ngModel)]="boardBox.notation.whitePlayer"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
         >
@@ -34,7 +37,7 @@
         <input mdInput
                title="Игрок чёрными"
                placeholder="Игрок чёрными"
-               [(ngModel)]="boardBox.blackPlayer"
+               [(ngModel)]="boardBox.notation.blackPlayer"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
         >
@@ -43,7 +46,7 @@
         <input mdInput
                title="Событие"
                placeholder="Событие"
-               [(ngModel)]="boardBox.event"
+               [(ngModel)]="boardBox.notation.event"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
         >
@@ -52,7 +55,7 @@
         <input mdInput
                title="Место"
                placeholder="Место"
-               [(ngModel)]="boardBox.site"
+               [(ngModel)]="boardBox.notation.site"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
         >
@@ -61,7 +64,7 @@
         <input mdInput
                title="Раунд"
                placeholder="Раунд"
-               [(ngModel)]="boardBox.round"
+               [(ngModel)]="boardBox.notation.round"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
         >
@@ -70,7 +73,7 @@
         <input mdInput
                title="Дата"
                placeholder="Дата"
-               [(ngModel)]="boardBox.date"
+               [(ngModel)]="boardBox.notation.date"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
         >
@@ -79,7 +82,7 @@
         <input mdInput
                title="Результат"
                placeholder="Результат"
-               [(ngModel)]="boardBox.result"
+               [(ngModel)]="boardBox.notation.result"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
         >
@@ -88,7 +91,7 @@
         <input mdInput
                title="Тип игры"
                placeholder="Тип игры"
-               [(ngModel)]="boardBox.gameType"
+               [(ngModel)]="boardBox.notation.gameType"
                (blur)="handleBoardBoxChanges()"
                (keyup)="handleBoardBoxChanges()"
         >

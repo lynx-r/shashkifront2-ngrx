@@ -30,4 +30,5 @@ export class AppConstants {
     10: 'j',
   };
   static SIMPLE_STROKE: string = 'SIMPLE';
+  static ARTICLE_INFO_TAB_COOKIE: string = 'article-info-tab';
 }

@@ -1,9 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Article } from '../../models/article';
 import { Store } from '@ngrx/store';
 import * as fromArticles from '../../reducers';
 import * as toolbar from '../../actions/toolbar';
 import { BoardBox } from '../../models/board-box';
+import * as _ from 'lodash';
+import { MdTabGroup } from '@angular/material';
+import { CookieService } from 'ngx-cookie';
+import { AppConstants } from '../../../core/services/app-constants';
 
 @Component({
   selector: 'bc-article-edit',
@@ -14,11 +18,20 @@ export class ArticleEditComponent implements OnInit {
   @Input() article: Article;
   @Input() boardBox: BoardBox;
 
-  constructor(private store: Store<fromArticles.State>) {}
+  selectedInfoTab: number;
+
+  constructor(
+    private store: Store<fromArticles.State>,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit() {
     this.article = { ...this.article };
-    this.boardBox = { ...this.boardBox };
+    this.boardBox = _.merge({}, this.boardBox);
+    this.selectedInfoTab = +this.cookieService.get(
+      AppConstants.ARTICLE_INFO_TAB_COOKIE
+    );
+    console.log('SELECT TAB', this.selectedInfoTab);
   }
 
   handleArticleChanges() {
@@ -30,7 +43,12 @@ export class ArticleEditComponent implements OnInit {
 
   handleBoardBoxChanges() {
     if (!!this.boardBox) {
-      this.store.dispatch(new toolbar.SaveBoardBox({ ...this.boardBox }));
+      this.store.dispatch(new toolbar.SaveBoardBox(_.merge({}, this.boardBox)));
     }
+  }
+
+  handleTabChange(event: any) {
+    console.log(event);
+    this.cookieService.put(AppConstants.ARTICLE_INFO_TAB_COOKIE, event);
   }
 }
