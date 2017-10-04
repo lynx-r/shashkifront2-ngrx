@@ -74,4 +74,11 @@ export class BoardBoxService {
       Utils.resetSquaresOnBoardBox(boardBox)
     );
   }
+
+  updateBoardBox(boardBox: BoardBox) {
+    return this.apiBoardBoxService.put(
+      AppConstants.BOARD_RESOURCE + '/update',
+      Utils.resetSquaresOnBoardBox(boardBox)
+    );
+  }
 }

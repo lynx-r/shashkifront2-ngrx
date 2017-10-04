@@ -9,6 +9,7 @@ import * as board from '../actions/board';
 import { Injectable } from '@angular/core';
 import { AppConstants } from '../../core/services/app-constants';
 import { BoardBoxService } from '../../core/services/board-box.service';
+import { Article } from '../models/article';
 
 @Injectable()
 export class ToolbarEffects {
@@ -17,8 +18,8 @@ export class ToolbarEffects {
     .ofType(toolbar.SAVE_ARTICLE)
     .debounceTime(AppConstants.DEBOUNCE_SAVE)
     .map((action: toolbar.SaveArticle) => action.payload)
-    .switchMap(saving => this.articleService.saveArticle(saving))
-    .map(saved => new article.Update(saved))
+    .switchMap((saving: Article) => this.articleService.saveArticle(saving))
+    .map(article => new article.Select(article.id))
     .catch(err => of(new article.LoadFail(err)));
 
   @Effect()
@@ -27,7 +28,15 @@ export class ToolbarEffects {
     .debounceTime(AppConstants.DEBOUNCE_SAVE)
     .map((action: toolbar.SaveBoardBox) => action.payload)
     .switchMap(saving => this.boardBoxService.saveBoardBox(saving))
-    .map(saved => new board.Update(saved))
+    .map(boardBox => new board.Select(boardBox.id))
+    .catch(err => of(new board.LoadFail(err)));
+
+  @Effect()
+  updateBoardBox: Observable<Action> = this.actions$
+    .ofType(toolbar.UPDATE_BOARD_BOX)
+    .map((action: toolbar.UpdateBoardBox) => action.payload)
+    .switchMap(saving => this.boardBoxService.updateBoardBox(saving))
+    .map(updated => new board.Update(updated))
     .catch(err => of(new board.LoadFail(err)));
 
   constructor(

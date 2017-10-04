@@ -15,7 +15,7 @@ import { AppConstants } from '../../../core/services/app-constants';
   template: `
     <div [style.height.px]="rowHeight">
       <div>
-        Ход {{ blackTurn ? 'Чёрных' : 'Белых' }}
+        Ход <span class="white-turn" *ngIf="!blackTurn">Белых</span><span class="black-turn" *ngIf="blackTurn">Чёрных</span>
       </div>
       <div class="notation">
         <div *ngFor="let stroke of notation.notationStrokes">

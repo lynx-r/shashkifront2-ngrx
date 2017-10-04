@@ -16,7 +16,7 @@ export class AppConstants {
   static EDIT_MODE_COOKIE: string = 'edit-mode-cookie';
   static SIGN_REQUEST: string = 'signRequest';
   static SIGN: string = 'sign';
-  static DEBOUNCE_SAVE = 1000;
+  static DEBOUNCE_SAVE = 500;
   static ALPH: { [key: number]: string } = {
     1: 'a',
     2: 'b',
@@ -29,6 +29,5 @@ export class AppConstants {
     9: 'i',
     10: 'j',
   };
-  static NOTATION_NEW_LINE: string = '#';
   static SIMPLE_STROKE: string = 'SIMPLE';
 }

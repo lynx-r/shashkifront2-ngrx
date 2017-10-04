@@ -19,11 +19,11 @@ export class ArticleEditComponent implements OnInit {
   ngOnInit() {
     this.article = { ...this.article };
     this.boardBox = { ...this.boardBox };
-    console.log('BOARDBOX SEL', this.boardBox);
   }
 
   handleArticleChanges() {
     if (!!this.article) {
+      console.log('ARTICLE', this.article);
       this.store.dispatch(new toolbar.SaveArticle({ ...this.article }));
     }
   }

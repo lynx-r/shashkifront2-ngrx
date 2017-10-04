@@ -8,7 +8,16 @@ export const PLACE_MODE_TOGGLED = '[Toolbar] Place mode toggled';
 export const OPEN_CREATE_ARTICLE_DIALOG =
   '[Toolbar] Open create article dialog';
 export const SAVE_ARTICLE = '[Toolbar] Save article';
+/**
+ * Save board box
+ * @type {string}
+ */
 export const SAVE_BOARD_BOX = '[Toolbar] Save board box';
+/**
+ * Save and update board in board box
+ * @type {string}
+ */
+export const UPDATE_BOARD_BOX = '[Toolbar] Update board box';
 
 export class DraughtSelect implements Action {
   readonly type = DRAUGHT_SELECTED;
@@ -40,9 +49,16 @@ export class SaveBoardBox implements Action {
   constructor(public payload: BoardBox) {}
 }
 
+export class UpdateBoardBox implements Action {
+  readonly type = UPDATE_BOARD_BOX;
+
+  constructor(public payload: BoardBox) {}
+}
+
 export type Actions =
   | SaveArticle
   | SaveBoardBox
+  | UpdateBoardBox
   | DraughtSelect
   | PlaceModeToggle
   | OpenCreateArticleDialog;

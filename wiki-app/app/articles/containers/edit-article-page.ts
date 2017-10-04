@@ -209,7 +209,7 @@ export class EditArticlePageComponent implements OnDestroy {
           ...boardBox,
           boardId: boardId,
         };
-        this.store.dispatch(new toolbar.SaveBoardBox(updated));
+        this.store.dispatch(new toolbar.UpdateBoardBox(updated));
       })
       .take(1)
       .subscribe();

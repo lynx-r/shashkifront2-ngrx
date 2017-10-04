@@ -10,7 +10,7 @@
               [style.backgroundColor]="backgroundColor"
     ></ac-board>
   </md-grid-tile>
-  <md-grid-tile colspan="1">
+  <md-grid-tile colspan="2">
     <ac-notation
       [blackTurn]="boardBox.board.blackTurn"
       [rowHeight]="rowHeight"
@@ -18,7 +18,7 @@
       (loadBoard)="loadBoard.emit($event)"
     ></ac-notation>
   </md-grid-tile>
-  <md-grid-tile colspan="6">
+  <md-grid-tile colspan="5">
     <bc-article-view *ngIf="!edit" class="fit" [article]="article"></bc-article-view>
     <bc-article-edit *ngIf="edit" class="fit" [article]="article" [boardBox]="boardBox"></bc-article-edit>
   </md-grid-tile>

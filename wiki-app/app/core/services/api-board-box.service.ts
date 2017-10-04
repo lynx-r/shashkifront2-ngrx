@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class ApiBoardBoxService extends ApiBase {
-  constructor(private http: Http, private router: ActivatedRoute) {
+  constructor(private http: Http) {
     super();
   }
 
