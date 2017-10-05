@@ -4,7 +4,7 @@
                                                                       *ngIf="blackTurn">Чёрных</span>
   </div>
   <div class="notation">
-    <div *ngFor="let stroke of notation.notationStrokes" class="notation-stroke">
+    <div *ngFor="let stroke of notation" class="notation-stroke">
           <span>
             {{stroke.count}}.
           </span>

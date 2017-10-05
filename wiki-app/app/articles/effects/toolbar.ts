@@ -19,7 +19,7 @@ export class ToolbarEffects {
     .debounceTime(AppConstants.DEBOUNCE_SAVE)
     .map((action: toolbar.SaveArticle) => action.payload)
     .switchMap((saving: Article) => this.articleService.saveArticle(saving))
-    .map(articleSaved => new article.Select(articleSaved.id))
+    .map(articleSaved => new article.Update(articleSaved))
     .catch(err => of(new article.LoadFail(err)));
 
   @Effect()
@@ -28,7 +28,7 @@ export class ToolbarEffects {
     .debounceTime(AppConstants.DEBOUNCE_SAVE)
     .map((action: toolbar.SaveBoardBox) => action.payload)
     .switchMap(saving => this.boardBoxService.saveBoardBox(saving))
-    .map(boardBox => new board.Select(boardBox.id))
+    .map(boardBox => new board.Update(boardBox))
     .catch(err => of(new board.LoadFail(err)));
 
   @Effect()

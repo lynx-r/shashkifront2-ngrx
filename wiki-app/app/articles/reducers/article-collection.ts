@@ -25,6 +25,9 @@ export function reducer(
     }
 
     case articleCollection.LOAD_SUCCESS: {
+      if (!action.payload) {
+        return state;
+      }
       return {
         ...state,
         loaded: true,

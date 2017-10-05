@@ -80,7 +80,7 @@ import { AppConstants } from './core/services/app-constants';
      * `provideDB` sets up @ngrx/db with the provided schema and makes the Database
      * service available.
      */
-    DBModule.provideDB(schema),
+    // DBModule.provideDB(schema),
 
     CoreModule.forRoot(),
 

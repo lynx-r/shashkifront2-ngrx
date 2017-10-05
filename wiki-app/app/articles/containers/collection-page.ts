@@ -44,6 +44,6 @@ export class CollectionPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new collection.Load(AppConstants.PAGE_SIZE));
+    this.store.dispatch(new collection.Load(AppConstants.ARTICLE_PAGE_SIZE));
   }
 }

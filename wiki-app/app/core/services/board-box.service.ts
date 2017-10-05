@@ -62,7 +62,7 @@ export class BoardBoxService {
   }
 
   makeWhiteStroke(boardBox: BoardBox) {
-    return this.apiBoardBoxService.post(
+    return this.apiBoardBoxService.put(
       AppConstants.BOARD_RESOURCE + '/make-white-stroke',
       Utils.resetSquaresOnBoardBox(boardBox)
     );
@@ -76,7 +76,7 @@ export class BoardBoxService {
   }
 
   loadBoardBoard(boardBox: BoardBox) {
-    return this.apiBoardBoxService.put(
+    return this.apiBoardBoxService.post(
       AppConstants.BOARD_RESOURCE + '/load-board',
       Utils.resetSquaresOnBoardBox(boardBox)
     );

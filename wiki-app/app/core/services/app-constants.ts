@@ -32,14 +32,14 @@ export class AppConstants {
   static REDO: string = '/redo';
 
   static HOST: string = 'http://localhost:4200';
-  static PAGE_SIZE: number = 50;
+  static ARTICLE_PAGE_SIZE: number = 50;
   static PLACE_MODE: string = 'place';
   static WRITE_MODE: string = 'write';
   static ARTICLE_CREATE_COOKIE: string = 'article-create-cookie';
   static DRAUGHT_PLACE_COOKIE: string = 'draught-place-cookie';
   static DELETE_DRAUGHT_CHECKED_COOKIE: string = 'delete-draught-checked';
   static EDIT_MODE_COOKIE: string = 'edit-mode-cookie';
-  static SIGN_REQUEST: string = 'signRequest';
+  static SIGN_REQUEST: string = 'sign-request';
   static SIGN: string = 'sign';
   static DEBOUNCE_SAVE = 500;
   static SIMPLE_STROKE: string = 'SIMPLE';

@@ -12,6 +12,7 @@ import * as board from '../actions/board';
 import * as fromArticles from '../reducers';
 import { ActivatedRoute } from '@angular/router';
 import { Notation } from '../models/notation';
+import { NotationStroke } from '../models/notation-stroke';
 
 @Component({
   selector: 'bc-view-article-page-component',
@@ -29,7 +30,7 @@ export class ViewArticlePageComponent {
   boardSubscription: Subscription;
   article$: Observable<Article>;
   boardBox$: Observable<BoardBox>;
-  notation$: Observable<Notation>;
+  notation$: Observable<NotationStroke[]>;
 
   constructor(
     private store: Store<fromArticles.State>,
@@ -52,7 +53,7 @@ export class ViewArticlePageComponent {
 
     this.notation$ = this.store
       .select(fromArticles.getSelectedBoard)
-      .map(boardBox => !!boardBox && boardBox.notation);
+      .map(boardBox => !!boardBox && boardBox.notation.notationStrokes);
   }
 
   ngOnDestroy() {

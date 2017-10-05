@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Article } from '../models/article';
+import { BoardBox } from '../models/board-box';
 
 export const SEARCH = '[Article] Search';
 export const SEARCH_COMPLETE = '[Article] Search Complete';
