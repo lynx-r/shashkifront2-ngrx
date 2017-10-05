@@ -50,6 +50,14 @@
   box-shadow: 1px 1px 10px 0 black;
 }
 
+.draught-mobile {
+  border-width: 1px !important;
+}
+
+.draught-mobile:before {
+  border-width: 1px !important;
+}
+
 .captured {
   color: brown !important;
 }
