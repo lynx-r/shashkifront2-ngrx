@@ -37,7 +37,7 @@ export class AppConstants {
   static WRITE_MODE: string = 'write';
   static ARTICLE_CREATE_COOKIE: string = 'article-create-cookie';
   static DRAUGHT_PLACE_COOKIE: string = 'draught-place-cookie';
-  static DELETE_DRAUGHT_CHECKED_COOKIE: string = 'delete-draught-checked';
+  static DELETE_DRAUGHT_CHECKED_COOKIE: string = 'delete-draught-checked-cookie';
   static EDIT_MODE_COOKIE: string = 'edit-mode-cookie';
   static SIGN_REQUEST: string = 'sign-request';
   static SIGN: string = 'sign';

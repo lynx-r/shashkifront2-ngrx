@@ -30,6 +30,7 @@ import { httpFactory } from './core/interceptors/http.factory';
 import { DateAdapter, MD_DATE_FORMATS } from '@angular/material';
 import { MyDateAdapter } from './my-date-adapter';
 import { AppConstants } from './core/services/app-constants';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { AppConstants } from './core/services/app-constants';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    FlexLayoutModule,
     RouterModule.forRoot(routes, { useHash: true }),
 
     CookieModule.forRoot(),

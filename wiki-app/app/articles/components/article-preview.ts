@@ -22,9 +22,9 @@ import { Article } from '../models/article';
         <p>{{ article.content | acEllipsis:150 }}</p>
       </md-card-content>
       <md-card-footer>
-        <p>
-          Автор: {{ article.author ? article.author : 'Новый автор' }}
-        </p>
+        <!--<p>-->
+          <!--Автор: {{ article.author ? article.author : 'Новый автор' }}-->
+        <!--</p>-->
         <p>
           Опубликовано: {{ article.createdAt | date:'medium' }}
         </p>

@@ -2,15 +2,16 @@
   Назад
 </button>
 <ac-board-toolbar *ngIf="edit" [create]="!article" [createMode]="!!article"></ac-board-toolbar>
-<md-grid-list #editorGrid *ngIf="article; else createArticle" cols="12" [rowHeight]="rowHeight">
-  <md-grid-tile colspan="5">
+<md-grid-list #editorGrid *ngIf="article; else createArticle" [cols]="cols | async"
+              [rowHeight]="rowHeight">
+  <md-grid-tile [colspan]="((cols | async) == 2) ? 1 : 5">
     <ac-board #boardRef
               class="fit"
               [board]="boardBox.board"
               [style.backgroundColor]="backgroundColor"
     ></ac-board>
   </md-grid-tile>
-  <md-grid-tile colspan="2">
+  <md-grid-tile [colspan]="((cols | async) == 2) ? 1 : 2">
     <ac-notation
       [blackTurn]="boardBox.board.blackTurn"
       [rowHeight]="rowHeight"
@@ -18,7 +19,7 @@
       (loadBoard)="handleLoadBoard($event)"
     ></ac-notation>
   </md-grid-tile>
-  <md-grid-tile colspan="5">
+  <md-grid-tile [colspan]="((cols | async) == 2) ? 2 : 5">
     <bc-article-view *ngIf="!edit" class="fit" [article]="article"></bc-article-view>
     <bc-article-edit *ngIf="edit" class="fit" [article]="article" [boardBox]="boardBox"></bc-article-edit>
   </md-grid-tile>

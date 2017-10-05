@@ -52,7 +52,7 @@ export class DialogService {
           ...initArticle.article,
         },
       },
-      width: '40rem',
+      width: '600px',
     });
 
     return dialogRef
