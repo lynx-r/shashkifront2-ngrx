@@ -5,15 +5,13 @@ import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/articles', pathMatch: 'full' },
-  // {
-  //   path: 'index',
-  //   component: HomeComponent,
-  //   canActivate: [AuthGuard],
-  // },
+  {
+    path: 'about',
+    loadChildren: './home/home.module#HomeModule',
+  },
   {
     path: 'articles',
     loadChildren: './articles/articles.module#ArticlesModule',
-    // canActivate: [AuthGuard],
   },
   { path: '**', component: NotFoundPageComponent },
 ];

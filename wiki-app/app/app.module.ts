@@ -7,7 +7,6 @@ import { Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { DBModule } from '@ngrx/db';
 import {
   StoreRouterConnectingModule,
   RouterStateSerializer,
@@ -19,17 +18,12 @@ import { AuthModule } from './auth/auth.module';
 
 import { routes } from './routes';
 import { reducers, metaReducers } from './reducers';
-import { schema } from './db';
 import { CustomRouterStateSerializer } from './shared/utils';
 
 import { AppComponent } from './core/containers/app';
 import { environment } from '../environments/environment';
 import { CookieModule } from 'ngx-cookie';
-import { HomeComponent } from './home/home.component';
 import { httpFactory } from './core/interceptors/http.factory';
-import { DateAdapter, MD_DATE_FORMATS } from '@angular/material';
-import { MyDateAdapter } from './my-date-adapter';
-import { AppConstants } from './core/services/app-constants';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -102,6 +96,5 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     },
   ],
   bootstrap: [AppComponent],
-  declarations: [HomeComponent],
 })
 export class AppModule {}

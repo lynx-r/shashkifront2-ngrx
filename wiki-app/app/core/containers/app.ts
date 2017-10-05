@@ -28,16 +28,13 @@ import { AppConstants } from '../services/app-constants';
   template: `
     <block-ui>
       <ac-layout>
-        <!--<ac-sidenav [open]="showSidenav$ | async">-->
-        <!--<ac-nav-item (navigate)="closeSidenav()" routerLink="/articles/create"-->
-        <!--icon="article"-->
-        <!--hint="Написать статью">-->
-        <!--Новая статья-->
-        <!--</ac-nav-item>-->
-        <!--<ac-nav-item (navigate)="closeSidenav()" routerLink="/articles" hint="Все статьи сайта" icon="">-->
-        <!--Статьи-->
-        <!--</ac-nav-item>-->
-        <!--</ac-sidenav>-->
+        <ac-sidenav [open]="showSidenav$ | async">
+          <ac-nav-item (navigate)="closeSidenav()" routerLink="/articles/create"
+                       icon="article"
+                       hint="Написать новую статью">
+            Новая статья
+          </ac-nav-item>
+        </ac-sidenav>
         <ac-toolbar (openMenu)="openSidenav()">
         </ac-toolbar>
 

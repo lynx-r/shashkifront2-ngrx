@@ -7,19 +7,31 @@ import * as fromRoot from '../../reducers';
   selector: 'ac-toolbar',
   template: `
     <md-toolbar color="primary">
-      <!--<button md-icon-button (click)="openMenu.emit()">-->
-        <!--<md-icon>menu</md-icon>-->
-      <!--</button>-->
+      <button md-icon-button (click)="openMenu.emit()">
+        <md-icon>menu</md-icon>
+      </button>
       <ng-content></ng-content>
 
-      <button md-button [routerLink]="['articles']" title="Все статьи">
+      <button md-button [routerLink]="['articles']" routerLinkActive="active" title="Все статьи">
         Статьи
       </button>
-      <button md-button [routerLink]="['articles', 'create']" title="Написать новую статью">
-        Новая статья
+      <div class="fill-remaining-space"></div>
+      <button md-button [routerLink]="['about']" routerLinkActive="active" title="О сайте">
+        О сайте
       </button>
     </md-toolbar>
   `,
+  styles: [
+    `
+      .fill-remaining-space {
+        flex: 1 1 auto;
+      }
+
+      .active {
+        color: #fff59f;
+      }
+    `,
+  ],
 })
 export class ToolbarComponent {
   @Output() openMenu = new EventEmitter();

@@ -17,6 +17,7 @@ import { NotationStroke } from '../../models/notation-stroke';
       text-decoration: underline;
       border-radius: 4px;
       margin-right: 8px;
+      cursor: pointer;
     }
 
     .cursor {
