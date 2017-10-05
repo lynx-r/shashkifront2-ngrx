@@ -12,6 +12,7 @@
 }
 
 .draught {
+  cursor: pointer;
   width: 80%;
   height: 80%;
   display: flex;
@@ -35,6 +36,7 @@
 }
 
 .draught-queen {
+  cursor: pointer;
   width: 80%;
   height: 80%;
   display: flex;

@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
       <div #draughtRef
            [ngStyle]="{'color': draught?.black ? 'black' : 'white'}"
            [ngClass]="{
-        'draught-mobile': mobile,
+        'draught-mobile': (mobile | async),
         'captured' : draught?.captured,
         'highlight': draught?.highlighted,
         'draught': !draught?.queen,
@@ -33,11 +33,11 @@ export class DraughtComponent implements OnInit {
 
   ngOnInit() {
     const grid = new Map([
-      ['xs', false],
-      ['sm', false],
-      ['md', true],
-      ['lg', true],
-      ['xl', true],
+      ['xs', true],
+      ['sm', true],
+      ['md', false],
+      ['lg', false],
+      ['xl', false],
     ]);
     let start: boolean;
     grid.forEach((border, mqAlias) => {

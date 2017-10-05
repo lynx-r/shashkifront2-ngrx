@@ -46,4 +46,5 @@ export class AppConstants {
   static ARTICLE_INFO_TAB_COOKIE: string = 'article-info-tab';
   static SIMPLE_STROKE_NOTATION: string = '-';
   static CAPTURE_STROKE_NOTATION: string = ':';
+  static PAGE_LOADING_MESSAGE: string = 'Загрузка страницы...';
 }

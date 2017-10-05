@@ -9,6 +9,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -ms-overflow-style: none;
   overflow: auto;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .fill-remaining-space {
