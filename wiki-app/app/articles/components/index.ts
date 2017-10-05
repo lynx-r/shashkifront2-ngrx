@@ -21,6 +21,9 @@ import { PlaceDraughtRowComponent } from './board-toolbar/row/place-draught-row.
 import { ArticleEditComponent } from './article-edit/article-edit.component';
 import { NotationStrokeComponent } from './notation/notation-stroke.component';
 import { NotationMenuComponent } from './notation/notation-alternative-menu.component';
+import { DateAdapter, MD_DATE_FORMATS } from '@angular/material';
+import { MyDateAdapter } from '../../my-date-adapter';
+import { AppConstants } from '../../core/services/app-constants';
 
 export const COMPONENTS = [
   EditorComponent,

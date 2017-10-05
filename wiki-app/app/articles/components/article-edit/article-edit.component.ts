@@ -17,6 +17,9 @@ import { AppConstants } from '../../../core/services/app-constants';
 export class ArticleEditComponent implements OnInit {
   @Input() article: Article;
   @Input() boardBox: BoardBox;
+  userArticle: Article;
+  userBoardBox: BoardBox;
+  eventDate: Date;
 
   selectedInfoTab: number;
 
@@ -26,8 +29,8 @@ export class ArticleEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.article = { ...this.article };
-    this.boardBox = _.merge({}, this.boardBox);
+    this.userArticle = _.merge({}, this.article);
+    this.userBoardBox = _.merge({}, this.boardBox);
     this.selectedInfoTab = +this.cookieService.get(
       AppConstants.ARTICLE_INFO_TAB_COOKIE
     );
@@ -35,24 +38,32 @@ export class ArticleEditComponent implements OnInit {
   }
 
   handleArticleChanges() {
-    if (!!this.article) {
-      console.log('ARTICLE', this.article);
-      this.store.dispatch(new toolbar.SaveArticle({ ...this.article }));
+    if (!!this.userArticle) {
+      console.log('ARTICLE', this.userArticle);
+      this.store.dispatch(
+        new toolbar.SaveArticle(_.merge({}, this.userArticle))
+      );
     }
   }
 
-  handleArticlePaste(event: any) {
-    console.log('paste ', event);
-  }
-
   handleBoardBoxChanges() {
-    if (!!this.boardBox) {
-      this.store.dispatch(new toolbar.SaveBoardBox(_.merge({}, this.boardBox)));
+    if (!!this.userBoardBox) {
+      console.log(this.userBoardBox);
+      this.store.dispatch(
+        new toolbar.SaveBoardBox(_.merge({}, this.userBoardBox))
+      );
     }
   }
 
   handleTabChange(event: any) {
     console.log(event);
     this.cookieService.put(AppConstants.ARTICLE_INFO_TAB_COOKIE, event);
+  }
+
+  handleDateChange(date: Date) {
+    if (!!date) {
+      this.userBoardBox.notation.date = date;
+      this.handleBoardBoxChanges();
+    }
   }
 }

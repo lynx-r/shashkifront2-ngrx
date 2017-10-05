@@ -49,7 +49,7 @@ export class EditArticlePageComponent implements OnDestroy {
 
   article$: Observable<Article>;
   boardBox$: Observable<BoardBox>;
-  notation$: Observable<Notation>;
+  notation$: Observable<NotationStroke[]>;
 
   selectedDraught$: Observable<Draught>;
   draught: Draught;
@@ -89,10 +89,7 @@ export class EditArticlePageComponent implements OnDestroy {
 
     this.notation$ = this.store
       .select(fromArticles.getSelectedBoard)
-      .do(boardBox =>
-        console.log('NOTATION', boardBox.notation.notationStrokes)
-      )
-      .map(boardBox => !!boardBox && boardBox.notation);
+      .map(boardBox => !!boardBox && boardBox.notation.notationStrokes);
 
     this.selectedDraught$ = this.store.select(fromArticles.getSelectedDraught);
 

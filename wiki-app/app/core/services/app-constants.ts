@@ -1,4 +1,29 @@
 export class AppConstants {
+  static ALPH: { [key: number]: string } = {
+    1: 'a',
+    2: 'b',
+    3: 'c',
+    4: 'd',
+    5: 'e',
+    6: 'f',
+    7: 'g',
+    8: 'h',
+    9: 'i',
+    10: 'j',
+  };
+
+  static MY_DATE_FORMATS = {
+    parse: {
+      dateInput: 'yyyy.MM.dd',
+    },
+    display: {
+      dateInput: 'input',
+      monthYearLabel: { year: 'numeric', month: 'short' },
+      dateA11yLabel: { year: 'numeric', month: 'short', day: 'numeric' },
+      monthYearA11yLabel: { year: 'numeric', month: 'short' },
+    },
+  };
+
   static ARTICLES_RESOURCE: string = '/articles';
   static ARTICLE_RESOURCE: string = '/article';
   static BOARDS_RESOURCE: string = '/boards';
@@ -17,18 +42,6 @@ export class AppConstants {
   static SIGN_REQUEST: string = 'signRequest';
   static SIGN: string = 'sign';
   static DEBOUNCE_SAVE = 500;
-  static ALPH: { [key: number]: string } = {
-    1: 'a',
-    2: 'b',
-    3: 'c',
-    4: 'd',
-    5: 'e',
-    6: 'f',
-    7: 'g',
-    8: 'h',
-    9: 'i',
-    10: 'j',
-  };
   static SIMPLE_STROKE: string = 'SIMPLE';
   static ARTICLE_INFO_TAB_COOKIE: string = 'article-info-tab';
   static SIMPLE_STROKE_NOTATION: string = '-';

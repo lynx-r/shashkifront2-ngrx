@@ -27,6 +27,9 @@ import { environment } from '../environments/environment';
 import { CookieModule } from 'ngx-cookie';
 import { HomeComponent } from './home/home.component';
 import { httpFactory } from './core/interceptors/http.factory';
+import { DateAdapter, MD_DATE_FORMATS } from '@angular/material';
+import { MyDateAdapter } from './my-date-adapter';
+import { AppConstants } from './core/services/app-constants';
 
 @NgModule({
   imports: [
