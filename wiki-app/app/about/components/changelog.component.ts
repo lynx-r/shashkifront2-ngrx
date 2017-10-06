@@ -10,14 +10,16 @@ import { Lightbox, IAlbum } from 'angular2-lightbox';
       <md-card-subtitle>{{changelog.date}}</md-card-subtitle>
       <md-card-content>
         <p>{{changelog.description}}</p>
-        <div fxLayout="row" *ngFor="let feature of changelog.features">
-          <div>
-            <img [src]="feature.video?.thumb" (click)="open(0)"/>
-          </div>
-          <div>
-            {{feature.feature}}
-          </div>
-        </div>
+        <md-list>
+          <md-list-item fxLayout="row" *ngFor="let feature of changelog.features; let i = index">
+            <div>
+              <img [src]="feature.video?.thumb" (click)="open(i)"/>
+            </div>
+            <div>
+              {{feature.feature}}
+            </div>
+          </md-list-item>
+        </md-list>
       </md-card-content>
     </md-card>
   `,

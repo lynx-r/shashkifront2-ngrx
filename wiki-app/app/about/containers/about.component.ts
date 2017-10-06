@@ -25,7 +25,7 @@ export class AboutComponent implements OnInit {
       {
         version: 'Версия 0.0.1',
         date: '5.10.2017',
-        description: 'Первый выпуск.',
+        description: 'Первая редакция',
         features: [
           {
             video: {
@@ -36,25 +36,36 @@ export class AboutComponent implements OnInit {
             feature: `Добавление статьи и доски`,
           },
           {
+            video: {
+              src: 'assets/img/about/edit-article.gif',
+              caption: 'Редактирование статьи',
+              thumb: 'assets/img/about/edit-article.gif',
+            },
+            feature: 'Редактирование статьи и метаинформации',
+          },
+          {
+            video: {
+              src: 'assets/img/about/add-draught.gif',
+              caption: 'Добавление шашек',
+              thumb: 'assets/img/about/add-draught.gif',
+            },
             feature: 'Добавление шашек на доску',
           },
           {
-            feature: 'Запись ходов',
+            video: {
+              src: 'assets/img/about/notation-view.gif',
+              caption: 'Нотация',
+              thumb: 'assets/img/about/notation-view.gif',
+            },
+            feature: 'Запись ходов и их просмотре в нотации',
           },
           {
+            video: {
+              src: 'assets/img/about/undo-redo.gif',
+              caption: 'Отмена/повторение',
+              thumb: 'assets/img/about/undo-redo.gif',
+            },
             feature: 'Отмена/повторение хода',
-          },
-          {
-            feature: 'Просмотр предыдущих ходов по нотации',
-          },
-          {
-            feature: 'Список всех статей',
-          },
-          {
-            feature: 'Редактирование статьи',
-          },
-          {
-            feature: 'Редактирование метаинформации',
           },
         ],
       },
