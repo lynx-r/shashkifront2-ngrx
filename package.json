@@ -127,6 +127,7 @@
     "@angular/cdk": "^2.0.0-beta.8",
     "@angular/flex-layout": "^2.0.0-beta.9",
     "@types/lodash": "^4.14.76",
+    "angular2-lightbox": "^1.2.1",
     "lodash": "^4.17.4",
     "ng-block-ui": "^1.0.0-beta.15",
     "ngx-cookie": "^1.0.0",

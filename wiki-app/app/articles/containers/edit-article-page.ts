@@ -74,18 +74,7 @@ export class EditArticlePageComponent implements OnDestroy {
       .subscribe();
 
     this.article$ = this.store.select(fromArticles.getSelectedArticle);
-    this.boardBox$ = this.store
-      .select(fromArticles.getSelectedBoard)
-      .do(boardBox =>
-        this.store.select(getBoardMode).do(mode => {
-          if (mode !== this.mode) {
-            if (!!boardBox) {
-              Utils.resetSquaresOnBoardBox(boardBox);
-            }
-            this.mode = mode;
-          }
-        })
-      );
+    this.boardBox$ = this.store.select(fromArticles.getSelectedBoard);
 
     this.notation$ = this.store
       .select(fromArticles.getSelectedBoard)
@@ -103,6 +92,21 @@ export class EditArticlePageComponent implements OnDestroy {
     this.squareClickSubscription = this.store
       .select(getClickedSquare)
       .subscribe(square => !!square && this.onSquareClicked(square));
+
+    this.store.select(getBoardMode).subscribe(mode => {
+      if (mode == AppConstants.PLACE_MODE) {
+        this.store
+          .select(fromArticles.getSelectedBoard)
+          .do(boardBox => {
+            if (!!boardBox) {
+              let boardBoxUpdated = Utils.resetHighlightBoardBox(boardBox);
+              this.store.dispatch(new board.Update(boardBoxUpdated));
+            }
+          })
+          .take(1)
+          .subscribe();
+      }
+    });
   }
 
   ngOnDestroy() {

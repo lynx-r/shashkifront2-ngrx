@@ -4,7 +4,7 @@ import { Article } from '../models/article';
 @Component({
   selector: 'bc-article-preview',
   template: `
-    <md-card *ngIf="article">
+    <md-card>
       <md-card-title-group>
         <md-card-title>
             {{ article.title | acEllipsis:26 }}

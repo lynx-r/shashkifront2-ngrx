@@ -85,4 +85,17 @@ export class Utils {
       },
     };
   }
+
+  static resetHighlightBoardBox(boardBox: BoardBox) {
+    let squares = boardBox.board.squares.map(square => {
+      if (!!square) return <Square>{ ...square, highlighted: false };
+    });
+    return {
+      ...boardBox,
+      board: {
+        ...boardBox.board,
+        squares: squares,
+      },
+    };
+  }
 }

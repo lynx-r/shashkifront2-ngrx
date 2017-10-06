@@ -17,15 +17,15 @@
       </md-icon>
     </md-button-toggle>
   </md-button-toggle-group>
-  <button md-raised-button value="write" (click)="handleUndo()" [disabled]="!createMode">
+  <button md-raised-button value="write" (click)="handleUndo()" [disabled]="!createMode || mode == 'place'">
     <md-icon aria-label="Отмена">undo</md-icon>
   </button>
-  <button md-raised-button value="place" (click)="handleRedo()" [disabled]="!createMode">
+  <button md-raised-button value="place" (click)="handleRedo()" [disabled]="!createMode  || mode == 'place'">
     <md-icon>redo</md-icon>
   </button>
   <button md-raised-button
           (click)="handleMakeWhiteStroke()"
-          [disabled]="!createMode"
+          [disabled]="!createMode || mode == 'place'"
           title="Поменять последовательность ходов"
   >
     <md-icon>swap_horiz</md-icon>
