@@ -10,6 +10,7 @@ import { SidenavComponent } from './components/sidenav';
 import { ToolbarComponent } from './components/toolbar';
 import { BlockUIModule } from 'ng-block-ui';
 import { MaterialModule } from '../material.module';
+import { MissionComponent } from './containers/mission.component';
 
 export const COMPONENTS = [
   AppComponent,
@@ -18,6 +19,7 @@ export const COMPONENTS = [
   NavItemComponent,
   SidenavComponent,
   ToolbarComponent,
+  MissionComponent,
 ];
 
 @NgModule({

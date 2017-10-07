@@ -29,41 +29,51 @@ export class AboutComponent implements OnInit {
         features: [
           {
             video: {
-              src: 'assets/img/about/create-desk.gif',
+              src:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/create-desk.gif',
               caption: 'Создание доски',
-              thumb: 'assets/img/about/create-desk.gif',
+              thumb:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/create-desk.gif',
             },
             feature: `Добавление статьи и доски`,
           },
           {
             video: {
-              src: 'assets/img/about/edit-article.gif',
+              src:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/edit-article.gif',
               caption: 'Редактирование статьи',
-              thumb: 'assets/img/about/edit-article.gif',
+              thumb:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/edit-article.gif',
             },
             feature: 'Редактирование статьи и метаинформации',
           },
           {
             video: {
-              src: 'assets/img/about/add-draught.gif',
+              src:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/add-draught.gif',
               caption: 'Добавление шашек',
-              thumb: 'assets/img/about/add-draught.gif',
+              thumb:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/add-draught.gif',
             },
             feature: 'Добавление шашек на доску',
           },
           {
             video: {
-              src: 'assets/img/about/notation-view.gif',
+              src:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/notation-view.gif',
               caption: 'Нотация',
-              thumb: 'assets/img/about/notation-view.gif',
+              thumb:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/notation-view.gif',
             },
             feature: 'Запись ходов и их просмотре в нотации',
           },
           {
             video: {
-              src: 'assets/img/about/undo-redo.gif',
+              src:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/undo-redo.gif',
               caption: 'Отмена/повторение',
-              thumb: 'assets/img/about/undo-redo.gif',
+              thumb:
+                'https://s3-eu-west-1.amazonaws.com/wiki.shashki.online/images-cdn/about/undo-redo.gif',
             },
             feature: 'Отмена/повторение хода',
           },

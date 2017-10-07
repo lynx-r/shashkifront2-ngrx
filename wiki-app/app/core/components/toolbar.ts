@@ -16,6 +16,9 @@ import * as fromRoot from '../../reducers';
         Статьи
       </button>
       <div class="fill-remaining-space"></div>
+      <button md-button [routerLink]="['mission']" routerLinkActive="active" title="Миссия">
+        Миссия
+      </button>
       <button md-button [routerLink]="['about']" routerLinkActive="active" title="О сайте">
         О сайте
       </button>

@@ -9,8 +9,7 @@
       "outDir": "wiki-dist",
       "assets": [
         "assets",
-        "favicon.ico",
-        { "glob": "**/*", "input": "../node_modules/angular2-lightbox/src", "output": "./assets/lightbox" }
+        "favicon.ico"
       ],
       "index": "index.html",
       "main": "main.ts",
